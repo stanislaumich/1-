@@ -19,3 +19,5 @@ Class MyWork.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Methods:
     edel(list*, list*): PrivateScope, Public, HideBySig
+    eins(list*, list*, SByte*, SByte*): PrivateScope, Public, HideBySig
+    eshow(list*): PrivateScope, Public, HideBySig
