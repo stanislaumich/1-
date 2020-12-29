@@ -1,0 +1,30 @@
+// лаб 3
+#include "stdafx.h"
+#include <iostream>
+#include <cmath>
+#define stop system("pause")
+
+using namespace std;
+
+double x, a,y;
+
+
+int main() {
+	setlocale (LC_ALL, "");
+	cout << "¬ведите х ";
+	cin >> x;
+	cout << "\n¬ведите а ";
+	cin >> a;
+	if (x <= 0) {
+		y = abs(x)*sin(3 * x);
+	}
+	else if ((x>0)&&(x<=a)) {
+		y = pow(x, 3)*cos(x + 2);
+	}
+	else {
+		y = sin(x*x) + pow(x, 0.25);
+	}
+	cout << "y = " << y<<"\n";
+	stop;
+	return 0;
+}

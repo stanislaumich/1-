@@ -1,0 +1,34 @@
+// лаб 4
+#include "stdafx.h"
+#include <iostream>
+#include <cmath>
+#define stop system("pause")
+
+using namespace std;
+
+double xn = -3.2;
+double xk = 7.8;
+double xh = 0.36;
+double x, y, a=15.;
+
+int main(){
+	x = xn;
+	while (x < xk) {
+		if (x <= 0) {
+			y = pow(x, 3) + 4 * x*x*sqrt(abs(x));
+		}
+		else if ((x > 0) && (x <= a)) {
+			y = pow((x - 1), 3) + cos(pow(x, 3));
+		}
+		else
+		{
+			y = sqrt(pow(abs(x), 3))*sin(pow(x, 3));
+		}
+		cout << "x = " << x << "    \t\ty = " << y<<"\n";
+		x += xh;
+	}
+
+
+stop;
+return 0;
+}

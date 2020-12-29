@@ -1,0 +1,80 @@
+// лаб 7
+#include "stdafx.h"
+#include <iostream>
+#include <cmath>
+
+#define stop system("pause")
+#define SCREENW 79
+#define SCREENH 25
+
+
+
+using namespace std;
+
+double x;
+
+double f(double x) {
+	return pow(cos(pow(pow(x,3)+2,2)),3);
+}
+
+void plot(FILE *fout, double a, double b, double(*f)(double))
+{
+	// 
+	// FILE *fout Ц ук. потока вывода
+	// double a Ц левый х
+	// double b Ц правый х
+	// double (*f) (double) Ц указатель на нашу функцию
+	char screen[SCREENW][SCREENH];
+	double x, y[SCREENW];
+	double ymin = 0, ymax = 0;
+	double hx, hy;
+	int i, j;
+	int xz, yz;
+	// hx Ц шаг по х
+	hx = (b - a) / (SCREENW - 1);
+	for (i = 0, x = a; i < SCREENW; ++i, x += hx) {
+		y[i] = f(x);
+		if (y[i] < ymin) ymin = y[i];
+		if (y[i] > ymax) ymax = y[i];
+	}// готовим масштаб
+	hy = (ymax - ymin) / (SCREENH - 1);
+	yz = (int)floor(ymax / hy + 0.5);
+	xz = (int)floor(-a / hx + 0.5);
+	// оси координат
+	for (j = 0; j < SCREENH; ++j) {
+		
+			for (i = 0; i < SCREENW; ++i) {
+				if (j == yz && i == xz)
+					screen[i][j] = '+';
+				else if (j == yz)
+					screen[i][j] = '-';
+				else if (i == xz)
+					screen[i][j] = '|';
+				else
+					screen[i][j] = ' ';
+			}
+	}
+	// и график
+	for (i = 0; i < SCREENW; ++i) {
+		j = (int)floor((ymax - y[i]) / hy + 0.5);
+		screen[i][j] = '.'; // точечками
+	}
+	// и это на экран в стандартный stdout
+		for (j = 0; j < SCREENH; ++j) {
+			for (i = 0; i < SCREENW; ++i)
+				fputc(screen[i][j], fout);
+			fprintf(fout, "\n");
+		}
+}
+
+int main() {
+	setlocale(LC_ALL, "");
+
+	// собственно вызов печати
+	plot(stdout, 0.0, 10.0, f);
+
+
+
+	stop;
+	return 0;
+}

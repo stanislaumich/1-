@@ -1,0 +1,39 @@
+делать полностью по видео https://www.youtube.com/watch?v=QbMVxkzTi54
+
+
+#include "MyForm.h" 
+#include <Windows.h> 
+using namespace Project2; // Название проекта 
+
+int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
+	Application::EnableVisualStyles();
+	Application::SetCompatibleTextRenderingDefault(false);
+	Application::Run(gcnew MyForm);
+	return 0;
+}
+
+
+
+или так:
+
+
+Создать проект->Visual C++->CLR->Пустой проект CLR->
+ После создания проекта нажать на вкладку Проект->Добавить новый элемент->UI->форма Windows Form.
+ Потом добавить следующий код в MyForm.cpp:
+#include "MyForm.h" //the header name for your form
+ 
+using namespace CyberForum(Изменяем на свое название проекта); //name of your project
+ 
+[STAThreadAttribute]
+int main(array<System::String ^> ^args)
+{
+    Application::EnableVisualStyles();
+    Application::SetCompatibleTextRenderingDefault(false);
+ 
+    Application::Run(gcnew MyForm());
+    return 0;
+}
+ 
+ Далее нажимаем вкладку проект-Свойства : (имя текущего проекта).
+ Свойства конфигурации - Компоновщик - Система - Подсистема (Configuration Properties - Linker - System - SubSystem): вставляем Windows (/SUBSYSTEM:WINDOWS).
+ Свойства конфигурации - Компоновщик - Дополнительно - Точка входа (Configuration Properties - Linker - Advanced - Entry Point): вставляем main

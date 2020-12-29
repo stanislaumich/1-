@@ -1,0 +1,19 @@
+// лаб 2
+#include "stdafx.h"
+#include <iostream>
+#include <cmath>
+#define stop system("pause")
+
+using namespace std;
+
+double x=0.42, y=-0.87, z, b;
+
+
+int main() {
+	setlocale(LC_ALL, "");
+	z = (sqrt(x)*pow(sin(y),2)) / (x+exp(y));
+	b = abs(cos(x) + sin(y)) - 2 * pow(tan(x), 2);
+	cout << "b = " << y << "\n";
+	stop;
+	return 0;
+}
