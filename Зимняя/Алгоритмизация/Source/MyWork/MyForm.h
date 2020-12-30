@@ -16,11 +16,6 @@ namespace MyWork {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Сводка для MyForm
-	/// </summary>
-
-
 	struct list
 	{
 		char* name; // поле данных марка авто
@@ -31,6 +26,15 @@ namespace MyWork {
 	};
 
 	list *ecur, *etemp, *efirst, *elast;
+	int **A;
+	int **B;
+
+	struct country {
+		string name;
+		int gold;
+		int silver;
+		int bronze;
+	}
 
 
 	public ref class MyForm : public System::Windows::Forms::Form
@@ -105,6 +109,7 @@ namespace MyWork {
 			//
 			//TODO: добавьте код конструктора
 			//
+			/*
 			efirst = (struct list*)malloc(sizeof(struct list));
 			efirst->ptrprev = NULL;
 			elast = (struct list*)malloc(sizeof(struct list));
@@ -117,6 +122,18 @@ namespace MyWork {
 			efirst->nomer = "EMPTY";
 			elast->name = "EMPTY";
 			elast->nomer = "EMPTY";
+			*/
+			dataGridView1->RowCount = 4;
+			dataGridView2->RowCount = 3;
+			dataGridView3->RowCount = 4;
+			dataGridView4->RowCount = 3;
+
+			A= new int*[4];
+			for (int i=0;i<4;i++){A[i]= new int[4];}
+			B = new int*[3];
+			for (int i = 0; i<3; i++) { B[i] = new int[3]; }
+
+
 		}
 
 	protected:
@@ -142,9 +159,7 @@ namespace MyWork {
 	private: System::Windows::Forms::TabPage^  tabPage1;
 	private: System::Windows::Forms::TabPage^  tabPage2;
 	private: System::Windows::Forms::Label^  label1;
-	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::TabPage^  tabPage3;
-	private: System::Windows::Forms::Label^  label3;
 	private: System::Windows::Forms::TabPage^  tabPage4;
 	private: System::Windows::Forms::Button^  button9;
 	private: System::Windows::Forms::Button^  button8;
@@ -183,6 +198,35 @@ private: System::Windows::Forms::Label^  label18;
 private: System::Windows::Forms::Label^  label17;
 private: System::Windows::Forms::TextBox^  textBox9;
 private: System::Windows::Forms::TextBox^  textBox8;
+private: System::Windows::Forms::RichTextBox^  richTextBox1;
+private: System::Windows::Forms::RichTextBox^  richTextBox2;
+private: System::Windows::Forms::DataGridView^  dataGridView4;
+private: System::Windows::Forms::DataGridView^  dataGridView3;
+private: System::Windows::Forms::Button^  button12;
+private: System::Windows::Forms::DataGridView^  dataGridView2;
+private: System::Windows::Forms::DataGridView^  dataGridView1;
+private: System::Windows::Forms::Label^  label22;
+private: System::Windows::Forms::Label^  label21;
+private: System::Windows::Forms::Label^  label3;
+private: System::Windows::Forms::Label^  label2;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column51;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column52;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column53;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column1;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column2;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column3;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column4;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  CB1;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  CB2;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  CB3;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  C1;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  C2;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  C3;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  C4;
+private: System::Windows::Forms::Button^  button13;
+private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
+private: System::Windows::Forms::Button^  button15;
+private: System::Windows::Forms::Button^  button14;
 
 	private:
 		/// <summary>
@@ -197,8 +241,11 @@ private: System::Windows::Forms::TextBox^  textBox8;
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->textBox9 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox8 = (gcnew System::Windows::Forms::TextBox());
 			this->label20 = (gcnew System::Windows::Forms::Label());
 			this->label19 = (gcnew System::Windows::Forms::Label());
 			this->label18 = (gcnew System::Windows::Forms::Label());
@@ -213,9 +260,33 @@ private: System::Windows::Forms::TextBox^  textBox8;
 			this->button10 = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
+			this->dataGridView4 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column51 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column52 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column53 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->dataGridView3 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->button12 = (gcnew System::Windows::Forms::Button());
+			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
+			this->CB1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->CB2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->CB3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->C1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->C2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->C3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->C4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->label22 = (gcnew System::Windows::Forms::Label());
+			this->label21 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
+			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
+			this->button13 = (gcnew System::Windows::Forms::Button());
+			this->richTextBox2 = (gcnew System::Windows::Forms::RichTextBox());
 			this->tabPage4 = (gcnew System::Windows::Forms::TabPage());
 			this->button9 = (gcnew System::Windows::Forms::Button());
 			this->button8 = (gcnew System::Windows::Forms::Button());
@@ -240,11 +311,16 @@ private: System::Windows::Forms::TextBox^  textBox8;
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->textBox8 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox9 = (gcnew System::Windows::Forms::TextBox());
+			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->button14 = (gcnew System::Windows::Forms::Button());
+			this->button15 = (gcnew System::Windows::Forms::Button());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			this->tabPage2->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView4))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView3))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->tabPage3->SuspendLayout();
 			this->tabPage4->SuspendLayout();
 			this->SuspendLayout();
@@ -289,6 +365,20 @@ private: System::Windows::Forms::TextBox^  textBox8;
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Задание 1";
 			this->tabPage1->UseVisualStyleBackColor = true;
+			// 
+			// textBox9
+			// 
+			this->textBox9->Location = System::Drawing::Point(10, 226);
+			this->textBox9->Name = L"textBox9";
+			this->textBox9->Size = System::Drawing::Size(480, 20);
+			this->textBox9->TabIndex = 15;
+			// 
+			// textBox8
+			// 
+			this->textBox8->Location = System::Drawing::Point(10, 191);
+			this->textBox8->Name = L"textBox8";
+			this->textBox8->Size = System::Drawing::Size(480, 20);
+			this->textBox8->TabIndex = 14;
 			// 
 			// label20
 			// 
@@ -407,7 +497,16 @@ private: System::Windows::Forms::TextBox^  textBox8;
 			// 
 			// tabPage2
 			// 
+			this->tabPage2->Controls->Add(this->dataGridView4);
+			this->tabPage2->Controls->Add(this->dataGridView3);
+			this->tabPage2->Controls->Add(this->button12);
+			this->tabPage2->Controls->Add(this->dataGridView2);
+			this->tabPage2->Controls->Add(this->dataGridView1);
+			this->tabPage2->Controls->Add(this->label22);
+			this->tabPage2->Controls->Add(this->label21);
+			this->tabPage2->Controls->Add(this->label3);
 			this->tabPage2->Controls->Add(this->label2);
+			this->tabPage2->Controls->Add(this->richTextBox1);
 			this->tabPage2->Location = System::Drawing::Point(4, 22);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
@@ -416,18 +515,198 @@ private: System::Windows::Forms::TextBox^  textBox8;
 			this->tabPage2->Text = L"Задание 2";
 			this->tabPage2->UseVisualStyleBackColor = true;
 			// 
+			// dataGridView4
+			// 
+			this->dataGridView4->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView4->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {
+				this->Column51,
+					this->Column52, this->Column53
+			});
+			this->dataGridView4->Location = System::Drawing::Point(705, 93);
+			this->dataGridView4->Name = L"dataGridView4";
+			this->dataGridView4->Size = System::Drawing::Size(155, 135);
+			this->dataGridView4->TabIndex = 9;
+			// 
+			// Column51
+			// 
+			this->Column51->HeaderText = L"C1";
+			this->Column51->Name = L"Column51";
+			this->Column51->Width = 30;
+			// 
+			// Column52
+			// 
+			this->Column52->HeaderText = L"C2";
+			this->Column52->Name = L"Column52";
+			this->Column52->Width = 30;
+			// 
+			// Column53
+			// 
+			this->Column53->HeaderText = L"C3";
+			this->Column53->Name = L"Column53";
+			this->Column53->Width = 30;
+			// 
+			// dataGridView3
+			// 
+			this->dataGridView3->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView3->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
+				this->Column1,
+					this->Column2, this->Column3, this->Column4
+			});
+			this->dataGridView3->Location = System::Drawing::Point(486, 93);
+			this->dataGridView3->Name = L"dataGridView3";
+			this->dataGridView3->Size = System::Drawing::Size(199, 135);
+			this->dataGridView3->TabIndex = 8;
+			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"C1";
+			this->Column1->Name = L"Column1";
+			this->Column1->Width = 30;
+			// 
+			// Column2
+			// 
+			this->Column2->HeaderText = L"C2";
+			this->Column2->Name = L"Column2";
+			this->Column2->Width = 30;
+			// 
+			// Column3
+			// 
+			this->Column3->HeaderText = L"C3";
+			this->Column3->Name = L"Column3";
+			this->Column3->Width = 30;
+			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"C4";
+			this->Column4->Name = L"Column4";
+			this->Column4->Width = 30;
+			// 
+			// button12
+			// 
+			this->button12->Location = System::Drawing::Point(391, 93);
+			this->button12->Name = L"button12";
+			this->button12->Size = System::Drawing::Size(75, 23);
+			this->button12->TabIndex = 7;
+			this->button12->Text = L"Обработать";
+			this->button12->UseVisualStyleBackColor = true;
+			this->button12->Click += gcnew System::EventHandler(this, &MyForm::button12_Click);
+			// 
+			// dataGridView2
+			// 
+			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView2->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {
+				this->CB1, this->CB2,
+					this->CB3
+			});
+			this->dataGridView2->Location = System::Drawing::Point(213, 93);
+			this->dataGridView2->Name = L"dataGridView2";
+			this->dataGridView2->Size = System::Drawing::Size(159, 135);
+			this->dataGridView2->TabIndex = 6;
+			// 
+			// CB1
+			// 
+			this->CB1->HeaderText = L"C1";
+			this->CB1->Name = L"CB1";
+			this->CB1->Width = 30;
+			// 
+			// CB2
+			// 
+			this->CB2->HeaderText = L"C2";
+			this->CB2->Name = L"CB2";
+			this->CB2->Width = 30;
+			// 
+			// CB3
+			// 
+			this->CB3->HeaderText = L"C3";
+			this->CB3->Name = L"CB3";
+			this->CB3->Width = 30;
+			// 
+			// dataGridView1
+			// 
+			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
+				this->C1, this->C2,
+					this->C3, this->C4
+			});
+			this->dataGridView1->Location = System::Drawing::Point(7, 93);
+			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->Size = System::Drawing::Size(191, 135);
+			this->dataGridView1->TabIndex = 5;
+			// 
+			// C1
+			// 
+			this->C1->HeaderText = L"C1";
+			this->C1->Name = L"C1";
+			this->C1->Width = 30;
+			// 
+			// C2
+			// 
+			this->C2->HeaderText = L"C2";
+			this->C2->Name = L"C2";
+			this->C2->Width = 30;
+			// 
+			// C3
+			// 
+			this->C3->HeaderText = L"C3";
+			this->C3->Name = L"C3";
+			this->C3->Width = 30;
+			// 
+			// C4
+			// 
+			this->C4->HeaderText = L"C4";
+			this->C4->Name = L"C4";
+			this->C4->Width = 30;
+			// 
+			// label22
+			// 
+			this->label22->AutoSize = true;
+			this->label22->Location = System::Drawing::Point(764, 67);
+			this->label22->Name = L"label22";
+			this->label22->Size = System::Drawing::Size(68, 13);
+			this->label22->TabIndex = 4;
+			this->label22->Text = L"Результат 2";
+			// 
+			// label21
+			// 
+			this->label21->AutoSize = true;
+			this->label21->Location = System::Drawing::Point(551, 67);
+			this->label21->Name = L"label21";
+			this->label21->Size = System::Drawing::Size(68, 13);
+			this->label21->TabIndex = 3;
+			this->label21->Text = L"Результат 1";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(239, 67);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(108, 13);
+			this->label3->TabIndex = 2;
+			this->label3->Text = L"Исходный массив 2";
+			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(7, 3);
+			this->label2->Location = System::Drawing::Point(42, 67);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(91, 13);
-			this->label2->TabIndex = 0;
-			this->label2->Text = L"Текст задания 2";
+			this->label2->Size = System::Drawing::Size(108, 13);
+			this->label2->TabIndex = 1;
+			this->label2->Text = L"Исходный массив 1";
+			// 
+			// richTextBox1
+			// 
+			this->richTextBox1->Location = System::Drawing::Point(7, 6);
+			this->richTextBox1->Name = L"richTextBox1";
+			this->richTextBox1->Size = System::Drawing::Size(930, 53);
+			this->richTextBox1->TabIndex = 0;
+			this->richTextBox1->Text = resources->GetString(L"richTextBox1.Text");
 			// 
 			// tabPage3
 			// 
-			this->tabPage3->Controls->Add(this->label3);
+			this->tabPage3->Controls->Add(this->button15);
+			this->tabPage3->Controls->Add(this->button14);
+			this->tabPage3->Controls->Add(this->button13);
+			this->tabPage3->Controls->Add(this->richTextBox2);
 			this->tabPage3->Location = System::Drawing::Point(4, 22);
 			this->tabPage3->Name = L"tabPage3";
 			this->tabPage3->Padding = System::Windows::Forms::Padding(3);
@@ -436,14 +715,23 @@ private: System::Windows::Forms::TextBox^  textBox8;
 			this->tabPage3->Text = L"Задание 3";
 			this->tabPage3->UseVisualStyleBackColor = true;
 			// 
-			// label3
+			// button13
 			// 
-			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(7, 3);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(91, 13);
-			this->label3->TabIndex = 0;
-			this->label3->Text = L"Текст задания 3";
+			this->button13->Location = System::Drawing::Point(3, 62);
+			this->button13->Name = L"button13";
+			this->button13->Size = System::Drawing::Size(107, 23);
+			this->button13->TabIndex = 1;
+			this->button13->Text = L"Загрузить файл";
+			this->button13->UseVisualStyleBackColor = true;
+			this->button13->Click += gcnew System::EventHandler(this, &MyForm::button13_Click);
+			// 
+			// richTextBox2
+			// 
+			this->richTextBox2->Location = System::Drawing::Point(3, 6);
+			this->richTextBox2->Name = L"richTextBox2";
+			this->richTextBox2->Size = System::Drawing::Size(934, 50);
+			this->richTextBox2->TabIndex = 0;
+			this->richTextBox2->Text = resources->GetString(L"richTextBox2.Text");
 			// 
 			// tabPage4
 			// 
@@ -678,19 +966,27 @@ private: System::Windows::Forms::TextBox^  textBox8;
 			this->label4->TabIndex = 0;
 			this->label4->Text = L"Работа со списками элементов на примере автомобилей";
 			// 
-			// textBox8
+			// openFileDialog1
 			// 
-			this->textBox8->Location = System::Drawing::Point(10, 191);
-			this->textBox8->Name = L"textBox8";
-			this->textBox8->Size = System::Drawing::Size(480, 20);
-			this->textBox8->TabIndex = 14;
+			this->openFileDialog1->FileName = L"openFileDialog1";
 			// 
-			// textBox9
+			// button14
 			// 
-			this->textBox9->Location = System::Drawing::Point(10, 226);
-			this->textBox9->Name = L"textBox9";
-			this->textBox9->Size = System::Drawing::Size(480, 20);
-			this->textBox9->TabIndex = 15;
+			this->button14->Location = System::Drawing::Point(116, 62);
+			this->button14->Name = L"button14";
+			this->button14->Size = System::Drawing::Size(105, 23);
+			this->button14->TabIndex = 2;
+			this->button14->Text = L"Сохранить файл";
+			this->button14->UseVisualStyleBackColor = true;
+			// 
+			// button15
+			// 
+			this->button15->Location = System::Drawing::Point(3, 91);
+			this->button15->Name = L"button15";
+			this->button15->Size = System::Drawing::Size(218, 23);
+			this->button15->TabIndex = 3;
+			this->button15->Text = L"Обработать";
+			this->button15->UseVisualStyleBackColor = true;
 			// 
 			// MyForm
 			// 
@@ -705,8 +1001,11 @@ private: System::Windows::Forms::TextBox^  textBox8;
 			this->tabPage1->PerformLayout();
 			this->tabPage2->ResumeLayout(false);
 			this->tabPage2->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView4))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView3))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->tabPage3->ResumeLayout(false);
-			this->tabPage3->PerformLayout();
 			this->tabPage4->ResumeLayout(false);
 			this->tabPage4->PerformLayout();
 			this->ResumeLayout(false);
@@ -780,12 +1079,9 @@ private: System::Void button10_Click(System::Object^  sender, System::EventArgs^
   for (int i = 0; i < lN2; i++) {
 	  N2[i] = Convert::ToChar(textBox7->Text[i]);
   }
-
 }
 
-private: System::Void button11_Click(System::Object^  sender, System::EventArgs^  e) {
-	
-	
+private: System::Void button11_Click(System::Object^  sender, System::EventArgs^  e) {	
 	Int32 rN1 =  mainwork(N1, lN1);
 	Int32 rN2 = mainwork(N2, lN2);
 	label19->Text= Convert::ToString(rN1);
@@ -799,14 +1095,94 @@ private: System::Void button11_Click(System::Object^  sender, System::EventArgs^
 	for (int i = 0; i < lN2; i++) {
 		textBox9->Text += Convert::ToChar(N2[i]);
 	}
-	
-
-
-
 	free(N1);
 	free(N2);
 }
 
+private:System::Void transmatrix(int **A,int n) {
+	// выделим память под временные массивы
+	int *B= new int[n];
+	int *C = new int[n];
 
+    // и сохраним в них последнюю строку 
+	for (int i = 0; i < n; i++) {
+		B[i] = A[n-1][i];
+	}
+	//и первый столбец
+	for (int i = 0; i < n; i++) {
+		C[i] = A[i][0];
+	}
+	// запишем в последнюю строку первый столбец
+	// потеряем первый элемент, но его всё равно потом стирать
+	for (int i = 0; i < n; i++) {
+		A[n-1][i] = A[i][0];
+	}
+	//Вернем из временного массива назад строку на место столбца
+	for (int i = 0; i < n; i++) {
+		A[i][0] = B[i];
+	}
+	// и столбец на место строки
+	for (int i = 0; i < n; i++) {
+		A[n-1][i] = C[i];
+	}
+    // всё, освободим временный массив
+	free(B);
+	free(C);
+}
+
+private: System::Void button12_Click(System::Object^  sender, System::EventArgs^  e) {
+// по строкам и по столбцам таблицы dataGridView1 заносим её в массив A[i][j]
+for (int i = 0; i < 4; i++)
+	for (int j = 0; j < 4; j++)
+	{
+		A[i][j] = Convert::ToInt32(this->dataGridView1->Rows[i]->Cells[j]->Value);
+	}
+// по строкам и по столбцам таблицы dataGridView2 заносим её в массив B[i][j]
+for (int i = 0; i < 3; i++)
+	for (int j = 0; j < 3; j++)
+	{
+		B[i][j] = Convert::ToInt32(this->dataGridView2->Rows[i]->Cells[j]->Value);
+	}
+// исходные массивы готовы к обработке нашей функцией
+transmatrix(A, 4);
+transmatrix(B, 3);
+// результат обработки переносим в таблицы dataGridView3 и dataGridView4
+// по строкам и по столбцам таблицы dataGridView1 заполняем её из массива A[i][j]
+for (int i = 0; i < 4; i++)
+	for (int j = 0; j < 4; j++)
+	{
+		this->dataGridView3->Rows[i]->Cells[j]->Value = Convert::ToString(A[i][j]);
+	}
+// по строкам и по столбцам таблицы dataGridView2 заполняем её из массива B[i][j]
+for (int i = 0; i < 3; i++)
+	for (int j = 0; j < 3; j++)
+	{
+		this->dataGridView4->Rows[i]->Cells[j]->Value = Convert::ToString(B[i][j]);
+	}
+
+// освобождаем занимаемую память
+//free{arr41);
+//free{arr42);
+//free{arr31);
+//free{arr32);
+
+};
+
+private: System::Void button13_Click(System::Object^  sender, System::EventArgs^  e) {
+
+	country c;
+
+
+	//openFileDialog1->InitialDirectory = "c:\\";
+	openFileDialog1->Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+	openFileDialog1->FilterIndex = 2;
+	openFileDialog1->RestoreDirectory = true;
+	if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+	{
+		//hhh https://www.cyberforum.ru/visual-cpp/thread901249.html
+
+
+	}
+}
 };
 }

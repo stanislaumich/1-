@@ -1,7 +1,7 @@
 ﻿  MyForm.cpp
-s:\контрольные\универ\1курс\1 семестр\зимняя\1-kurs\зимняя\алгоритмизация\source\mywork\MyForm.h(93): warning C4101: s: неиспользованная локальная переменная
-s:\контрольные\универ\1курс\1 семестр\зимняя\1-kurs\зимняя\алгоритмизация\source\mywork\MyForm.h(770): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-s:\контрольные\универ\1курс\1 семестр\зимняя\1-kurs\зимняя\алгоритмизация\source\mywork\MyForm.h(781): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
+s:\контрольные\универ\1-kurs\зимняя\алгоритмизация\source\mywork\MyForm.h(90): warning C4101: s: неиспользованная локальная переменная
+s:\контрольные\универ\1-kurs\зимняя\алгоритмизация\source\mywork\MyForm.h(1038): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+s:\контрольные\универ\1-kurs\зимняя\алгоритмизация\source\mywork\MyForm.h(1049): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
   MyForm.obj : /DEBUG:FASTLINK не поддерживается, если присутствует управляемый код; выполняется перезапуск компоновки с /DEBUG:FULL
-  MyWork.vcxproj -> S:\Контрольные\Универ\1курс\1 семестр\Зимняя\1-kurs\Зимняя\Алгоритмизация\Source\MyWork\Debug\MyWork.exe
-  MyWork.vcxproj -> S:\Контрольные\Универ\1курс\1 семестр\Зимняя\1-kurs\Зимняя\Алгоритмизация\Source\MyWork\Debug\MyWork.pdb (Partial PDB)
+  MyWork.vcxproj -> S:\Контрольные\универ\1-kurs\Зимняя\Алгоритмизация\Source\MyWork\Debug\MyWork.exe
+  MyWork.vcxproj -> S:\Контрольные\универ\1-kurs\Зимняя\Алгоритмизация\Source\MyWork\Debug\MyWork.pdb (Partial PDB)
