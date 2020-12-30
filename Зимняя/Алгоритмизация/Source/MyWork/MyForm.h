@@ -34,7 +34,7 @@ namespace MyWork {
 		int gold;
 		int silver;
 		int bronze;
-	}
+	};
 
 
 	public ref class MyForm : public System::Windows::Forms::Form
@@ -132,8 +132,14 @@ namespace MyWork {
 			for (int i=0;i<4;i++){A[i]= new int[4];}
 			B = new int*[3];
 			for (int i = 0; i<3; i++) { B[i] = new int[3]; }
-
-
+			int T[9] = { 4,2,7,-1,-5,-7,9,4,1 };
+			int c = 0;
+			for (int i = 0; i < 3; i++) {
+				for (int j = 0; j < 3; j++) {
+					B[i][j] = T[c++];
+					this->dataGridView2->Rows[i]->Cells[j]->Value = Convert::ToString(B[i][j]);
+			 }
+			}
 		}
 
 	protected:
@@ -285,6 +291,8 @@ private: System::Windows::Forms::Button^  button14;
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
+			this->button15 = (gcnew System::Windows::Forms::Button());
+			this->button14 = (gcnew System::Windows::Forms::Button());
 			this->button13 = (gcnew System::Windows::Forms::Button());
 			this->richTextBox2 = (gcnew System::Windows::Forms::RichTextBox());
 			this->tabPage4 = (gcnew System::Windows::Forms::TabPage());
@@ -312,8 +320,6 @@ private: System::Windows::Forms::Button^  button14;
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
-			this->button14 = (gcnew System::Windows::Forms::Button());
-			this->button15 = (gcnew System::Windows::Forms::Button());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			this->tabPage2->SuspendLayout();
@@ -441,6 +447,7 @@ private: System::Windows::Forms::Button^  button14;
 			this->textBox7->Name = L"textBox7";
 			this->textBox7->Size = System::Drawing::Size(480, 20);
 			this->textBox7->TabIndex = 7;
+			this->textBox7->Text = L"asdaaassdfasdaaa";
 			// 
 			// label15
 			// 
@@ -715,6 +722,24 @@ private: System::Windows::Forms::Button^  button14;
 			this->tabPage3->Text = L"Задание 3";
 			this->tabPage3->UseVisualStyleBackColor = true;
 			// 
+			// button15
+			// 
+			this->button15->Location = System::Drawing::Point(3, 91);
+			this->button15->Name = L"button15";
+			this->button15->Size = System::Drawing::Size(218, 23);
+			this->button15->TabIndex = 3;
+			this->button15->Text = L"Обработать";
+			this->button15->UseVisualStyleBackColor = true;
+			// 
+			// button14
+			// 
+			this->button14->Location = System::Drawing::Point(116, 62);
+			this->button14->Name = L"button14";
+			this->button14->Size = System::Drawing::Size(105, 23);
+			this->button14->TabIndex = 2;
+			this->button14->Text = L"Сохранить файл";
+			this->button14->UseVisualStyleBackColor = true;
+			// 
 			// button13
 			// 
 			this->button13->Location = System::Drawing::Point(3, 62);
@@ -970,24 +995,6 @@ private: System::Windows::Forms::Button^  button14;
 			// 
 			this->openFileDialog1->FileName = L"openFileDialog1";
 			// 
-			// button14
-			// 
-			this->button14->Location = System::Drawing::Point(116, 62);
-			this->button14->Name = L"button14";
-			this->button14->Size = System::Drawing::Size(105, 23);
-			this->button14->TabIndex = 2;
-			this->button14->Text = L"Сохранить файл";
-			this->button14->UseVisualStyleBackColor = true;
-			// 
-			// button15
-			// 
-			this->button15->Location = System::Drawing::Point(3, 91);
-			this->button15->Name = L"button15";
-			this->button15->Size = System::Drawing::Size(218, 23);
-			this->button15->TabIndex = 3;
-			this->button15->Text = L"Обработать";
-			this->button15->UseVisualStyleBackColor = true;
-			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1064,20 +1071,20 @@ private: System::Int32 mainwork(char *N, int len) {
 private: System::Void button10_Click(System::Object^  sender, System::EventArgs^  e) {
 // выделить память и сгенерировать массив 1
 	lN1 = Convert::ToInt32(textBox6->Text);
-	free(N1);
-	N1 = (char*)malloc(lN1*sizeof(char));
+	//free(N1);
+	N1 = new char[lN1];//(char*)malloc(lN1*sizeof(char));
 	srand(time(0));
 	textBox5->Text = "";
 	for (int i = 0; i < lN1; i++) {
-		N1[i] = (char)((rand()%93  + 33));
+		N1[i] = (char)((rand()%(126-97)  + 97));
 		textBox5->Text += Convert::ToChar(N1[i]);
 	}
 // выделить память и заполнить массив 2
  lN2= textBox7->Text->Length;
-  free(N2);
-  N2 = (char*)malloc(lN2 * sizeof(char));
+  //free(N2);
+  N2 = new char[lN2];//(char*)malloc(lN2 * sizeof(char));
   for (int i = 0; i < lN2; i++) {
-	  N2[i] = Convert::ToChar(textBox7->Text[i]);
+	  N2[i] = textBox7->Text[i];//Convert::ToChar(textBox7->Text[i]);
   }
 }
 
