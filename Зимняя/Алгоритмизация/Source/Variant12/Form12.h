@@ -1,6 +1,12 @@
 #pragma once
 #include <malloc.h>
+// для косинусов подключим библиотеку математики
 #include <math.h>
+// для работы со строками
+#include <msclr\marshal_cppstd.h>
+#include <string>
+#include <iostream>
+using namespace System;
 
 namespace Variant12 {
 
@@ -113,6 +119,16 @@ namespace Variant12 {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column3;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column4;
 	private: System::Windows::Forms::Label^  label14;
+	private: System::Windows::Forms::Button^  button3;
+	private: System::Windows::Forms::Label^  label20;
+	private: System::Windows::Forms::TextBox^  textBox3;
+	private: System::Windows::Forms::TextBox^  textBox2;
+	private: System::Windows::Forms::TextBox^  textBox1;
+	private: System::Windows::Forms::Label^  label19;
+	private: System::Windows::Forms::Label^  label18;
+	private: System::Windows::Forms::Label^  label17;
+	private: System::Windows::Forms::RichTextBox^  richTextBox1;
+	private: System::Windows::Forms::ListBox^  listBox1;
 
 	private:
 		/// <summary>
@@ -121,10 +137,6 @@ namespace Variant12 {
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Требуемый метод для поддержки конструктора — не изменяйте 
-		/// содержимое этого метода с помощью редактора кода.
-		/// </summary>
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Form12::typeid));
@@ -162,7 +174,17 @@ namespace Variant12 {
 			this->label14 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
+			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->label20 = (gcnew System::Windows::Forms::Label());
+			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->label19 = (gcnew System::Windows::Forms::Label());
+			this->label18 = (gcnew System::Windows::Forms::Label());
+			this->label17 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
@@ -479,6 +501,16 @@ namespace Variant12 {
 			// 
 			// tabPage3
 			// 
+			this->tabPage3->Controls->Add(this->listBox1);
+			this->tabPage3->Controls->Add(this->richTextBox1);
+			this->tabPage3->Controls->Add(this->button3);
+			this->tabPage3->Controls->Add(this->label20);
+			this->tabPage3->Controls->Add(this->textBox3);
+			this->tabPage3->Controls->Add(this->textBox2);
+			this->tabPage3->Controls->Add(this->textBox1);
+			this->tabPage3->Controls->Add(this->label19);
+			this->tabPage3->Controls->Add(this->label18);
+			this->tabPage3->Controls->Add(this->label17);
 			this->tabPage3->Controls->Add(this->label3);
 			this->tabPage3->Location = System::Drawing::Point(4, 22);
 			this->tabPage3->Name = L"tabPage3";
@@ -488,6 +520,80 @@ namespace Variant12 {
 			this->tabPage3->Text = L"Задание3";
 			this->tabPage3->UseVisualStyleBackColor = true;
 			// 
+			// richTextBox1
+			// 
+			this->richTextBox1->Location = System::Drawing::Point(215, 180);
+			this->richTextBox1->Name = L"richTextBox1";
+			this->richTextBox1->Size = System::Drawing::Size(212, 272);
+			this->richTextBox1->TabIndex = 9;
+			this->richTextBox1->Text = L"";
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(215, 151);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(495, 23);
+			this->button3->TabIndex = 8;
+			this->button3->Text = L"Произвести обработку слов";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &Form12::button3_Click);
+			// 
+			// label20
+			// 
+			this->label20->Location = System::Drawing::Point(212, 84);
+			this->label20->Name = L"label20";
+			this->label20->Size = System::Drawing::Size(498, 64);
+			this->label20->TabIndex = 7;
+			this->label20->Text = L"Условимся что слова в каждой строке разделены пробелами";
+			// 
+			// textBox3
+			// 
+			this->textBox3->Location = System::Drawing::Point(273, 61);
+			this->textBox3->Name = L"textBox3";
+			this->textBox3->Size = System::Drawing::Size(437, 20);
+			this->textBox3->TabIndex = 6;
+			// 
+			// textBox2
+			// 
+			this->textBox2->Location = System::Drawing::Point(273, 36);
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(437, 20);
+			this->textBox2->TabIndex = 5;
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(273, 10);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(437, 20);
+			this->textBox1->TabIndex = 4;
+			// 
+			// label19
+			// 
+			this->label19->AutoSize = true;
+			this->label19->Location = System::Drawing::Point(212, 64);
+			this->label19->Name = L"label19";
+			this->label19->Size = System::Drawing::Size(55, 13);
+			this->label19->TabIndex = 3;
+			this->label19->Text = L"Строка 3:";
+			// 
+			// label18
+			// 
+			this->label18->AutoSize = true;
+			this->label18->Location = System::Drawing::Point(212, 39);
+			this->label18->Name = L"label18";
+			this->label18->Size = System::Drawing::Size(55, 13);
+			this->label18->TabIndex = 2;
+			this->label18->Text = L"Строка 2:";
+			// 
+			// label17
+			// 
+			this->label17->AutoSize = true;
+			this->label17->Location = System::Drawing::Point(212, 13);
+			this->label17->Name = L"label17";
+			this->label17->Size = System::Drawing::Size(55, 13);
+			this->label17->TabIndex = 1;
+			this->label17->Text = L"Строка 1:";
+			// 
 			// label3
 			// 
 			this->label3->Dock = System::Windows::Forms::DockStyle::Left;
@@ -496,6 +602,15 @@ namespace Variant12 {
 			this->label3->Size = System::Drawing::Size(188, 452);
 			this->label3->TabIndex = 0;
 			this->label3->Text = resources->GetString(L"label3.Text");
+			// 
+			// listBox1
+			// 
+			this->listBox1->FormattingEnabled = true;
+			this->listBox1->Location = System::Drawing::Point(433, 180);
+			this->listBox1->Name = L"listBox1";
+			this->listBox1->Size = System::Drawing::Size(277, 264);
+			this->listBox1->TabIndex = 10;
+			this->listBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &Form12::listBox1_SelectedIndexChanged);
 			// 
 			// Form12
 			// 
@@ -516,6 +631,7 @@ namespace Variant12 {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView4))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView3))->EndInit();
 			this->tabPage3->ResumeLayout(false);
+			this->tabPage3->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -591,7 +707,74 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 			this->dataGridView5->Rows[i]->Cells[j]->Value = Convert::ToString(C2[i][j]); //конвертируем в строку
 		}
 	}
+}
 
+
+private: void GetWordList(String ^s) {
+	const wchar_t *sep = L" ";
+	int l = s->Length;
+	s->Trim();
+	s += " ";
+	System::String^ ts = "";
+	for (int i = 0; i < l; i++) {
+		//richTextBox1->Text = richTextBox1->Text + "\r\n" + s[i];
+		if (s[i] == *sep) {
+			listBox1->Items->Add(ts);
+			ts = "";
+		}
+		else {
+			ts += s[i];
+		}
+
+	}
+	//s=s->Trim();
+	//int l= s-Length();
+	//for (int i = 0; i < l; i++) {
+	//IntPtr initialStringPtr = Marshal::StringToHGlobalAnsi(s);
+	//char* converted = static_cast<char*>(initialStringPtr.ToPointer());
+	//msclr::interop::marshal_context context;
+	//std::string ins = context.marshal_as<std::string>(s);
+	//for (int i = 0; i < ins.length(); i++) {
+	//	richTextBox1->Text = richTextBox1->Text + "\r\n" + ins[i].ToChar();
+	//	}
+}
+
+private: bool IsWordInString(String ^w,String ^s) {
+	
+}
+
+private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+	// очистим поле вывода информации
+	richTextBox1->Text = "";
+	// сначала проверим не пусты ли строки
+	if (textBox1->Text->Length == 0) {
+		richTextBox1->Text = richTextBox1->Text + "\r\n Строка1 - пустое значение";
+	}
+	if (textBox2->Text->Length == 0) {
+		richTextBox1->Text = richTextBox1->Text + "\r\n Строка2 - пустое значение";
+	}
+	if (textBox3->Text->Length == 0) {
+		richTextBox1->Text = richTextBox1->Text + "\r\n Строка3 - пустое значение";
+	}
+	// проверим превышение длины строки (по условию 75)
+	if (textBox1->Text->Length >75) {
+		richTextBox1->Text = richTextBox1->Text + "\r\n Строка1 - длина строки более 75";
+	}
+	if (textBox2->Text->Length >75) {
+		richTextBox1->Text = richTextBox1->Text + "\r\n Строка2 - длина строки более 75";
+	}
+	if (textBox3->Text->Length >75) {
+		richTextBox1->Text = richTextBox1->Text + "\r\n Строка3 - длина строки более 75";
+	}
+	richTextBox1->ScrollToCaret();
+	listBox1->Items->Clear();
+	GetWordList(textBox1->Text);
+	GetWordList(textBox2->Text);
+	GetWordList(textBox3->Text);
+
+
+}
+private: System::Void listBox1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
 }
 };
 }
