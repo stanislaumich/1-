@@ -709,17 +709,26 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	}
 }
 
+private: void insList(String ^s) {
+	bool ins = true;
+	for (int i= 0; i < listBox1->Items->Count; i++) {
+		if (listBox1->Items[i]->ToString() == s) {
+			ins = false; 
+		}
+	}
+	ins? listBox1->Items->Add(s):ins=ins;
+	}
 
 private: void GetWordList(String ^s) {
 	const wchar_t *sep = L" ";
-	int l = s->Length;
+	//int l = s->Length;
 	s->Trim();
+	//s->Concat(*sep);
 	s += " ";
 	System::String^ ts = "";
-	for (int i = 0; i < l; i++) {
-		//richTextBox1->Text = richTextBox1->Text + "\r\n" + s[i];
+	for (int i = 0; i < s->Length; i++) {
 		if (s[i] == *sep) {
-			listBox1->Items->Add(ts);
+			insList(ts);
 			ts = "";
 		}
 		else {
@@ -739,8 +748,9 @@ private: void GetWordList(String ^s) {
 	//	}
 }
 
-private: bool IsWordInString(String ^w,String ^s) {
-	
+private: bool WordInString(String ^w,String ^s) {
+	//s->Contains(w);
+	return s->Contains(" "+w+" ");
 }
 
 private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -768,11 +778,41 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 	}
 	richTextBox1->ScrollToCaret();
 	listBox1->Items->Clear();
+	textBox1->Text=textBox1->Text->Trim();
+	textBox2->Text=textBox2->Text->Trim();
+	textBox3->Text=textBox3->Text->Trim();
+	textBox1->Text = " " + textBox1->Text + " ";
+	textBox2->Text = " " + textBox2->Text + " ";
+	textBox3->Text = " " + textBox3->Text + " ";
 	GetWordList(textBox1->Text);
 	GetWordList(textBox2->Text);
 	GetWordList(textBox3->Text);
+	for (int i = 0; i < listBox1->Items->Count; i++) {
+		if (WordInString(listBox1->Items[i]->ToString(), textBox1->Text)&&
+			WordInString(listBox1->Items[i]->ToString(), textBox2->Text)&&
+			WordInString(listBox1->Items[i]->ToString(), textBox3->Text)) {
+			richTextBox1->Text = richTextBox1->Text +"\r\n Слово "+ listBox1->Items[i]->ToString()+" есть во всех трёх строках";
+		}
+	}
 
-
+	for (int i = 0; i < listBox1->Items->Count; i++) {
+		if (WordInString(listBox1->Items[i]->ToString(), textBox1->Text) &&
+			WordInString(listBox1->Items[i]->ToString(), textBox2->Text)) {
+			richTextBox1->Text = richTextBox1->Text + "\r\n Слово " + listBox1->Items[i]->ToString() + " есть во всех строках 1 и 2";
+		}
+	}
+	for (int i = 0; i < listBox1->Items->Count; i++) {
+		if (WordInString(listBox1->Items[i]->ToString(), textBox1->Text) &&
+			WordInString(listBox1->Items[i]->ToString(), textBox3->Text)) {
+			richTextBox1->Text = richTextBox1->Text + "\r\n Слово " + listBox1->Items[i]->ToString() + " есть во всех строках 1 и 3";
+		}
+	}
+	for (int i = 0; i < listBox1->Items->Count; i++) {
+		if (WordInString(listBox1->Items[i]->ToString(), textBox3->Text) &&
+			WordInString(listBox1->Items[i]->ToString(), textBox2->Text)) {
+			richTextBox1->Text = richTextBox1->Text + "\r\n Слово " + listBox1->Items[i]->ToString() + " есть во всех строках 2 и 3";
+		}
+	}
 }
 private: System::Void listBox1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
 }
