@@ -1,4 +1,6 @@
 #pragma once
+#include <malloc.h>
+#include <math.h>
 
 namespace Variant12 {
 
@@ -9,26 +11,67 @@ namespace Variant12 {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Сводка для Form12
-	/// </summary>
+
+	// Задание №1
+	double *A;
+
+	// Задание №2
+	int **A2;
+	int **B2;
+	int **C2;
+	int T[4][2]={ { 1,3 },{ 7,1 },{3,5},{4,2} };
+	// Задание №3
+
+
 	public ref class Form12 : public System::Windows::Forms::Form
 	{
 	public:
 		Form12(void)
 		{
 			InitializeComponent();
+			// раздел подготовки для задания 1
+			 // готовить ничего не нужно
+			// раздел подготовки для задания 2
+			// укажем количество строк для таблиц отображения массивов
+			dataGridView3->RowCount = 4;
+			dataGridView4->RowCount = 4;
+			dataGridView5->RowCount = 4;
 			//
-			//TODO: добавьте код конструктора
-			//
+			// выделим память для строк массива А
+			A2 = new int*[4];//
+			// выделим память для столбцов массива А
+			for (int i = 0; i < 4; i++) {A2[i] = new int[2];}
+			// по всем элементам массива 
+			for (int i = 0; i < 4; i++) {
+				for (int j = 0; j < 2; j++) {
+					//заполним его заданными значениями из временного массива Т
+					A2[i][j] = T[i][j];
+					// и отобразим в таблице на экране
+					this->dataGridView3->Rows[i]->Cells[j]->Value = Convert::ToString(A2[i][j]);
+				}
+			}
+			// выделим память для строк массивов В и С
+			B2 = new int*[4];
+			C2 = new int*[4];
+			// и для их столбцов
+			for (int i = 0; i < 4; i++) { 
+				B2[i] = new int[2]; 
+				C2[i] = new int[2];
+			}
+
+
+			// раздел подготовки для задания 3
 		}
 
 	protected:
-		/// <summary>
-		/// Освободить все используемые ресурсы.
-		/// </summary>
+
 		~Form12()
 		{
+			// освободить память массивов задания 2
+			free(A2);
+			free(B2);
+			free(C2);
+			//------------------ отдаем обработку системе
 			if (components)
 			{
 				delete components;
@@ -39,6 +82,37 @@ namespace Variant12 {
 	private: System::Windows::Forms::TabPage^  tabPage1;
 	private: System::Windows::Forms::TabPage^  tabPage2;
 	private: System::Windows::Forms::TabPage^  tabPage3;
+	private: System::Windows::Forms::Label^  label1;
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::Label^  label3;
+	private: System::Windows::Forms::Label^  label7;
+	private: System::Windows::Forms::Label^  label6;
+	private: System::Windows::Forms::Label^  label5;
+	private: System::Windows::Forms::Label^  label4;
+	private: System::Windows::Forms::DataGridView^  dataGridView2;
+	private: System::Windows::Forms::DataGridView^  dataGridView1;
+	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::Label^  label13;
+	private: System::Windows::Forms::Label^  label12;
+	private: System::Windows::Forms::Label^  label11;
+	private: System::Windows::Forms::Label^  label10;
+	private: System::Windows::Forms::Label^  label9;
+	private: System::Windows::Forms::Label^  label8;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column2;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column1;
+	private: System::Windows::Forms::Label^  label16;
+	private: System::Windows::Forms::DataGridView^  dataGridView5;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column7;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column8;
+	private: System::Windows::Forms::Button^  button2;
+	private: System::Windows::Forms::Label^  label15;
+	private: System::Windows::Forms::DataGridView^  dataGridView4;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column5;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column6;
+	private: System::Windows::Forms::DataGridView^  dataGridView3;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column3;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column4;
+	private: System::Windows::Forms::Label^  label14;
 
 	private:
 		/// <summary>
@@ -53,11 +127,51 @@ namespace Variant12 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Form12::typeid));
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->label13 = (gcnew System::Windows::Forms::Label());
+			this->label12 = (gcnew System::Windows::Forms::Label());
+			this->label11 = (gcnew System::Windows::Forms::Label());
+			this->label10 = (gcnew System::Windows::Forms::Label());
+			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
+			this->label16 = (gcnew System::Windows::Forms::Label());
+			this->dataGridView5 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column8 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->label15 = (gcnew System::Windows::Forms::Label());
+			this->dataGridView4 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->dataGridView3 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->label14 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->tabControl1->SuspendLayout();
+			this->tabPage1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			this->tabPage2->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView5))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView4))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView3))->BeginInit();
+			this->tabPage3->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// tabControl1
@@ -69,51 +183,415 @@ namespace Variant12 {
 			this->tabControl1->Location = System::Drawing::Point(0, 0);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
-			this->tabControl1->Size = System::Drawing::Size(964, 400);
+			this->tabControl1->Size = System::Drawing::Size(726, 484);
 			this->tabControl1->TabIndex = 0;
 			// 
 			// tabPage1
 			// 
+			this->tabPage1->Controls->Add(this->label13);
+			this->tabPage1->Controls->Add(this->label12);
+			this->tabPage1->Controls->Add(this->label11);
+			this->tabPage1->Controls->Add(this->label10);
+			this->tabPage1->Controls->Add(this->label9);
+			this->tabPage1->Controls->Add(this->label8);
+			this->tabPage1->Controls->Add(this->label7);
+			this->tabPage1->Controls->Add(this->label6);
+			this->tabPage1->Controls->Add(this->label5);
+			this->tabPage1->Controls->Add(this->label4);
+			this->tabPage1->Controls->Add(this->dataGridView2);
+			this->tabPage1->Controls->Add(this->dataGridView1);
+			this->tabPage1->Controls->Add(this->button1);
+			this->tabPage1->Controls->Add(this->label1);
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(956, 374);
+			this->tabPage1->Size = System::Drawing::Size(718, 458);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Задание1";
 			this->tabPage1->UseVisualStyleBackColor = true;
 			// 
+			// label13
+			// 
+			this->label13->AutoSize = true;
+			this->label13->Location = System::Drawing::Point(374, 10);
+			this->label13->Name = L"label13";
+			this->label13->Size = System::Drawing::Size(122, 13);
+			this->label13->TabIndex = 13;
+			this->label13->Text = L"Массив обработанный";
+			// 
+			// label12
+			// 
+			this->label12->AutoSize = true;
+			this->label12->Location = System::Drawing::Point(196, 10);
+			this->label12->Name = L"label12";
+			this->label12->Size = System::Drawing::Size(98, 13);
+			this->label12->TabIndex = 12;
+			this->label12->Text = L"Массив исходный";
+			// 
+			// label11
+			// 
+			this->label11->AutoSize = true;
+			this->label11->Location = System::Drawing::Point(424, 378);
+			this->label11->Name = L"label11";
+			this->label11->Size = System::Drawing::Size(41, 13);
+			this->label11->TabIndex = 11;
+			this->label11->Text = L"Сумма";
+			// 
+			// label10
+			// 
+			this->label10->AutoSize = true;
+			this->label10->Location = System::Drawing::Point(526, 50);
+			this->label10->Name = L"label10";
+			this->label10->Size = System::Drawing::Size(13, 13);
+			this->label10->TabIndex = 10;
+			this->label10->Text = L"0";
+			// 
+			// label9
+			// 
+			this->label9->AutoSize = true;
+			this->label9->Location = System::Drawing::Point(526, 26);
+			this->label9->Name = L"label9";
+			this->label9->Size = System::Drawing::Size(149, 13);
+			this->label9->TabIndex = 9;
+			this->label9->Text = L"Количество отрицательных:";
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Location = System::Drawing::Point(230, 378);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(41, 13);
+			this->label8->TabIndex = 8;
+			this->label8->Text = L"Сумма";
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->Location = System::Drawing::Point(424, 418);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(13, 13);
+			this->label7->TabIndex = 7;
+			this->label7->Text = L"0";
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Location = System::Drawing::Point(239, 418);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(13, 13);
+			this->label6->TabIndex = 6;
+			this->label6->Text = L"0";
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(409, 395);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(87, 13);
+			this->label5->TabIndex = 5;
+			this->label5->Text = L"отрицательных:";
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(207, 395);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(87, 13);
+			this->label4->TabIndex = 4;
+			this->label4->Text = L"отрицательных:";
+			// 
+			// dataGridView2
+			// 
+			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView2->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(1) { this->Column2 });
+			this->dataGridView2->Location = System::Drawing::Point(376, 26);
+			this->dataGridView2->Name = L"dataGridView2";
+			this->dataGridView2->Size = System::Drawing::Size(144, 349);
+			this->dataGridView2->TabIndex = 3;
+			// 
+			// Column2
+			// 
+			this->Column2->HeaderText = L"Col1";
+			this->Column2->Name = L"Column2";
+			// 
+			// dataGridView1
+			// 
+			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(1) { this->Column1 });
+			this->dataGridView1->Location = System::Drawing::Point(207, 26);
+			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->Size = System::Drawing::Size(82, 349);
+			this->dataGridView1->TabIndex = 2;
+			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"Col1";
+			this->Column1->Name = L"Column1";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(295, 26);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->TabIndex = 1;
+			this->button1->Text = L"Выполнить";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Form12::button1_Click);
+			// 
+			// label1
+			// 
+			this->label1->Dock = System::Windows::Forms::DockStyle::Left;
+			this->label1->Location = System::Drawing::Point(3, 3);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(198, 452);
+			this->label1->TabIndex = 0;
+			this->label1->Text = resources->GetString(L"label1.Text");
+			// 
 			// tabPage2
 			// 
+			this->tabPage2->Controls->Add(this->label16);
+			this->tabPage2->Controls->Add(this->dataGridView5);
+			this->tabPage2->Controls->Add(this->button2);
+			this->tabPage2->Controls->Add(this->label15);
+			this->tabPage2->Controls->Add(this->dataGridView4);
+			this->tabPage2->Controls->Add(this->dataGridView3);
+			this->tabPage2->Controls->Add(this->label14);
+			this->tabPage2->Controls->Add(this->label2);
 			this->tabPage2->Location = System::Drawing::Point(4, 22);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(956, 374);
+			this->tabPage2->Size = System::Drawing::Size(718, 458);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"Задание2";
 			this->tabPage2->UseVisualStyleBackColor = true;
 			// 
+			// label16
+			// 
+			this->label16->AutoSize = true;
+			this->label16->Location = System::Drawing::Point(471, 125);
+			this->label16->Name = L"label16";
+			this->label16->Size = System::Drawing::Size(114, 13);
+			this->label16->TabIndex = 9;
+			this->label16->Text = L"Результат: Массив С";
+			// 
+			// dataGridView5
+			// 
+			this->dataGridView5->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView5->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) {
+				this->Column7,
+					this->Column8
+			});
+			this->dataGridView5->Location = System::Drawing::Point(463, 149);
+			this->dataGridView5->Name = L"dataGridView5";
+			this->dataGridView5->Size = System::Drawing::Size(240, 150);
+			this->dataGridView5->TabIndex = 8;
+			// 
+			// Column7
+			// 
+			this->Column7->HeaderText = L"С1";
+			this->Column7->Name = L"Column7";
+			// 
+			// Column8
+			// 
+			this->Column8->HeaderText = L"С2";
+			this->Column8->Name = L"Column8";
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(463, 33);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(240, 23);
+			this->button2->TabIndex = 7;
+			this->button2->Text = L"Обработать";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &Form12::button2_Click);
+			// 
+			// label15
+			// 
+			this->label15->AutoSize = true;
+			this->label15->Location = System::Drawing::Point(192, 194);
+			this->label15->Name = L"label15";
+			this->label15->Size = System::Drawing::Size(56, 13);
+			this->label15->TabIndex = 6;
+			this->label15->Text = L"Массив В";
+			// 
+			// dataGridView4
+			// 
+			this->dataGridView4->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView4->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) {
+				this->Column5,
+					this->Column6
+			});
+			this->dataGridView4->Location = System::Drawing::Point(195, 221);
+			this->dataGridView4->Name = L"dataGridView4";
+			this->dataGridView4->Size = System::Drawing::Size(240, 150);
+			this->dataGridView4->TabIndex = 5;
+			// 
+			// Column5
+			// 
+			this->Column5->HeaderText = L"С1";
+			this->Column5->Name = L"Column5";
+			// 
+			// Column6
+			// 
+			this->Column6->HeaderText = L"С2";
+			this->Column6->Name = L"Column6";
+			// 
+			// dataGridView3
+			// 
+			this->dataGridView3->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView3->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) {
+				this->Column3,
+					this->Column4
+			});
+			this->dataGridView3->Location = System::Drawing::Point(195, 30);
+			this->dataGridView3->Name = L"dataGridView3";
+			this->dataGridView3->Size = System::Drawing::Size(240, 150);
+			this->dataGridView3->TabIndex = 4;
+			// 
+			// Column3
+			// 
+			this->Column3->HeaderText = L"C1";
+			this->Column3->Name = L"Column3";
+			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"C2";
+			this->Column4->Name = L"Column4";
+			// 
+			// label14
+			// 
+			this->label14->AutoSize = true;
+			this->label14->Location = System::Drawing::Point(192, 3);
+			this->label14->Name = L"label14";
+			this->label14->Size = System::Drawing::Size(56, 13);
+			this->label14->TabIndex = 3;
+			this->label14->Text = L"Массив А";
+			// 
+			// label2
+			// 
+			this->label2->Dock = System::Windows::Forms::DockStyle::Left;
+			this->label2->Location = System::Drawing::Point(3, 3);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(168, 452);
+			this->label2->TabIndex = 2;
+			this->label2->Text = resources->GetString(L"label2.Text");
+			// 
 			// tabPage3
 			// 
+			this->tabPage3->Controls->Add(this->label3);
 			this->tabPage3->Location = System::Drawing::Point(4, 22);
 			this->tabPage3->Name = L"tabPage3";
 			this->tabPage3->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage3->Size = System::Drawing::Size(956, 374);
+			this->tabPage3->Size = System::Drawing::Size(718, 458);
 			this->tabPage3->TabIndex = 2;
 			this->tabPage3->Text = L"Задание3";
 			this->tabPage3->UseVisualStyleBackColor = true;
+			// 
+			// label3
+			// 
+			this->label3->Dock = System::Windows::Forms::DockStyle::Left;
+			this->label3->Location = System::Drawing::Point(3, 3);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(188, 452);
+			this->label3->TabIndex = 0;
+			this->label3->Text = resources->GetString(L"label3.Text");
 			// 
 			// Form12
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(964, 400);
+			this->ClientSize = System::Drawing::Size(726, 484);
 			this->Controls->Add(this->tabControl1);
 			this->Name = L"Form12";
 			this->Text = L"Вариант 12 Парахневич Алина ";
 			this->tabControl1->ResumeLayout(false);
+			this->tabPage1->ResumeLayout(false);
+			this->tabPage1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
+			this->tabPage2->ResumeLayout(false);
+			this->tabPage2->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView5))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView4))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView3))->EndInit();
+			this->tabPage3->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
-	};
+
+	private: int MasCos(double *A,int n) {
+		int c = 0;
+		for (int i = 0; i < n; i++) {// по всем элементам
+			A[i] = cos(A[i]);// заменяем их на косинус
+			A[i] < 0 ?  c += 1 : i = i;
+	  }
+		return c;
+	}
+
+private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+
+
+	// выделим память для массива по количеству указанных в таблице строк
+	A = new double[dataGridView1->RowCount * sizeof(double)];
+	// для второй таблицы укажем то же количество строк что и в первой
+	dataGridView2->RowCount = dataGridView1->RowCount;
+	double s = 0;//обнулим переменную для подсчета суммы
+	for (int i = 0; i < dataGridView1->RowCount; i++) {
+		// конвертируем значения таблицы в тип double в процессе заполнения
+		A[i]= Convert::ToDouble(this->dataGridView1->Rows[i]->Cells[0]->Value);
+		// сразу подсчитаем сумму отрицательных элементов данного массива
+		A[i] < 0 ? s += A[i] : i = i;
+	}
+	// выведем сумму отрицательных элементов исходного массива
+	label6->Text= Convert::ToString(s);
+	// зададим счетчик отрицательных элементов и 
+	// вызовем нашу функцию для замены элементов на их косинусы
+	// и заполнения количества отрицательных элементов
+	int c = MasCos(A, dataGridView1->RowCount);
+	s = 0; //обнулим переменную для подсчета суммы	
+	// заполним вторую таблицу элементами преобразованного массива
+	for (int i = 0; i < dataGridView1->RowCount; i++) {
+		// конвертируем значения таблицы в тип string в процессе заполнения
+		this->dataGridView2->Rows[i]->Cells[0]->Value = Convert::ToString(A[i]);
+		// сразу подсчитаем сумму отрицательных элементов данного массива
+		A[i] < 0 ? s += A[i] : i = i;
+	}
+	// выведем сумму отрицательных элементов нового массива
+	label7->Text = Convert::ToString(s);
+	// выведем количество отрицательных элементов нового массива
+	label10->Text = Convert::ToString(c);
+	// освободим память массива
+	free(A);
+}
+
+private: void MasMul(int **A, int **B, int **C) {
+			 // по всем элементам массивов
+			 for (int i = 0; i < 4; i++) {// по всем элементам массивов
+				 for (int j = 0; j < 2; j++) {
+				 C[i][j] = A[i][j] * B[i][j];// выполняем умножение элементов в третий массив
+			 }
+			 }
+		 }
+
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+	// заполняем массив В значениями таблицы
+	// по каждому элементу таблицы
+	for (int i = 0; i < 4; i++) {// по строкам
+		for (int j = 0; j < 2; j++) { //по столбцам
+			B2[i][j] = Convert::ToInt32(this->dataGridView4->Rows[i]->Cells[j]->Value);// выполняем сразу конвертацию
+		}
+	}
+	// вызываем нашу функцию для нахождения произведения
+	MasMul(A2, B2, C2);
+	// по всем элементам рассчитанного массива С заполняем таблицу на форме
+	for (int i = 0; i < 4; i++) {// по всем строкам
+		for (int j = 0; j < 2; j++) { // по столбцам
+			this->dataGridView5->Rows[i]->Cells[j]->Value = Convert::ToString(C2[i][j]); //конвертируем в строку
+		}
+	}
+
+}
+};
 }

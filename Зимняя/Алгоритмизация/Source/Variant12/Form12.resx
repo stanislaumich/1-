@@ -117,4 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Вариант 7.12. Написать функцию, которая для заданного в качестве параметра массива типа double заменяет его элементы значениями косинусов от исходных значений и возвращает количество отрицательных элементов. В главной программе обеспечить вычисление суммы отрицательных элементов обоих заданных массивов. (Необходимо заполнить исходный массив значениями нажать кнопку "Выполнить"
+)</value>
+  </data>
+  <metadata name="Column7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column8.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column6.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Вариант 8.12. Написать функцию, которая перемножает соответствующие элементы двух заданных массивов и заносит результаты в третий массив. Размерности всех трех массивов одинаковы. Написать программу, которая описывает три двухмерных массива: А, В и С размерностью 4*2, инициализировав массив А значениями 1, 3, 7, 1, 3, 5, 4, 2, а значения элементов массива В ввести с клавиатуры. Результаты перемножения массивов А и В занести в массив С. Вывести все три массива на экран.</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Вариант 9.12. Составить программу, которая вводит с клавиатуры три строки, содержащие до 75 символов, и выводит на экран слова, которые являются общими для всех трех строк, а также для каждой пары строк.</value>
+  </data>
 </root>

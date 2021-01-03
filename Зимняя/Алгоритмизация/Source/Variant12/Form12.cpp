@@ -1,6 +1,6 @@
-#include "Form12.h" //the header name for your form
+#include "Form12.h"
 
-using namespace Variant12; //name of your project
+using namespace Variant12;
 
 [STAThreadAttribute]
 int main(array<System::String ^> ^args)
