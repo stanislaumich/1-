@@ -1,0 +1,5 @@
+﻿  MainForm.cpp
+  .NETFramework,Version=v4.5.2.AssemblyAttributes.cpp
+  MainForm.obj : /DEBUG:FASTLINK не поддерживается, если присутствует управляемый код; выполняется перезапуск компоновки с /DEBUG:FULL
+  PoluyanovM.vcxproj -> S:\Контрольные\Универ\1курс\1 семестр\Зимняя\1-kurs\Зимняя\Алгоритмизация\Source\PoluyanovM\Debug\PoluyanovM.exe
+  PoluyanovM.vcxproj -> S:\Контрольные\Универ\1курс\1 семестр\Зимняя\1-kurs\Зимняя\Алгоритмизация\Source\PoluyanovM\Debug\PoluyanovM.pdb (Partial PDB)
