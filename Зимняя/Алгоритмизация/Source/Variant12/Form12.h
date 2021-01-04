@@ -3,7 +3,7 @@
 // для косинусов подключим библиотеку математики
 #include <math.h>
 // для работы со строками
-#include <msclr\marshal_cppstd.h>
+//#include <msclr\marshal_cppstd.h>
 #include <string>
 #include <iostream>
 using namespace System;
@@ -17,7 +17,6 @@ namespace Variant12 {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-
 	// Задание №1
 	double *A;
 
@@ -26,8 +25,6 @@ namespace Variant12 {
 	int **B2;
 	int **C2;
 	int T[4][2]={ { 1,3 },{ 7,1 },{3,5},{4,2} };
-	// Задание №3
-
 
 	public ref class Form12 : public System::Windows::Forms::Form
 	{
@@ -36,7 +33,7 @@ namespace Variant12 {
 		{
 			InitializeComponent();
 			// раздел подготовки для задания 1
-			 // готовить ничего не нужно
+			// готовить ничего не нужно
 			// раздел подготовки для задания 2
 			// укажем количество строк для таблиц отображения массивов
 			dataGridView3->RowCount = 4;
@@ -64,9 +61,6 @@ namespace Variant12 {
 				B2[i] = new int[2]; 
 				C2[i] = new int[2];
 			}
-
-
-			// раздел подготовки для задания 3
 		}
 
 	protected:
@@ -131,9 +125,7 @@ namespace Variant12 {
 	private: System::Windows::Forms::ListBox^  listBox1;
 
 	private:
-		/// <summary>
-		/// Обязательная переменная конструктора.
-		/// </summary>
+
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
@@ -610,7 +602,6 @@ namespace Variant12 {
 			this->listBox1->Name = L"listBox1";
 			this->listBox1->Size = System::Drawing::Size(277, 264);
 			this->listBox1->TabIndex = 10;
-			this->listBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &Form12::listBox1_SelectedIndexChanged);
 			// 
 			// Form12
 			// 
@@ -637,23 +628,25 @@ namespace Variant12 {
 		}
 #pragma endregion
 
-	private: int MasCos(double *A,int n) {
-		int c = 0;
+// функция заменяющая в массиве значения их косинусами
+private: int MasCos(double *A,int n) {
+		int c = 0;// переменная для подсчета отрицательных значений
 		for (int i = 0; i < n; i++) {// по всем элементам
 			A[i] = cos(A[i]);// заменяем их на косинус
-			A[i] < 0 ?  c += 1 : i = i;
+			A[i] < 0 ?  c += 1 : i = i;// увеличиваем счетчик если значение меньше нуля
+			// тут неточное условие: считать отрицательные до замены на косинус или после
+			// считается после замены, если поменять строки в цикле местами то считать будет
+			//  отрицательные до замены
 	  }
 		return c;
 	}
 
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-
-
 	// выделим память для массива по количеству указанных в таблице строк
 	A = new double[dataGridView1->RowCount * sizeof(double)];
 	// для второй таблицы укажем то же количество строк что и в первой
 	dataGridView2->RowCount = dataGridView1->RowCount;
-	double s = 0;//обнулим переменную для подсчета суммы
+	double s = 0;//обнулим переменную для подсчета суммы отрицательных элементов
 	for (int i = 0; i < dataGridView1->RowCount; i++) {
 		// конвертируем значения таблицы в тип double в процессе заполнения
 		A[i]= Convert::ToDouble(this->dataGridView1->Rows[i]->Cells[0]->Value);
@@ -666,7 +659,7 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	// вызовем нашу функцию для замены элементов на их косинусы
 	// и заполнения количества отрицательных элементов
 	int c = MasCos(A, dataGridView1->RowCount);
-	s = 0; //обнулим переменную для подсчета суммы	
+	s = 0; //обнулим переменную для подсчета суммы отрицательных элементов
 	// заполним вторую таблицу элементами преобразованного массива
 	for (int i = 0; i < dataGridView1->RowCount; i++) {
 		// конвертируем значения таблицы в тип string в процессе заполнения
@@ -681,13 +674,13 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	// освободим память массива
 	free(A);
 }
-
+// функция произведения массивов согласно условию
 private: void MasMul(int **A, int **B, int **C) {
 			 // по всем элементам массивов
 			 for (int i = 0; i < 4; i++) {// по всем элементам массивов
 				 for (int j = 0; j < 2; j++) {
 				 C[i][j] = A[i][j] * B[i][j];// выполняем умножение элементов в третий массив
-			 }
+			     }
 			 }
 		 }
 
@@ -696,7 +689,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	// по каждому элементу таблицы
 	for (int i = 0; i < 4; i++) {// по строкам
 		for (int j = 0; j < 2; j++) { //по столбцам
-			B2[i][j] = Convert::ToInt32(this->dataGridView4->Rows[i]->Cells[j]->Value);// выполняем сразу конвертацию
+			B2[i][j] = Convert::ToInt32(this->dataGridView4->Rows[i]->Cells[j]->Value);// выполняем сразу конвертацию в число
 		}
 	}
 	// вызываем нашу функцию для нахождения произведения
@@ -704,52 +697,43 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	// по всем элементам рассчитанного массива С заполняем таблицу на форме
 	for (int i = 0; i < 4; i++) {// по всем строкам
 		for (int j = 0; j < 2; j++) { // по столбцам
-			this->dataGridView5->Rows[i]->Cells[j]->Value = Convert::ToString(C2[i][j]); //конвертируем в строку
+			this->dataGridView5->Rows[i]->Cells[j]->Value = Convert::ToString(C2[i][j]); //конвертируем число в строку
 		}
 	}
 }
-
+// функция добавляет строку в список строк, 
+// написана для того чтобы не добавлять дубликаты
 private: void insList(String ^s) {
-	bool ins = true;
+	bool ins = true;// условие добавления
+	// сравниваем новую строку с уже ранее добавленными
 	for (int i= 0; i < listBox1->Items->Count; i++) {
 		if (listBox1->Items[i]->ToString() == s) {
-			ins = false; 
+			ins = false;// если строка есть в списке то отменяем условие добавления 
 		}
 	}
-	ins? listBox1->Items->Add(s):ins=ins;
+	ins? listBox1->Items->Add(s):ins=ins;// добавляем по условию если она уникальна
 	}
-
+// выбирает слова из строки и добавляет их в общий список слов 
 private: void GetWordList(String ^s) {
-	const wchar_t *sep = L" ";
-	//int l = s->Length;
-	s->Trim();
-	//s->Concat(*sep);
-	s += " ";
-	System::String^ ts = "";
-	for (int i = 0; i < s->Length; i++) {
-		if (s[i] == *sep) {
-			insList(ts);
-			ts = "";
+	const wchar_t *sep = L" ";// зададим разделитель
+	s->Trim();// обрежем лишние пробелы в начале и конце строки
+	s += " ";//в конце один пробел нам нужен для упрощения алгоритма
+	System::String^ ts = "";// переменная для нового слова
+	for (int i = 0; i < s->Length; i++) {// по символам исходной строки
+		if (s[i] == *sep) {//если текущий символ есть разделитель
+			insList(ts);// добавляем своей функцией отбрасывая дубликаты
+			ts = "";// обнулим новое слово
 		}
 		else {
-			ts += s[i];
+			ts += s[i];// если не разделитель то добавляем к текущему слову
 		}
-
 	}
-	//s=s->Trim();
-	//int l= s-Length();
-	//for (int i = 0; i < l; i++) {
-	//IntPtr initialStringPtr = Marshal::StringToHGlobalAnsi(s);
-	//char* converted = static_cast<char*>(initialStringPtr.ToPointer());
-	//msclr::interop::marshal_context context;
-	//std::string ins = context.marshal_as<std::string>(s);
-	//for (int i = 0; i < ins.length(); i++) {
-	//	richTextBox1->Text = richTextBox1->Text + "\r\n" + ins[i].ToChar();
-	//	}
 }
 
+// проверяем входит ли слово из списка в строку, обрамляем пробелами
+//для этого и нужны пробелы в начале и конце строки
 private: bool WordInString(String ^w,String ^s) {
-	//s->Contains(w);
+// с этим оператором могут быть вопросы
 	return s->Contains(" "+w+" ");
 }
 
@@ -757,6 +741,8 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 	// очистим поле вывода информации
 	richTextBox1->Text = "";
 	// сначала проверим не пусты ли строки
+	// вообще эти 6 проверок непринципиальны
+	// работать будет и без них
 	if (textBox1->Text->Length == 0) {
 		richTextBox1->Text = richTextBox1->Text + "\r\n Строка1 - пустое значение";
 	}
@@ -767,6 +753,7 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 		richTextBox1->Text = richTextBox1->Text + "\r\n Строка3 - пустое значение";
 	}
 	// проверим превышение длины строки (по условию 75)
+	// без этих точно будет работать
 	if (textBox1->Text->Length >75) {
 		richTextBox1->Text = richTextBox1->Text + "\r\n Строка1 - длина строки более 75";
 	}
@@ -776,45 +763,58 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 	if (textBox3->Text->Length >75) {
 		richTextBox1->Text = richTextBox1->Text + "\r\n Строка3 - длина строки более 75";
 	}
+	// прокрутим при необходимости список в конец
 	richTextBox1->ScrollToCaret();
+	// очистим список слов
 	listBox1->Items->Clear();
+	// уберём неподконтрольные пробелы 
 	textBox1->Text=textBox1->Text->Trim();
 	textBox2->Text=textBox2->Text->Trim();
 	textBox3->Text=textBox3->Text->Trim();
+	// добавим по одному пробелу для облегчения алгоритма выделения слов
 	textBox1->Text = " " + textBox1->Text + " ";
 	textBox2->Text = " " + textBox2->Text + " ";
 	textBox3->Text = " " + textBox3->Text + " ";
+	// формируем общий список слов трех строк
 	GetWordList(textBox1->Text);
 	GetWordList(textBox2->Text);
 	GetWordList(textBox3->Text);
+	// по списку слов
 	for (int i = 0; i < listBox1->Items->Count; i++) {
+		// включается ли слово во все три строки?
 		if (WordInString(listBox1->Items[i]->ToString(), textBox1->Text)&&
 			WordInString(listBox1->Items[i]->ToString(), textBox2->Text)&&
 			WordInString(listBox1->Items[i]->ToString(), textBox3->Text)) {
+			// выводим сообщение
 			richTextBox1->Text = richTextBox1->Text +"\r\n Слово "+ listBox1->Items[i]->ToString()+" есть во всех трёх строках";
 		}
 	}
 
 	for (int i = 0; i < listBox1->Items->Count; i++) {
+		// включается ли в строки 1 и 2
 		if (WordInString(listBox1->Items[i]->ToString(), textBox1->Text) &&
 			WordInString(listBox1->Items[i]->ToString(), textBox2->Text)) {
-			richTextBox1->Text = richTextBox1->Text + "\r\n Слово " + listBox1->Items[i]->ToString() + " есть во всех строках 1 и 2";
+			// сообщаем
+			richTextBox1->Text = richTextBox1->Text + "\r\n Слово " + listBox1->Items[i]->ToString() + " есть в строках 1 и 2";
 		}
 	}
 	for (int i = 0; i < listBox1->Items->Count; i++) {
+		// включается ли в строки 1 и 3
 		if (WordInString(listBox1->Items[i]->ToString(), textBox1->Text) &&
 			WordInString(listBox1->Items[i]->ToString(), textBox3->Text)) {
-			richTextBox1->Text = richTextBox1->Text + "\r\n Слово " + listBox1->Items[i]->ToString() + " есть во всех строках 1 и 3";
+			// сообщаем
+			richTextBox1->Text = richTextBox1->Text + "\r\n Слово " + listBox1->Items[i]->ToString() + " есть в строках 1 и 3";
 		}
 	}
 	for (int i = 0; i < listBox1->Items->Count; i++) {
+		// включается ли в строки 2 и 3
 		if (WordInString(listBox1->Items[i]->ToString(), textBox3->Text) &&
 			WordInString(listBox1->Items[i]->ToString(), textBox2->Text)) {
-			richTextBox1->Text = richTextBox1->Text + "\r\n Слово " + listBox1->Items[i]->ToString() + " есть во всех строках 2 и 3";
+			// сообщаем
+			richTextBox1->Text = richTextBox1->Text + "\r\n Слово " + listBox1->Items[i]->ToString() + " есть в строках 2 и 3";
 		}
 	}
 }
-private: System::Void listBox1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
-}
+
 };
 }
