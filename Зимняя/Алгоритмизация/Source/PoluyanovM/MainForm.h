@@ -1,4 +1,5 @@
 #pragma once
+// для управления выделением памяти
 #include<malloc.h>
 
 namespace PoluyanovM {
@@ -10,8 +11,9 @@ namespace PoluyanovM {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
+	// опишем динамические массивы
 	// задание 1
-
+	
 	double *M1;
 	double *M2;
 	double *M3;
@@ -33,9 +35,9 @@ namespace PoluyanovM {
 			M3 = new double[4 * sizeof(double)];
 			// проинициализируем массив М2 в момент его создания инициализатором
 			M2 = new double[10 * sizeof(double)] { 0.2,(-1.2),0.5,-3,9,2,-9,8,9,0 };
-			// проинициализируем массив М2 и внесем его в таблицу
+			// проинициализируем массив М2 
 			this->dataGridView2->RowCount = 10;// зададим количество строк второй таблицы
-			// заполним вторую таблицу значениями массива
+			// и заполним вторую таблицу значениями массива
 			for (int i = 0; i < 10; i++) {
 				this->dataGridView2->Rows[i]->Cells[0]->Value = Convert::ToString(M2[i]);
 				// заполним и первый обнулённый массив
@@ -52,18 +54,18 @@ namespace PoluyanovM {
 			A1 = new int*[3];
 			B1 = new int*[4];
 			for (int i = 0; i < 4; i++) {
-				B1[i] = new int[4];
+				B1[i] = new int[4];// выделим память для каждой строки В1
 				if (i < 3) {
-					A1[i] = new int[3];
+					A1[i] = new int[3];// выделим память для каждой строки А1
 				}
 			}
 			// инициализируем согласно условию
-			int T[16]{ 5,3,7,-1, -3,-5,4,7, 9,0,1,2, 1,5,3,2 };
-			int c = 0;
-			for (int i = 0; i < 4; i++) {
-				for (int j = 0; j < 4; j++) {
+			int T[16]{ 5,3,7,-1, -3,-5,4,7, 9,0,1,2, 1,5,3,2 };// временный массив
+			int c = 0;// обнулим счетчик
+			for (int i = 0; i < 4; i++) {// по всем строкам
+				for (int j = 0; j < 4; j++) { // по элементам строки
 					B1[i][j] = T[c++];// внесём значение в массив
-					// сразу внесем значение во входную таблицу
+					// и сразу внесем значение во входную таблицу чтобы повторно не запускать цикл
 					dataGridView5->Rows[i]->Cells[j]->Value = Convert::ToString(B1[i][j]);
 				}
 			}
@@ -78,14 +80,14 @@ namespace PoluyanovM {
 			free(M2);
 			free(M3);
 			
-			// освободим внутренние массивы
+			// освободим внутренние массивы строк
 			for (int i = 0; i < 4; i++) {
-				free(B1[i]);
+				free(B1[i]);// освобождаем память строки В1
 				if (i < 3) {
-					free(A1[i]);
+					free(A1[i]); //освобождаем память строки А1
 				}
 			}
-			// освободим внешние массивы
+			// освободим собственно внешние массивы
 			free(A1);
 			free(B1);
 
@@ -192,14 +194,14 @@ private: System::Windows::Forms::Button^  button3;
 			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
-			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->label11 = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
-			this->label12 = (gcnew System::Windows::Forms::Label());
-			this->label13 = (gcnew System::Windows::Forms::Label());
-			this->listBox2 = (gcnew System::Windows::Forms::ListBox());
 			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->listBox2 = (gcnew System::Windows::Forms::ListBox());
+			this->label13 = (gcnew System::Windows::Forms::Label());
+			this->label12 = (gcnew System::Windows::Forms::Label());
+			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->label11 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView3))->BeginInit();
@@ -222,7 +224,7 @@ private: System::Windows::Forms::Button^  button3;
 			this->tabControl1->Location = System::Drawing::Point(0, 0);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
-			this->tabControl1->Size = System::Drawing::Size(883, 523);
+			this->tabControl1->Size = System::Drawing::Size(781, 424);
 			this->tabControl1->TabIndex = 0;
 			// 
 			// tabPage1
@@ -238,7 +240,7 @@ private: System::Windows::Forms::Button^  button3;
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(875, 497);
+			this->tabPage1->Size = System::Drawing::Size(773, 398);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Номер 1";
 			this->tabPage1->UseVisualStyleBackColor = true;
@@ -327,7 +329,7 @@ private: System::Windows::Forms::Button^  button3;
 			this->label1->Dock = System::Windows::Forms::DockStyle::Top;
 			this->label1->Location = System::Drawing::Point(3, 3);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(869, 59);
+			this->label1->Size = System::Drawing::Size(767, 59);
 			this->label1->TabIndex = 1;
 			this->label1->Text = resources->GetString(L"label1.Text");
 			this->label1->UseWaitCursor = true;
@@ -347,7 +349,7 @@ private: System::Windows::Forms::Button^  button3;
 			this->tabPage2->Location = System::Drawing::Point(4, 22);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(875, 497);
+			this->tabPage2->Size = System::Drawing::Size(773, 398);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"Номер 2";
 			this->tabPage2->UseVisualStyleBackColor = true;
@@ -535,7 +537,7 @@ private: System::Windows::Forms::Button^  button3;
 			this->label2->Dock = System::Windows::Forms::DockStyle::Top;
 			this->label2->Location = System::Drawing::Point(3, 3);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(869, 40);
+			this->label2->Size = System::Drawing::Size(767, 40);
 			this->label2->TabIndex = 0;
 			this->label2->Text = resources->GetString(L"label2.Text");
 			// 
@@ -552,69 +554,10 @@ private: System::Windows::Forms::Button^  button3;
 			this->tabPage3->Location = System::Drawing::Point(4, 22);
 			this->tabPage3->Name = L"tabPage3";
 			this->tabPage3->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage3->Size = System::Drawing::Size(875, 497);
+			this->tabPage3->Size = System::Drawing::Size(773, 398);
 			this->tabPage3->TabIndex = 2;
 			this->tabPage3->Text = L"Номер 3";
 			this->tabPage3->UseVisualStyleBackColor = true;
-			// 
-			// label3
-			// 
-			this->label3->Dock = System::Windows::Forms::DockStyle::Top;
-			this->label3->Location = System::Drawing::Point(3, 3);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(869, 32);
-			this->label3->TabIndex = 0;
-			this->label3->Text = resources->GetString(L"label3.Text");
-			// 
-			// label11
-			// 
-			this->label11->AutoSize = true;
-			this->label11->Location = System::Drawing::Point(8, 48);
-			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(172, 13);
-			this->label11->TabIndex = 1;
-			this->label11->Text = L"Введите строку до 80 символов:";
-			// 
-			// textBox1
-			// 
-			this->textBox1->Location = System::Drawing::Point(186, 45);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(565, 20);
-			this->textBox1->TabIndex = 2;
-			// 
-			// listBox1
-			// 
-			this->listBox1->FormattingEnabled = true;
-			this->listBox1->Location = System::Drawing::Point(8, 97);
-			this->listBox1->Name = L"listBox1";
-			this->listBox1->Size = System::Drawing::Size(136, 264);
-			this->listBox1->TabIndex = 3;
-			// 
-			// label12
-			// 
-			this->label12->AutoSize = true;
-			this->label12->Location = System::Drawing::Point(8, 81);
-			this->label12->Name = L"label12";
-			this->label12->Size = System::Drawing::Size(118, 13);
-			this->label12->TabIndex = 4;
-			this->label12->Text = L"Список слов в строке";
-			// 
-			// label13
-			// 
-			this->label13->AutoSize = true;
-			this->label13->Location = System::Drawing::Point(156, 81);
-			this->label13->Name = L"label13";
-			this->label13->Size = System::Drawing::Size(114, 13);
-			this->label13->TabIndex = 5;
-			this->label13->Text = L"Читаются одинаково";
-			// 
-			// listBox2
-			// 
-			this->listBox2->FormattingEnabled = true;
-			this->listBox2->Location = System::Drawing::Point(159, 97);
-			this->listBox2->Name = L"listBox2";
-			this->listBox2->Size = System::Drawing::Size(143, 264);
-			this->listBox2->TabIndex = 6;
 			// 
 			// button3
 			// 
@@ -626,11 +569,70 @@ private: System::Windows::Forms::Button^  button3;
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &MainForm::button3_Click);
 			// 
+			// listBox2
+			// 
+			this->listBox2->FormattingEnabled = true;
+			this->listBox2->Location = System::Drawing::Point(159, 97);
+			this->listBox2->Name = L"listBox2";
+			this->listBox2->Size = System::Drawing::Size(143, 264);
+			this->listBox2->TabIndex = 6;
+			// 
+			// label13
+			// 
+			this->label13->AutoSize = true;
+			this->label13->Location = System::Drawing::Point(156, 81);
+			this->label13->Name = L"label13";
+			this->label13->Size = System::Drawing::Size(114, 13);
+			this->label13->TabIndex = 5;
+			this->label13->Text = L"Читаются одинаково";
+			// 
+			// label12
+			// 
+			this->label12->AutoSize = true;
+			this->label12->Location = System::Drawing::Point(8, 81);
+			this->label12->Name = L"label12";
+			this->label12->Size = System::Drawing::Size(118, 13);
+			this->label12->TabIndex = 4;
+			this->label12->Text = L"Список слов в строке";
+			// 
+			// listBox1
+			// 
+			this->listBox1->FormattingEnabled = true;
+			this->listBox1->Location = System::Drawing::Point(8, 97);
+			this->listBox1->Name = L"listBox1";
+			this->listBox1->Size = System::Drawing::Size(136, 264);
+			this->listBox1->TabIndex = 3;
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(186, 45);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(565, 20);
+			this->textBox1->TabIndex = 2;
+			// 
+			// label11
+			// 
+			this->label11->AutoSize = true;
+			this->label11->Location = System::Drawing::Point(8, 48);
+			this->label11->Name = L"label11";
+			this->label11->Size = System::Drawing::Size(172, 13);
+			this->label11->TabIndex = 1;
+			this->label11->Text = L"Введите строку до 80 символов:";
+			// 
+			// label3
+			// 
+			this->label3->Dock = System::Windows::Forms::DockStyle::Top;
+			this->label3->Location = System::Drawing::Point(3, 3);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(767, 39);
+			this->label3->TabIndex = 0;
+			this->label3->Text = resources->GetString(L"label3.Text");
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(883, 523);
+			this->ClientSize = System::Drawing::Size(781, 424);
 			this->Controls->Add(this->tabControl1);
 			this->Name = L"MainForm";
 			this->Text = L"13 Полуянов Матвей ";
@@ -658,12 +660,17 @@ private: void compare(double *M1, double *M2, double *M3) {
 		// у нас в результирующем массиве всего 4 элемента
 		// значит и цикл делаем только до 4х
 
-		for (int i = 0; i < 4; i++) {
-			if (M1[i] * M2[i] >= 0) 
+		for (int i = 0; i < 4; i++) {// по первым 4м элементам
+			if (M1[i] * M2[i] >= 0) // нас интересует только знак числа
 			{ M3[i] = 1; }// числа одинаковых знаков при произведении друг на друга дадут положительное число
 			else { M3[i] = 0; }// числа разных знаков при произведении друг на друга дадут отрицательное число
+			
+			/* вообще говоря всё условие можно выкинуть и написать так
+			M1[i] * M2[i]>=0?M3[i]=1:M3[i]=0;
+			или вообще так  M3[i]=(int)(M1[i] * M2[i] >= 0) 
+			но могут возникнуть лишние вопросы
+			*/
 		}
-		//return void;
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 		// заполним массив М1 значениями введёнными в таблицу 1
@@ -739,32 +746,30 @@ private: void getWords(String ^s) {
 	const wchar_t *sep = L" ";// зададим разделитель
 	s->Trim();// обрежем лишние пробелы в начале и конце строки
 	s += " ";//в конце один пробел нам нужен для упрощения алгоритма
-	String^ ts = "";// переменная для текущего слова System::
+	String^ ts = "";// переменная для текущего слова 
 	for (int i = 0; i < s->Length; i++) {// по всем символам исходной строки
-		if (s[i] == *sep) {//если текущий символ есть разделитель
+		if (s[i] == *sep) {//если текущий символ есть разделитель значит слово закончилось
 			if (ts != "") {// проверяем не пустая ли строка слова
 				listBox1->Items->Add(ts);// добавляем слово в список
 			}
 			ts = "";// обнулим новое слово
 		}
 		else {
-			ts += s[i];// если не разделитель то добавляем к текущему слову
+			ts += s[i];// если не разделитель то добавляем к текущему слову этот символ
 		}
 	}
 }
 // проверяем слово на то что оно читается одинаково
-private: bool palindrom(String ^w) {
-	//
-	bool res = true;// переменная для возврата
-	if (w->Length == 1) { return false; }// не считаем слова из одного символа
-	if (w->Length == 2) { return w[1]==w[0]; }// слова с длиной 2 обрабатываем отдельно
-	for (int i = 0; i < w->Length % 2; i++) {// просматриваем слово с начала и с конца посимвольно
-		if (w[i] != w[w->Length - 1 - i]) {// сравниваем, как только несовпадение - это не палиндром
-		return false; // завершаем функцию
+	private: bool palindrom(String ^w) {
+		if (w->Length == 1) { return false; }// не считаем слова из одного символа
+		int len = w->Length;// сохраним длину слова
+		for (int i = 0; i < len / 2; i++) {// просматриваем слово с начала и с конца посимвольно
+			if (w[i] != w[len - 1 - i]) {// сравниваем, как только несовпадение - это не палиндром
+				return false; // завершаем функцию, это не палиндром
+			}
 		}
+		return true;// если дошли сюда, то это палиндром
 	}
-	return res;// если дошли сюда, то это палиндром
-}
 
 private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
 	listBox1->Items->Clear();// очищаем поля вывода
@@ -783,6 +788,8 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 			listBox2->Items->Add( listBox1->Items[i]->ToString());
 		}
 	}
+	// выводим сообщение об отсутствии палиндромов при необходимости
+	if (listBox2->Items->Count == 0) { listBox2->Items->Add("Отсутствуют палиндромы"); }
 }
 };
 }

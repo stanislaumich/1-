@@ -1,4 +1,5 @@
 #pragma once
+// библиотека для работы с памятью
 #include <malloc.h>
 // для косинусов подключим библиотеку математики
 #include <math.h>
@@ -15,13 +16,14 @@ namespace Variant12 {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	// Задание №1
+	// Задание №1 описываем  динамический одномерный массив
 	double *A;
 
-	// Задание №2
+	// Задание №2 описываем  динамические двумерные массивы
 	int **A2;
 	int **B2;
 	int **C2;
+	// массив со значениями из условия
 	int T[4][2]={ { 1,3 },{ 7,1 },{3,5},{4,2} };
 
 	public ref class Form12 : public System::Windows::Forms::Form
@@ -40,7 +42,7 @@ namespace Variant12 {
 			//
 			// выделим память для строк массива А
 			A2 = new int*[4];//
-			// выделим память для столбцов массива А
+			// выделим память для элементов каждой строки массива А
 			for (int i = 0; i < 4; i++) {A2[i] = new int[2];}
 			// по всем элементам массива 
 			for (int i = 0; i < 4; i++) {
@@ -54,7 +56,7 @@ namespace Variant12 {
 			// выделим память для строк массивов В и С
 			B2 = new int*[4];
 			C2 = new int*[4];
-			// и для их столбцов
+			// и для элементов строк
 			for (int i = 0; i < 4; i++) { 
 				B2[i] = new int[2]; 
 				C2[i] = new int[2];
@@ -66,9 +68,11 @@ namespace Variant12 {
 		~Form12()
 		{
 			// освободить память массивов задания 2
+			// освободим память элементов
 			for (int i = 0; i < 4; i++) { free(A2[i]); }
 			for (int i = 0; i < 4; i++) { free(B2[i]); }
 			for (int i = 0; i < 4; i++) { free(C2[i]); }
+			// освободим массивы ссылок на строки
 			free(A2);
 			free(B2);
 			free(C2);
@@ -635,11 +639,11 @@ private: int MasCos(double *A,int n) {
 		for (int i = 0; i < n; i++) {// по всем элементам
 			A[i] = cos(A[i]);// заменяем их на косинус
 			A[i] < 0 ?  c += 1 : i = i;// увеличиваем счетчик если значение меньше нуля
-			// тут неточное условие: считать отрицательные до замены на косинус или после
-			// считается после замены, если поменять строки в цикле местами то считать будет
+			// тут неточное условие: считать отрицательные до замены на косинус или после?
+			// тут считается после замены, если поменять строки в цикле местами то считать будет
 			//  отрицательные до замены
 	  }
-		return c;
+		return c;// возвращаем количество отрицательных элементов
 	}
 
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -705,7 +709,8 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 // функция добавляет строку в список строк, 
 // написана для того чтобы не добавлять дубликаты
 private: void insList(String ^s) {
-	bool ins = true;// условие добавления
+	s->Trim();// очистим пробелы
+	bool ins = s->Length != 0;// условие добавления, не пустая строка
 	// сравниваем новую строку с уже ранее добавленными
 	for (int i= 0; i < listBox1->Items->Count; i++) {
 		if (listBox1->Items[i]->ToString() == s) {
@@ -714,7 +719,8 @@ private: void insList(String ^s) {
 	}
 	ins? listBox1->Items->Add(s):ins=ins;// добавляем по условию если она уникальна
 	}
-// выбирает слова из строки и добавляет их в общий список слов 
+
+// функция выбирает слова из строки и добавляет их в общий список слов 
 private: void GetWordList(String ^s) {
 	const wchar_t *sep = L" ";// зададим разделитель
 	s->Trim();// обрежем лишние пробелы в начале и конце строки
@@ -754,7 +760,7 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 		richTextBox1->Text = richTextBox1->Text + "\r\n Строка3 - пустое значение";
 	}
 	// проверим превышение длины строки (по условию 75)
-	// без этих точно будет работать
+	// без этих точно будет работать, даже если длина строк будет больше
 	if (textBox1->Text->Length >75) {
 		richTextBox1->Text = richTextBox1->Text + "\r\n Строка1 - длина строки более 75";
 	}
@@ -780,7 +786,10 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 	GetWordList(textBox1->Text);
 	GetWordList(textBox2->Text);
 	GetWordList(textBox3->Text);
-	// по списку слов
+	// по списку слов выполняем проверки
+	// алгоритм проверок можно реализовать большим количеством способов
+	// этот наиболее наглядный, но не самый быстрый
+	// зато его легко понимать и объяснять
 	for (int i = 0; i < listBox1->Items->Count; i++) {
 		// включается ли слово во все три строки?
 		if (WordInString(listBox1->Items[i]->ToString(), textBox1->Text)&&
@@ -815,6 +824,8 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 			richTextBox1->Text = richTextBox1->Text + "\r\n Слово " + listBox1->Items[i]->ToString() + " есть в строках 2 и 3";
 		}
 	}
+	// прокрутим при необходимости список в конец
+	richTextBox1->ScrollToCaret();
 }
 
 };
