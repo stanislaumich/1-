@@ -4,9 +4,11 @@
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
+#include <fstream>
 
 using std::string;
-
+using std::ios;
 namespace MyWork {
 
 	using namespace System;
@@ -15,6 +17,10 @@ namespace MyWork {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	
+
+	std::ofstream OF;
+	std::ifstream IF;
 
 	struct list
 	{
@@ -23,6 +29,13 @@ namespace MyWork {
 
 		struct list *ptrnext; // указатель на следующий элемент
 		struct list *ptrprev; // указатель на предыдущий элемент
+	};
+
+	struct olymp {
+		char country[50];
+		int gold;
+		int silver;
+		int bronze;
 	};
 
 	list *ecur, *etemp, *efirst, *elast;
@@ -36,6 +49,7 @@ namespace MyWork {
 		int bronze;
 	};
 
+	
 
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
@@ -233,6 +247,15 @@ private: System::Windows::Forms::Button^  button13;
 private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
 private: System::Windows::Forms::Button^  button15;
 private: System::Windows::Forms::Button^  button14;
+private: System::Windows::Forms::SaveFileDialog^  saveFileDialog1;
+private: System::Windows::Forms::DataGridView^  dataGridView5;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column5;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column6;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column7;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column8;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column9;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
+
 
 	private:
 		/// <summary>
@@ -320,6 +343,14 @@ private: System::Windows::Forms::Button^  button14;
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
+			this->dataGridView5 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column8 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column9 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column10 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			this->tabPage2->SuspendLayout();
@@ -329,6 +360,7 @@ private: System::Windows::Forms::Button^  button14;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->tabPage3->SuspendLayout();
 			this->tabPage4->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView5))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// tabControl1
@@ -710,6 +742,7 @@ private: System::Windows::Forms::Button^  button14;
 			// 
 			// tabPage3
 			// 
+			this->tabPage3->Controls->Add(this->dataGridView5);
 			this->tabPage3->Controls->Add(this->button15);
 			this->tabPage3->Controls->Add(this->button14);
 			this->tabPage3->Controls->Add(this->button13);
@@ -739,6 +772,7 @@ private: System::Windows::Forms::Button^  button14;
 			this->button14->TabIndex = 2;
 			this->button14->Text = L"Сохранить файл";
 			this->button14->UseVisualStyleBackColor = true;
+			this->button14->Click += gcnew System::EventHandler(this, &MyForm::button14_Click);
 			// 
 			// button13
 			// 
@@ -995,6 +1029,48 @@ private: System::Windows::Forms::Button^  button14;
 			// 
 			this->openFileDialog1->FileName = L"openFileDialog1";
 			// 
+			// dataGridView5
+			// 
+			this->dataGridView5->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView5->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6) {
+				this->Column5,
+					this->Column6, this->Column7, this->Column8, this->Column9, this->Column10
+			});
+			this->dataGridView5->Location = System::Drawing::Point(227, 62);
+			this->dataGridView5->Name = L"dataGridView5";
+			this->dataGridView5->Size = System::Drawing::Size(667, 337);
+			this->dataGridView5->TabIndex = 4;
+			// 
+			// Column5
+			// 
+			this->Column5->HeaderText = L"Страна";
+			this->Column5->Name = L"Column5";
+			// 
+			// Column6
+			// 
+			this->Column6->HeaderText = L"Золотых";
+			this->Column6->Name = L"Column6";
+			// 
+			// Column7
+			// 
+			this->Column7->HeaderText = L"Серебряных";
+			this->Column7->Name = L"Column7";
+			// 
+			// Column8
+			// 
+			this->Column8->HeaderText = L"Бронзовых";
+			this->Column8->Name = L"Column8";
+			// 
+			// Column9
+			// 
+			this->Column9->HeaderText = L"Общее ";
+			this->Column9->Name = L"Column9";
+			// 
+			// Column10
+			// 
+			this->Column10->HeaderText = L"Очков";
+			this->Column10->Name = L"Column10";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1015,6 +1091,7 @@ private: System::Windows::Forms::Button^  button14;
 			this->tabPage3->ResumeLayout(false);
 			this->tabPage4->ResumeLayout(false);
 			this->tabPage4->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView5))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -1177,7 +1254,7 @@ for (int i = 0; i < 3; i++)
 
 private: System::Void button13_Click(System::Object^  sender, System::EventArgs^  e) {
 
-	country c;
+	olymp country;
 
 
 	//openFileDialog1->InitialDirectory = "c:\\";
@@ -1187,7 +1264,48 @@ private: System::Void button13_Click(System::Object^  sender, System::EventArgs^
 	if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 	{
 		//hhh https://www.cyberforum.ru/visual-cpp/thread901249.html
+		// https://kvodo.ru/urok-10-1-rabota-s-tekstovyimi-faylami-v-c.html
 
+		System::String^ path_f = openFileDialog1->FileName;
+		std::string vsSt = "";
+		for (int i = 0; i < path_f->Length; i++)
+			vsSt += (char)path_f[i];
+		const char * stt = vsSt.c_str();
+
+		IF.open(stt, ios::in);
+		IF.read((char*)&country, sizeof(olymp));
+
+
+		IF.close();
+	}
+}
+private: System::Void button14_Click(System::Object^  sender, System::EventArgs^  e) {
+	olymp country;
+	saveFileDialog1->Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+	saveFileDialog1->FilterIndex = 2;
+	saveFileDialog1->RestoreDirectory = true;
+	if (saveFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+	{
+		//hhh https://www.cyberforum.ru/visual-cpp/thread901249.html
+		// https://kvodo.ru/urok-10-1-rabota-s-tekstovyimi-faylami-v-c.html
+
+		System::String^ path_f = openFileDialog1->FileName;
+		std::string vsSt = "";
+		for (int i = 0; i < path_f->Length; i++)
+			vsSt += (char)path_f[i];
+		const char * stt = vsSt.c_str();
+		
+		OF.open("s:\cnt.txt", ios::out);//ios::binary | 
+		
+		country.bronze = 3;
+		strcpy_s(country.country, "Argentina");
+		country.gold = 5;
+		country.silver = 10;
+		
+		OF.write((char*)&country, sizeof(olymp));
+
+
+		OF.close();
 
 	}
 }
