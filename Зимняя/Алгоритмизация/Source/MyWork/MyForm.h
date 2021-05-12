@@ -7,8 +7,11 @@
 #include <iostream>
 #include <fstream>
 
+
+
 using std::string;
 using std::ios;
+
 namespace MyWork {
 
 	using namespace System;
@@ -17,126 +20,53 @@ namespace MyWork {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	
+	using namespace System::IO;
 
 	std::ofstream OF;
 	std::ifstream IF;
 
 	struct list
 	{
-		char* name; // поле данных марка авто
-		char* nomer; // поле данных номер авто
-
+		string name; // поле данных марка авто
+		string nomer; // поле данных номер авто
 		struct list *ptrnext; // указатель на следующий элемент
 		struct list *ptrprev; // указатель на предыдущий элемент
 	};
 
 	struct olymp {
-		char country[50];
+		string country;
 		int gold;
 		int silver;
 		int bronze;
+		int ball;
+		int kolvo;
+		int mesto;
 	};
 
 	list *ecur, *etemp, *efirst, *elast;
 	int **A;
 	int **B;
 
-	struct country {
-		string name;
-		int gold;
-		int silver;
-		int bronze;
-	};
-
-	
+	olymp *olympa;
+	int olympn;
 
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 	public:
-
-		list edel(list *ecur) {// проверить начало и конец списка
-			list *tmp;
-
-			if (ecur->ptrnext == NULL) {// конец списка
-				ecur->ptrprev->ptrnext = NULL;
-				tmp = ecur->ptrprev;
-				free(ecur);
-				return *tmp;
-			}
-			if (ecur->ptrprev == NULL) {// начало списка
-				ecur->ptrnext->ptrprev = NULL;
-				tmp = ecur->ptrnext;
-				free(ecur);
-				return *tmp;
-			}
-
-			ecur->ptrnext->ptrprev = ecur->ptrprev;
-			ecur->ptrprev->ptrnext = ecur->ptrnext;
-			tmp = ecur->ptrnext;
-			free(ecur);
-			return *tmp;
-		};
-
-		list eins(list *ecur, char* name, char* nomer) {
-			list *tmp;
-			tmp = (struct list*)malloc(sizeof(struct list));
-			tmp->name = name;
-			tmp->nomer = nomer;
-			if (ecur->ptrnext == NULL){// конец списка				
-				ecur->ptrnext = tmp;
-				tmp->ptrprev = ecur;
-				tmp->ptrnext = NULL;
-				elast = tmp;
-				return *tmp;
-			}
-			if (ecur->ptrprev == NULL) {// начало списка
-				ecur->ptrprev = tmp;
-				tmp->ptrprev = NULL;
-				tmp->ptrnext = ecur;				
-				efirst = tmp;
-				return *tmp;
-			}
-			// середина списка после ecur
-			tmp->ptrnext = ecur->ptrnext;
-			ecur->ptrnext->ptrprev = tmp;
-			ecur->ptrnext = tmp;
-			tmp->ptrprev = ecur;
-			return *tmp;
-		};
-
-		void eshow(list *ecur) {
-			list tmp;
-			tmp = *ecur;
-			char* s;
-			//label8->Text = ecur->ptrprev->name;
-			//textBox1->Text = "2";// ecur->name;// ->ToString();
-			//.s = (*ecur).name->ToString();
-			//..textBox1->Text = s.ToString();// tmp->name.c_str();
-			//label9->Text = ecur->ptrnext->name;
-
-		}
-
 		MyForm(void)
 		{
 			InitializeComponent();
 			//
 			//TODO: добавьте код конструктора
 			//
-			/*
-			efirst = (struct list*)malloc(sizeof(struct list));
+			efirst = new list();
 			efirst->ptrprev = NULL;
-			elast = (struct list*)malloc(sizeof(struct list));
-			elast->ptrnext = NULL;
-			efirst->ptrnext = elast;
-			elast->ptrprev = efirst;
-			//ecur = (struct list*)malloc(sizeof(struct list));
-			ecur = efirst;
+			efirst->ptrnext = NULL;
 			efirst->name = "EMPTY";
 			efirst->nomer = "EMPTY";
-			elast->name = "EMPTY";
-			elast->nomer = "EMPTY";
-			*/
+			elast = efirst;
+			ecur = efirst;
+
 			dataGridView1->RowCount = 4;
 			dataGridView2->RowCount = 3;
 			dataGridView3->RowCount = 4;
@@ -165,8 +95,17 @@ namespace MyWork {
          // освободить память
 
 
-			free(elast);
+			/*ecur = efirst;
+			while (ecur != NULL)
+			{
+				ecur = ecur->ptrnext;
+				free(ecur->ptrprev);
+			}
+			*/
+
 			free(efirst);
+
+
 
 
 			if (components)
@@ -255,6 +194,13 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column7;
 private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column8;
 private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column9;
 private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
+private: System::Windows::Forms::DataGridView^  dataGridView6;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column11;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column12;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column13;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column14;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column15;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column16;
 
 
 	private:
@@ -314,6 +260,20 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
+			this->dataGridView6 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column11 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column12 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column13 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column14 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column15 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column16 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->dataGridView5 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column8 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column9 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column10 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->button15 = (gcnew System::Windows::Forms::Button());
 			this->button14 = (gcnew System::Windows::Forms::Button());
 			this->button13 = (gcnew System::Windows::Forms::Button());
@@ -344,13 +304,6 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
-			this->dataGridView5 = (gcnew System::Windows::Forms::DataGridView());
-			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column8 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column9 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column10 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			this->tabPage2->SuspendLayout();
@@ -359,8 +312,9 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->tabPage3->SuspendLayout();
-			this->tabPage4->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView6))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView5))->BeginInit();
+			this->tabPage4->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// tabControl1
@@ -742,6 +696,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
 			// 
 			// tabPage3
 			// 
+			this->tabPage3->Controls->Add(this->dataGridView6);
 			this->tabPage3->Controls->Add(this->dataGridView5);
 			this->tabPage3->Controls->Add(this->button15);
 			this->tabPage3->Controls->Add(this->button14);
@@ -755,6 +710,90 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
 			this->tabPage3->Text = L"Задание 3";
 			this->tabPage3->UseVisualStyleBackColor = true;
 			// 
+			// dataGridView6
+			// 
+			this->dataGridView6->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView6->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6) {
+				this->Column11,
+					this->Column12, this->Column13, this->Column14, this->Column15, this->Column16
+			});
+			this->dataGridView6->Location = System::Drawing::Point(227, 232);
+			this->dataGridView6->Name = L"dataGridView6";
+			this->dataGridView6->Size = System::Drawing::Size(666, 167);
+			this->dataGridView6->TabIndex = 5;
+			// 
+			// Column11
+			// 
+			this->Column11->HeaderText = L"Страна";
+			this->Column11->Name = L"Column11";
+			// 
+			// Column12
+			// 
+			this->Column12->HeaderText = L"Золотых";
+			this->Column12->Name = L"Column12";
+			// 
+			// Column13
+			// 
+			this->Column13->HeaderText = L"Серебряных";
+			this->Column13->Name = L"Column13";
+			// 
+			// Column14
+			// 
+			this->Column14->HeaderText = L"Бронзовых";
+			this->Column14->Name = L"Column14";
+			// 
+			// Column15
+			// 
+			this->Column15->HeaderText = L"Общее";
+			this->Column15->Name = L"Column15";
+			// 
+			// Column16
+			// 
+			this->Column16->HeaderText = L"Очков";
+			this->Column16->Name = L"Column16";
+			// 
+			// dataGridView5
+			// 
+			this->dataGridView5->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView5->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6) {
+				this->Column5,
+					this->Column6, this->Column7, this->Column8, this->Column9, this->Column10
+			});
+			this->dataGridView5->Location = System::Drawing::Point(227, 62);
+			this->dataGridView5->Name = L"dataGridView5";
+			this->dataGridView5->Size = System::Drawing::Size(667, 160);
+			this->dataGridView5->TabIndex = 4;
+			// 
+			// Column5
+			// 
+			this->Column5->HeaderText = L"Страна";
+			this->Column5->Name = L"Column5";
+			// 
+			// Column6
+			// 
+			this->Column6->HeaderText = L"Золотых";
+			this->Column6->Name = L"Column6";
+			// 
+			// Column7
+			// 
+			this->Column7->HeaderText = L"Серебряных";
+			this->Column7->Name = L"Column7";
+			// 
+			// Column8
+			// 
+			this->Column8->HeaderText = L"Бронзовых";
+			this->Column8->Name = L"Column8";
+			// 
+			// Column9
+			// 
+			this->Column9->HeaderText = L"Общее ";
+			this->Column9->Name = L"Column9";
+			// 
+			// Column10
+			// 
+			this->Column10->HeaderText = L"Очков";
+			this->Column10->Name = L"Column10";
+			// 
 			// button15
 			// 
 			this->button15->Location = System::Drawing::Point(3, 91);
@@ -763,6 +802,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
 			this->button15->TabIndex = 3;
 			this->button15->Text = L"Обработать";
 			this->button15->UseVisualStyleBackColor = true;
+			this->button15->Click += gcnew System::EventHandler(this, &MyForm::button15_Click);
 			// 
 			// button14
 			// 
@@ -833,6 +873,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
 			this->button9->TabIndex = 22;
 			this->button9->Text = L"Добавить элемент последним";
 			this->button9->UseVisualStyleBackColor = true;
+			this->button9->Click += gcnew System::EventHandler(this, &MyForm::button9_Click);
 			// 
 			// button8
 			// 
@@ -842,6 +883,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
 			this->button8->TabIndex = 21;
 			this->button8->Text = L"Добавить после текущего";
 			this->button8->UseVisualStyleBackColor = true;
+			this->button8->Click += gcnew System::EventHandler(this, &MyForm::button8_Click);
 			// 
 			// textBox4
 			// 
@@ -883,6 +925,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
 			this->button7->TabIndex = 16;
 			this->button7->Text = L"Вперёд";
 			this->button7->UseVisualStyleBackColor = true;
+			this->button7->Click += gcnew System::EventHandler(this, &MyForm::button7_Click);
 			// 
 			// button6
 			// 
@@ -892,6 +935,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
 			this->button6->TabIndex = 15;
 			this->button6->Text = L"Назад";
 			this->button6->UseVisualStyleBackColor = true;
+			this->button6->Click += gcnew System::EventHandler(this, &MyForm::button6_Click);
 			// 
 			// label11
 			// 
@@ -930,18 +974,18 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
 			this->label9->AutoSize = true;
 			this->label9->Location = System::Drawing::Point(158, 118);
 			this->label9->Name = L"label9";
-			this->label9->Size = System::Drawing::Size(35, 13);
+			this->label9->Size = System::Drawing::Size(45, 13);
 			this->label9->TabIndex = 10;
-			this->label9->Text = L"label9";
+			this->label9->Text = L"ПУСТО";
 			// 
 			// label8
 			// 
 			this->label8->AutoSize = true;
 			this->label8->Location = System::Drawing::Point(158, 56);
 			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(35, 13);
+			this->label8->Size = System::Drawing::Size(45, 13);
 			this->label8->TabIndex = 9;
-			this->label8->Text = L"label8";
+			this->label8->Text = L"ПУСТО";
 			// 
 			// label7
 			// 
@@ -978,6 +1022,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
 			this->button5->TabIndex = 5;
 			this->button5->Text = L"Сохранить в файл";
 			this->button5->UseVisualStyleBackColor = true;
+			this->button5->Click += gcnew System::EventHandler(this, &MyForm::button5_Click);
 			// 
 			// button4
 			// 
@@ -987,6 +1032,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
 			this->button4->TabIndex = 4;
 			this->button4->Text = L"Загрузить из файла";
 			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &MyForm::button4_Click);
 			// 
 			// button3
 			// 
@@ -996,6 +1042,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
 			this->button3->TabIndex = 3;
 			this->button3->Text = L"Сохранить изменения";
 			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
 			// 
 			// button2
 			// 
@@ -1005,6 +1052,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
 			this->button2->TabIndex = 2;
 			this->button2->Text = L"Удалить элемент";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
 			// button1
 			// 
@@ -1029,48 +1077,6 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
 			// 
 			this->openFileDialog1->FileName = L"openFileDialog1";
 			// 
-			// dataGridView5
-			// 
-			this->dataGridView5->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView5->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6) {
-				this->Column5,
-					this->Column6, this->Column7, this->Column8, this->Column9, this->Column10
-			});
-			this->dataGridView5->Location = System::Drawing::Point(227, 62);
-			this->dataGridView5->Name = L"dataGridView5";
-			this->dataGridView5->Size = System::Drawing::Size(667, 337);
-			this->dataGridView5->TabIndex = 4;
-			// 
-			// Column5
-			// 
-			this->Column5->HeaderText = L"Страна";
-			this->Column5->Name = L"Column5";
-			// 
-			// Column6
-			// 
-			this->Column6->HeaderText = L"Золотых";
-			this->Column6->Name = L"Column6";
-			// 
-			// Column7
-			// 
-			this->Column7->HeaderText = L"Серебряных";
-			this->Column7->Name = L"Column7";
-			// 
-			// Column8
-			// 
-			this->Column8->HeaderText = L"Бронзовых";
-			this->Column8->Name = L"Column8";
-			// 
-			// Column9
-			// 
-			this->Column9->HeaderText = L"Общее ";
-			this->Column9->Name = L"Column9";
-			// 
-			// Column10
-			// 
-			this->Column10->HeaderText = L"Очков";
-			this->Column10->Name = L"Column10";
-			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1089,15 +1095,15 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column10;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->tabPage3->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView6))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView5))->EndInit();
 			this->tabPage4->ResumeLayout(false);
 			this->tabPage4->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView5))->EndInit();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
-	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-	}
+	
 
 			 char c;
 			 char *N1;
@@ -1132,8 +1138,6 @@ M[i] = 0. //Вариант 2 — использование индексов и
 строить функции, которые могут работать с массивами произ-
 вольного размера.
 
-
-
 */	
 
 private: System::Int32 mainwork(char *N, int len) {
@@ -1144,7 +1148,6 @@ private: System::Int32 mainwork(char *N, int len) {
 	}
 	return c;
 }
-
 private: System::Void button10_Click(System::Object^  sender, System::EventArgs^  e) {
 // выделить память и сгенерировать массив 1
 	lN1 = Convert::ToInt32(textBox6->Text);
@@ -1158,13 +1161,11 @@ private: System::Void button10_Click(System::Object^  sender, System::EventArgs^
 	}
 // выделить память и заполнить массив 2
  lN2= textBox7->Text->Length;
-  //free(N2);
-  N2 = new char[lN2];//(char*)malloc(lN2 * sizeof(char));
+  N2 = new char[lN2];
   for (int i = 0; i < lN2; i++) {
-	  N2[i] = textBox7->Text[i];//Convert::ToChar(textBox7->Text[i]);
+	  N2[i] = textBox7->Text[i];
   }
 }
-
 private: System::Void button11_Click(System::Object^  sender, System::EventArgs^  e) {	
 	Int32 rN1 =  mainwork(N1, lN1);
 	Int32 rN2 = mainwork(N2, lN2);
@@ -1182,7 +1183,6 @@ private: System::Void button11_Click(System::Object^  sender, System::EventArgs^
 	free(N1);
 	free(N2);
 }
-
 private:System::Void transmatrix(int **A,int n) {
 	// выделим память под временные массивы
 	int *B= new int[n];
@@ -1213,7 +1213,6 @@ private:System::Void transmatrix(int **A,int n) {
 	free(B);
 	free(C);
 }
-
 private: System::Void button12_Click(System::Object^  sender, System::EventArgs^  e) {
 // по строкам и по столбцам таблицы dataGridView1 заносим её в массив A[i][j]
 for (int i = 0; i < 4; i++)
@@ -1251,62 +1250,287 @@ for (int i = 0; i < 3; i++)
 //free{arr32);
 
 };
-
+/*------------------------------- ЗАДАНИЕ 3 --------------------------------------*/
+std::string ConvertToASCII(System::String^ _str)
+		 {
+			 if (_str == nullptr)
+				 return std::string();
+			 // Creating ASCII encoding (or smth. else)
+			 System::Text::ASCIIEncoding^ enc = gcnew System::Text::ASCIIEncoding;
+			 // Encoding source string
+			 array<unsigned char>^ encodedBytes = enc->GetBytes(_str);
+			 if (encodedBytes->Length == 0)
+				 return std::string();
+			 // Creating std::string
+			 pin_ptr<unsigned char> pin(&encodedBytes[0]);
+			 char *cstr(reinterpret_cast<char*>(static_cast<unsigned char*>(pin)));
+			 return std::string(cstr, encodedBytes->Length);
+		 }
 private: System::Void button13_Click(System::Object^  sender, System::EventArgs^  e) {
-
 	olymp country;
-
-
 	//openFileDialog1->InitialDirectory = "c:\\";
 	openFileDialog1->Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-	openFileDialog1->FilterIndex = 2;
+	openFileDialog1->FilterIndex = 1;
 	openFileDialog1->RestoreDirectory = true;
 	if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 	{
-		//hhh https://www.cyberforum.ru/visual-cpp/thread901249.html
-		// https://kvodo.ru/urok-10-1-rabota-s-tekstovyimi-faylami-v-c.html
+		StreamReader^ preader = gcnew StreamReader(openFileDialog1->FileName);
+		int i = 0;
+			while (preader->Peek() >= 0)
+		{
+			dataGridView5->RowCount++;
+			dataGridView5->Rows[i]->Cells[0]->Value= preader->ReadLine();
+			dataGridView5->Rows[i]->Cells[1]->Value = preader->ReadLine();
+			dataGridView5->Rows[i]->Cells[2]->Value = preader->ReadLine();
+			dataGridView5->Rows[i++]->Cells[3]->Value = preader->ReadLine();			
+		}
+		preader->Close();
+		
+		olympn= dataGridView5->RowCount;
+		olympa = new olymp[olympn];
+		for (int i = 0; i < olympn-1; i++) {			
+			olympa[i].country = ConvertToASCII(dataGridView5->Rows[i]->Cells[0]->Value->ToString());// "NO";
+			olympa[i].gold = Convert::ToInt32(dataGridView5->Rows[i]->Cells[1]->Value);
+			olympa[i].silver = Convert::ToInt32(dataGridView5->Rows[i]->Cells[2]->Value);
+			olympa[i].bronze = Convert::ToInt32(dataGridView5->Rows[i]->Cells[3]->Value);
+			olympa[i].kolvo = olympa[i].gold + olympa[i].silver + olympa[i].bronze;
+			olympa[i].ball= olympa[i].gold*10 + olympa[i].silver*7 + olympa[i].bronze*3;
+		}
 
-		System::String^ path_f = openFileDialog1->FileName;
-		std::string vsSt = "";
-		for (int i = 0; i < path_f->Length; i++)
-			vsSt += (char)path_f[i];
-		const char * stt = vsSt.c_str();
-
-		IF.open(stt, ios::in);
-		IF.read((char*)&country, sizeof(olymp));
-
-
-		IF.close();
 	}
-}
+}//end of func
 private: System::Void button14_Click(System::Object^  sender, System::EventArgs^  e) {
 	olymp country;
 	saveFileDialog1->Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-	saveFileDialog1->FilterIndex = 2;
+	saveFileDialog1->FilterIndex = 1;
 	saveFileDialog1->RestoreDirectory = true;
 	if (saveFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 	{
-		//hhh https://www.cyberforum.ru/visual-cpp/thread901249.html
-		// https://kvodo.ru/urok-10-1-rabota-s-tekstovyimi-faylami-v-c.html
+		StreamWriter^ pwriter = gcnew StreamWriter(saveFileDialog1->FileName);
+		for (int i = 0; i < dataGridView5->RowCount-1; i++){
+			pwriter->WriteLine(dataGridView5->Rows[i]->Cells[0]->Value->ToString());
+			pwriter->WriteLine(dataGridView5->Rows[i]->Cells[1]->Value->ToString());
+			pwriter->WriteLine(dataGridView5->Rows[i]->Cells[2]->Value->ToString());
+			pwriter->WriteLine(dataGridView5->Rows[i]->Cells[3]->Value->ToString());
+	}
+	pwriter->Close();
+	}	
+}
+void mswap(olymp a,olymp b) {
+			 
+		 }
+void Sort(olymp* x, int size)
+		 {
+			 for (int i = 1; i < size-1; ++i)
+				 for (int j = size - 2; j >= i; --j)
+					 if (x[j - 1].ball < x[j].ball)
+					 {
+						 olymp tmp = x[j - 1];
+						 x[j - 1] = x[j];
+						 x[j] = tmp;
+					 }
+		 }
+private: System::Void button15_Click(System::Object^  sender, System::EventArgs^  e) {
+	int m, b;
+	for (int i = 0; i < dataGridView5->RowCount - 1; i++) {
+		m = Convert::ToInt32(dataGridView5->Rows[i]->Cells[1]->Value) +
+			Convert::ToInt32(dataGridView5->Rows[i]->Cells[2]->Value) +
+			Convert::ToInt32(dataGridView5->Rows[i]->Cells[3]->Value);
+		dataGridView5->Rows[i]->Cells[4]->Value= Convert::ToString(m);
+		b = Convert::ToInt32(dataGridView5->Rows[i]->Cells[1]->Value)*10 +
+			Convert::ToInt32(dataGridView5->Rows[i]->Cells[2]->Value)*7 +
+			Convert::ToInt32(dataGridView5->Rows[i]->Cells[3]->Value)*3;
+		dataGridView5->Rows[i]->Cells[5]->Value = Convert::ToString(b);
+	}// end for
+	// sort
+	Sort(olympa, olympn);
+	//output	
+	dataGridView6->RowCount = olympn;
+	for (int i = 0; i < olympn-1; i++) {
+		dataGridView6->Rows[i]->Cells[0]->Value = gcnew String(olympa[i].country.c_str());
+		dataGridView6->Rows[i]->Cells[1]->Value = Convert::ToString(olympa[i].gold);
+		dataGridView6->Rows[i]->Cells[2]->Value = Convert::ToString(olympa[i].silver);
+		dataGridView6->Rows[i]->Cells[3]->Value = Convert::ToString(olympa[i].bronze);
+		dataGridView6->Rows[i]->Cells[4]->Value = Convert::ToString(olympa[i].kolvo);
+		dataGridView6->Rows[i]->Cells[5]->Value = Convert::ToString(olympa[i].ball);
+	}
+}
+/*------------------------------- СПИСКИ --------------------------------------*/
+list * edel(list *ecur) {// удаление записи
+			 list *tmp;
 
-		System::String^ path_f = openFileDialog1->FileName;
-		std::string vsSt = "";
-		for (int i = 0; i < path_f->Length; i++)
-			vsSt += (char)path_f[i];
-		const char * stt = vsSt.c_str();
-		
-		OF.open("s:\cnt.txt", ios::out);//ios::binary | 
-		
-		country.bronze = 3;
-		strcpy_s(country.country, "Argentina");
-		country.gold = 5;
-		country.silver = 10;
-		
-		OF.write((char*)&country, sizeof(olymp));
+			 if (ecur->ptrnext == NULL) {// конец списка
+				 ecur->ptrprev->ptrnext = NULL;
+				 tmp = ecur->ptrprev;
+				 free(ecur);
+				 return tmp;
+			 }
+			 if (ecur->ptrprev == NULL) {// начало списка
+				 ecur->ptrnext->ptrprev = NULL;
+				 tmp = ecur->ptrnext;
+				 free(ecur);
+				 return tmp;
+			 }
 
+			 ecur->ptrnext->ptrprev = ecur->ptrprev;
+			 ecur->ptrprev->ptrnext = ecur->ptrnext;
+			 tmp = ecur->ptrnext;
+			 free(ecur);
+			 return tmp;
+		 };
+list * leinsfirst(string name, string nomer) {
+	 // начало вставки при загрузке из файла
+	 efirst->name = name;
+	 efirst->nomer = nomer;
+	 return efirst;
+ }
+list * einsfirst(string name, string nomer) {
+	 // вставка первой записи
+	 etemp = new list();
+	 etemp->ptrprev = NULL;
+	 etemp->ptrnext = efirst;
+	 etemp->name = name;
+	 etemp->nomer = nomer;
+	 efirst->ptrprev = etemp;
+	 efirst = etemp;
+	 return efirst;
+ }
+list * einslast(string name, string nomer) {
+	 // вставка последней записи
+	 etemp = new list();
+	 etemp->name = name;
+	 etemp->nomer = nomer;
+	 etemp->ptrnext = NULL;
+	 etemp->ptrprev = elast;
+	 elast->ptrnext = etemp;
+	 elast = etemp;
+	 return elast;
+ }
+list * eins(list *ecur, string name, string nomer) {
+	// вставка записи после текущего элемента
+			 list *tmp= new list();
+			 tmp->name = name;
+			 tmp->nomer = nomer;
+			 if (ecur->ptrnext == NULL) {// конец списка				
+				 ecur->ptrnext = tmp;
+				 tmp->ptrprev = ecur;
+				 tmp->ptrnext = NULL;
+				 elast = tmp;
+				 return tmp;
+			 }			 
+			 // середина списка после ecur
+			 tmp->ptrnext = ecur->ptrnext;
+			 ecur->ptrnext->ptrprev = tmp;
+			 ecur->ptrnext = tmp;
+			 tmp->ptrprev = ecur;
+			 return tmp;
+		 };
+void eshow(list *ecur) {
+	// отображение текущей записи
+			 textBox1->Text = gcnew String(ecur->name.c_str());
+			 textBox2->Text = gcnew String(ecur->nomer.c_str());
+			 if (ecur->ptrprev != NULL) {
+				 label8->Text= gcnew String(ecur->ptrprev->name.c_str());
+			 }
+			 else
+			 {
+				 label8->Text = "Достигнуто начало списка";
+			 }
+			 if (ecur->ptrnext != NULL) {
+				 label9->Text = gcnew String(ecur->ptrnext->name.c_str());
+			 }
+			 else
+			 {
+				 label9->Text = "Достигнут конец списка";
+			 }
 
-		OF.close();
+		 }
+private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
+	// загрузка авто из файла
+	list tcar;
 
+	openFileDialog1->Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+	openFileDialog1->FilterIndex = 1;
+	openFileDialog1->RestoreDirectory = true;
+	if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+	{
+		StreamReader^ preader = gcnew StreamReader(openFileDialog1->FileName);
+		int i = 0;
+		String^ tname;
+		String^ tnomer;
+		while (preader->Peek() >= 0)
+		{			
+			tname = preader->ReadLine();
+			tnomer = preader->ReadLine();
+			tcar.name = ConvertToASCII(tname);
+			tcar.nomer = ConvertToASCII(tnomer);
+			if (i == 0) { leinsfirst(tcar.name, tcar.nomer); }
+			else { einslast(tcar.name, tcar.nomer); }
+			i++;
+		}
+		preader->Close();
+		eshow(efirst);	
+
+	}
+
+}
+private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {
+	//шаг к следующему
+	if (ecur->ptrnext != NULL) {
+		ecur = ecur->ptrnext;
+		eshow(ecur);
+	}
+}
+private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
+	// шаг к предыдущему
+	if (ecur->ptrprev != NULL) {
+		ecur = ecur->ptrprev;
+		eshow(ecur);
+	}
+}
+private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+// изменить текущий
+	ecur->name = ConvertToASCII(textBox1->Text);
+	ecur->nomer = ConvertToASCII(textBox2->Text);
+}
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+	// удалить текущий
+	ecur = edel(ecur);
+	eshow(ecur);
+}
+private: System::Void button8_Click(System::Object^  sender, System::EventArgs^  e) {
+	// после текущего
+	ecur = eins(ecur, ConvertToASCII(textBox3->Text), ConvertToASCII(textBox4->Text));
+	eshow(ecur);
+}
+private: System::Void button9_Click(System::Object^  sender, System::EventArgs^  e) {
+	// вставить последним
+ ecur = einslast(ConvertToASCII(textBox3->Text), ConvertToASCII(textBox4->Text));
+ eshow(ecur);
+}
+private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+	// вставить первым
+	ecur = einsfirst(ConvertToASCII(textBox3->Text), ConvertToASCII(textBox4->Text));
+	eshow(ecur);
+}
+private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
+	// сохранить в файл
+	saveFileDialog1->Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+	saveFileDialog1->FilterIndex = 1;
+	saveFileDialog1->RestoreDirectory = true;
+	if (saveFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+	{
+		StreamWriter^ pwriter = gcnew StreamWriter(saveFileDialog1->FileName);
+		String^ tname;
+		String^ tnomer;
+		ecur = efirst;
+		while (ecur!=NULL)
+		{
+			pwriter->WriteLine(gcnew System::String(ecur->name.c_str()));
+			pwriter->WriteLine(gcnew System::String(ecur->nomer.c_str()));
+			ecur = ecur->ptrnext;
+		}
+		pwriter->Close();
 	}
 }
 };
