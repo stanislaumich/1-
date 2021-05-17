@@ -1,0 +1,289 @@
+-- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
+--
+-- Host: localhost    Database: firma9
+-- ------------------------------------------------------
+-- Server version	8.0.23
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `client`
+--
+
+DROP TABLE IF EXISTS `client`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `client` (
+  `idclient` int NOT NULL AUTO_INCREMENT,
+  `fio` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
+  `uradr` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
+  `idschet` int DEFAULT NULL,
+  PRIMARY KEY (`idclient`),
+  UNIQUE KEY `idclient` (`idclient`),
+  KEY `FKschet` (`idschet`),
+  CONSTRAINT `FKschet` FOREIGN KEY (`idschet`) REFERENCES `schet` (`idschet`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `client`
+--
+
+LOCK TABLES `client` WRITE;
+/*!40000 ALTER TABLE `client` DISABLE KEYS */;
+/*!40000 ALTER TABLE `client` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `firma`
+--
+
+DROP TABLE IF EXISTS `firma`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `firma` (
+  `idfirma` int NOT NULL AUTO_INCREMENT,
+  `nazvan` varchar(500) NOT NULL DEFAULT '',
+  `uradr` varchar(500) NOT NULL DEFAULT '',
+  `phone` varchar(50) NOT NULL DEFAULT '',
+  `idschet` int NOT NULL,
+  PRIMARY KEY (`idfirma`),
+  UNIQUE KEY `idfirma` (`idfirma`),
+  KEY `FKschetf` (`idschet`),
+  CONSTRAINT `FKschetf` FOREIGN KEY (`idschet`) REFERENCES `schet` (`idschet`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Описание фирмы';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `firma`
+--
+
+LOCK TABLES `firma` WRITE;
+/*!40000 ALTER TABLE `firma` DISABLE KEYS */;
+/*!40000 ALTER TABLE `firma` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `kadr`
+--
+
+DROP TABLE IF EXISTS `kadr`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `kadr` (
+  `idkadr` int NOT NULL AUTO_INCREMENT,
+  `fio` varchar(250) NOT NULL,
+  `dolg` varchar(500) NOT NULL,
+  `edu` varchar(500) NOT NULL,
+  `salary` float NOT NULL,
+  `data` date NOT NULL,
+  PRIMARY KEY (`idkadr`),
+  UNIQUE KEY `idkadr` (`idkadr`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Сотрудники фирмы';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `kadr`
+--
+
+LOCK TABLES `kadr` WRITE;
+/*!40000 ALTER TABLE `kadr` DISABLE KEYS */;
+/*!40000 ALTER TABLE `kadr` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `naklad`
+--
+
+DROP TABLE IF EXISTS `naklad`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `naklad` (
+  `idnaklad` int NOT NULL AUTO_INCREMENT,
+  `idtovar` int NOT NULL,
+  `kolvo` int NOT NULL,
+  `summa` float NOT NULL,
+  PRIMARY KEY (`idnaklad`),
+  UNIQUE KEY `idnaklad` (`idnaklad`),
+  KEY `FKtovarn` (`idtovar`),
+  CONSTRAINT `FKtovarn` FOREIGN KEY (`idtovar`) REFERENCES `tovar` (`idtovar`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Накладные на товар';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `naklad`
+--
+
+LOCK TABLES `naklad` WRITE;
+/*!40000 ALTER TABLE `naklad` DISABLE KEYS */;
+/*!40000 ALTER TABLE `naklad` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `postav`
+--
+
+DROP TABLE IF EXISTS `postav`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `postav` (
+  `idpostav` int NOT NULL AUTO_INCREMENT,
+  `fio` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
+  `uradr` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
+  `idschet` int DEFAULT NULL,
+  PRIMARY KEY (`idpostav`),
+  UNIQUE KEY `idpostav` (`idpostav`),
+  KEY `FKschetp` (`idschet`),
+  CONSTRAINT `FKschetp` FOREIGN KEY (`idschet`) REFERENCES `schet` (`idschet`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Поставщики';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `postav`
+--
+
+LOCK TABLES `postav` WRITE;
+/*!40000 ALTER TABLE `postav` DISABLE KEYS */;
+/*!40000 ALTER TABLE `postav` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `schet`
+--
+
+DROP TABLE IF EXISTS `schet`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `schet` (
+  `idschet` int NOT NULL AUTO_INCREMENT,
+  `bank` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
+  `numchet` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `fio` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `status` int NOT NULL DEFAULT '0',
+  `data` date NOT NULL,
+  `creditstat` int NOT NULL DEFAULT '0',
+  `creditsum` float NOT NULL,
+  PRIMARY KEY (`idschet`),
+  UNIQUE KEY `idschet` (`idschet`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `schet`
+--
+
+LOCK TABLES `schet` WRITE;
+/*!40000 ALTER TABLE `schet` DISABLE KEYS */;
+/*!40000 ALTER TABLE `schet` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sklad_0`
+--
+
+DROP TABLE IF EXISTS `sklad_0`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sklad_0` (
+  `Nsklad` int unsigned NOT NULL AUTO_INCREMENT,
+  `adress` varchar(5000) DEFAULT NULL,
+  `zakazn` int DEFAULT NULL,
+  `tovarname` varchar(5000) DEFAULT NULL,
+  `edizm` varchar(50) DEFAULT NULL,
+  `tovarkolvo` int DEFAULT NULL,
+  `tovarprice` float DEFAULT NULL,
+  `oplata` char(100) DEFAULT NULL,
+  PRIMARY KEY (`Nsklad`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sklad_0`
+--
+
+LOCK TABLES `sklad_0` WRITE;
+/*!40000 ALTER TABLE `sklad_0` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sklad_0` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tovar`
+--
+
+DROP TABLE IF EXISTS `tovar`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tovar` (
+  `idtovar` int NOT NULL AUTO_INCREMENT,
+  `naimen` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
+  `edizm` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
+  `sort` int NOT NULL,
+  `price` float NOT NULL DEFAULT '0',
+  `idpostav` int NOT NULL,
+  PRIMARY KEY (`idtovar`),
+  UNIQUE KEY `idtovar` (`idtovar`),
+  KEY `FKpostavt` (`idpostav`),
+  CONSTRAINT `FKpostavt` FOREIGN KEY (`idpostav`) REFERENCES `postav` (`idpostav`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Список товаров нормализованный';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tovar`
+--
+
+LOCK TABLES `tovar` WRITE;
+/*!40000 ALTER TABLE `tovar` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tovar` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `zakaz`
+--
+
+DROP TABLE IF EXISTS `zakaz`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `zakaz` (
+  `id_zakaz` int NOT NULL AUTO_INCREMENT,
+  `data` date DEFAULT NULL,
+  `id_client` int NOT NULL,
+  `id_tovar` int NOT NULL,
+  `num` float NOT NULL,
+  `price` float NOT NULL,
+  PRIMARY KEY (`id_zakaz`),
+  UNIQUE KEY `id_zakaz` (`id_zakaz`),
+  KEY `FKtovar` (`id_tovar`),
+  KEY `FKclientz` (`id_client`),
+  CONSTRAINT `FKclientz` FOREIGN KEY (`id_client`) REFERENCES `client` (`idclient`),
+  CONSTRAINT `FKtovar` FOREIGN KEY (`id_tovar`) REFERENCES `tovar` (`idtovar`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Список заказов п 10';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zakaz`
+--
+
+LOCK TABLES `zakaz` WRITE;
+/*!40000 ALTER TABLE `zakaz` DISABLE KEYS */;
+/*!40000 ALTER TABLE `zakaz` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2021-02-11 16:58:04
