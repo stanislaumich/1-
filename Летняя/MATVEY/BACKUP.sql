@@ -14,89 +14,81 @@
 
 
 -- Дамп структуры базы данных matvey
-DROP DATABASE IF EXISTS `matvey`;
 CREATE DATABASE IF NOT EXISTS `matvey` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `matvey`;
 
 -- Дамп структуры для таблица matvey.firma
-DROP TABLE IF EXISTS `firma`;
 CREATE TABLE IF NOT EXISTS `firma` (
-  `id` int NOT NULL AUTO_INCREMENT,
   `nazvan` varchar(500) NOT NULL DEFAULT '',
   `uradr` varchar(500) NOT NULL DEFAULT '',
   `phone` varchar(50) NOT NULL DEFAULT '',
-  `schet` int NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idf` (`id`),
-  KEY `FKschetf` (`schet`),
-  CONSTRAINT `FKschetf` FOREIGN KEY (`schet`) REFERENCES `schet` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Описание';
+  `idschet` int NOT NULL,
+  KEY `FKschetf` (`idschet`),
+  CONSTRAINT `FKschetf` FOREIGN KEY (`idschet`) REFERENCES `schet` (`idschet`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Описание фирмы';
 
--- Дамп данных таблицы matvey.firma: ~0 rows (приблизительно)
+-- Дамп данных таблицы matvey.firma: ~1 rows (приблизительно)
 DELETE FROM `firma`;
 /*!40000 ALTER TABLE `firma` DISABLE KEYS */;
-INSERT INTO `firma` (`id`, `nazvan`, `uradr`, `phone`, `schet`) VALUES
-	(1, 'Название', 'Адрес', '+37500000000', 1);
+INSERT INTO `firma` (`nazvan`, `uradr`, `phone`, `idschet`) VALUES
+	('Инспектор гаджет', 'г.Мозырь ул.Чапаева 28', '+375336512162', 4);
 /*!40000 ALTER TABLE `firma` ENABLE KEYS */;
 
--- Дамп структуры для таблица matvey.kadr
-DROP TABLE IF EXISTS `kadr`;
-CREATE TABLE IF NOT EXISTS `kadr` (
-  `id` int NOT NULL AUTO_INCREMENT,
+-- Дамп структуры для таблица matvey.kadry
+CREATE TABLE IF NOT EXISTS `kadry` (
+  `idkadry` int NOT NULL AUTO_INCREMENT,
   `fio` varchar(250) NOT NULL,
-  `dolg` varchar(500) NOT NULL,
-  `obraz` varchar(500) NOT NULL,
-  `salary` float NOT NULL,
-  `data` date NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idk` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Сотрудники';
+  `dolgznost` varchar(500) NOT NULL,
+  `obrazovanie` varchar(500) NOT NULL,
+  `zarplata` float NOT NULL,
+  `data_priniatia` date NOT NULL,
+  PRIMARY KEY (`idkadry`),
+  UNIQUE KEY `idkadr` (`idkadry`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Сотрудники фирмы';
 
--- Дамп данных таблицы matvey.kadr: ~5 rows (приблизительно)
-DELETE FROM `kadr`;
-/*!40000 ALTER TABLE `kadr` DISABLE KEYS */;
-INSERT INTO `kadr` (`id`, `fio`, `dolg`, `obraz`, `salary`, `data`) VALUES
-	(1, 'Иванов А.С.', 'Директор', 'Высшее', 945, '2018-02-20'),
+-- Дамп данных таблицы matvey.kadry: ~7 rows (приблизительно)
+DELETE FROM `kadry`;
+/*!40000 ALTER TABLE `kadry` DISABLE KEYS */;
+INSERT INTO `kadry` (`idkadry`, `fio`, `dolgznost`, `obrazovanie`, `zarplata`, `data_priniatia`) VALUES
+	(1, 'Парахневич А.С.', 'Директор', 'Высшее', 945, '2018-02-20'),
 	(2, 'Аверкова И.В.', 'Бухгалтер', 'Высшее', 750, '2018-02-20'),
 	(3, 'Долбик К.В.', 'Водитель', 'Среднее-специальное', 550, '2020-02-20'),
 	(4, 'Савицкий А.Н.', 'Менеджер ', 'Среднее-специальное', 600, '2020-02-20'),
-	(5, 'Зарянина Т.Н.', 'Продавец', 'Среднее-специальное', 550, '2020-02-20');
-/*!40000 ALTER TABLE `kadr` ENABLE KEYS */;
+	(5, 'Зарянина Т.Н.', 'Продавец', 'Среднее-специальное', 550, '2020-02-20'),
+	(6, 'Ивашин А.С.', 'техник-Программист', 'среднее-специальное', 600, '2019-04-12'),
+	(7, 'Лубовский А.В.', 'продавец', 'Среднее-специальное', 550, '2019-05-26');
+/*!40000 ALTER TABLE `kadry` ENABLE KEYS */;
 
--- Дамп структуры для таблица matvey.kontragent
-DROP TABLE IF EXISTS `kontragent`;
-CREATE TABLE IF NOT EXISTS `kontragent` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nazv` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
+-- Дамп структуры для таблица matvey.klient
+CREATE TABLE IF NOT EXISTS `klient` (
+  `idklient` int NOT NULL AUTO_INCREMENT,
+  `fio` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
   `uradr` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
   `idschet` int DEFAULT NULL,
-  `tip` int DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idc` (`id`),
-  KEY `FtKschet` (`id`),
+  PRIMARY KEY (`idklient`),
+  UNIQUE KEY `idclient` (`idklient`),
   KEY `FKschet` (`idschet`),
-  CONSTRAINT `FKschet` FOREIGN KEY (`idschet`) REFERENCES `schet` (`id`)
+  CONSTRAINT `FKschet` FOREIGN KEY (`idschet`) REFERENCES `schet` (`idschet`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы matvey.kontragent: ~9 rows (приблизительно)
-DELETE FROM `kontragent`;
-/*!40000 ALTER TABLE `kontragent` DISABLE KEYS */;
-INSERT INTO `kontragent` (`id`, `nazv`, `uradr`, `idschet`, `tip`) VALUES
-	(1, 'Говрицов А.К.', 'г. Бобруйск, ул. Крылова, 152', 5, 0),
-	(2, 'Иванов К.А.', 'г. Минск, ул. Радиальная, 11', 6, 0),
-	(3, 'Максимова А.Г.', 'г. Жодино, ул. Неманская, 15-6', 7, 0),
-	(4, 'Мавриков П.К.', 'г. Бобруйск, ул. Минская, 14-2', NULL, 0),
-	(5, 'Парахневич С.А.', 'г. Рогачев, ул. Юбилейная, 23', NULL, 0),
-	(6, 'ООО СВ-ТрансЛигистик', 'Не указано', 4, 1),
-	(7, 'ИП Тишкевич А.Т.', 'Не указано', 3, 1),
-	(8, 'ООО СимулПлюс', 'Не указано', 2, 1),
-	(9, 'ЧТУП Сом-Трак', 'Не указано', 3, 1),
-	(10, 'ЧТУП АксаЛайт', 'Не указано', 2, 1);
-/*!40000 ALTER TABLE `kontragent` ENABLE KEYS */;
+-- Дамп данных таблицы matvey.klient: ~10 rows (приблизительно)
+DELETE FROM `klient`;
+/*!40000 ALTER TABLE `klient` DISABLE KEYS */;
+INSERT INTO `klient` (`idklient`, `fio`, `uradr`, `idschet`) VALUES
+	(1, 'Говрицов А.К.', 'г. Бобруйск, ул. Крылова, 152', 14),
+	(2, 'Иванов К.А.', 'г. Минск, ул. Радиальная, 11', 11),
+	(3, 'Максимова А.Г.', 'г. Жодино, ул. Неманская, 15-6', 13),
+	(4, 'Мавриков П.К.', 'г. Бобруйск, ул. Минская, 14-2', 19),
+	(5, 'Парахневич С.А.', 'г. Рогачев, ул. Юбилейная, 23', 12),
+	(6, 'Бобр Ю.Н.', 'г. Мозырь, ул.Б.Юности, 68', 15),
+	(7, 'Кузьменко Е.В.', 'г.Гомель, ул.Б.Хмельницкого 72 ', 17),
+	(8, 'Стаховский В.В.', 'г.Калинковичи, ул.Гастело, 33', 16),
+	(9, 'Фещенко В.П.', 'г.Речица, ул.8 марта, 12', 20),
+	(10, 'Комисаров Т.В.', 'г.Житковичи, ул.Пушкина,69', 18);
+/*!40000 ALTER TABLE `klient` ENABLE KEYS */;
 
--- Дамп структуры для таблица matvey.naklad
-DROP TABLE IF EXISTS `naklad`;
-CREATE TABLE IF NOT EXISTS `naklad` (
+-- Дамп структуры для таблица matvey.nakladnaya
+CREATE TABLE IF NOT EXISTS `nakladnaya` (
   `idnakladnaya` int NOT NULL AUTO_INCREMENT,
   `idtovar` int NOT NULL,
   `kolvo` int NOT NULL,
@@ -108,53 +100,95 @@ CREATE TABLE IF NOT EXISTS `naklad` (
   KEY `FK_nakladnaya_klient` (`idklient`),
   CONSTRAINT `FK_nakladnaya_klient` FOREIGN KEY (`idklient`) REFERENCES `klient` (`idklient`),
   CONSTRAINT `FKtovarn` FOREIGN KEY (`idtovar`) REFERENCES `tovar` (`idtovar`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Накладные на товар';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Накладные на товар';
 
--- Дамп данных таблицы matvey.naklad: ~2 rows (приблизительно)
-DELETE FROM `naklad`;
-/*!40000 ALTER TABLE `naklad` DISABLE KEYS */;
-INSERT INTO `naklad` (`idnakladnaya`, `idtovar`, `kolvo`, `summa`, `idklient`) VALUES
+-- Дамп данных таблицы matvey.nakladnaya: ~5 rows (приблизительно)
+DELETE FROM `nakladnaya`;
+/*!40000 ALTER TABLE `nakladnaya` DISABLE KEYS */;
+INSERT INTO `nakladnaya` (`idnakladnaya`, `idtovar`, `kolvo`, `summa`, `idklient`) VALUES
 	(1, 1, 3, 60, 1),
-	(2, 2, 5, 100, 2);
-/*!40000 ALTER TABLE `naklad` ENABLE KEYS */;
+	(2, 2, 5, 100, 2),
+	(3, 6, 1, 55, 6),
+	(4, 7, 1, 20, 4),
+	(5, 10, 5, 55, 7);
+/*!40000 ALTER TABLE `nakladnaya` ENABLE KEYS */;
+
+-- Дамп структуры для таблица matvey.postav
+CREATE TABLE IF NOT EXISTS `postav` (
+  `idpostav` int NOT NULL AUTO_INCREMENT,
+  `fio` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
+  `uradr` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
+  `idschet` int DEFAULT NULL,
+  PRIMARY KEY (`idpostav`),
+  UNIQUE KEY `idpostav` (`idpostav`),
+  KEY `FKschetp` (`idschet`),
+  CONSTRAINT `FKschetp` FOREIGN KEY (`idschet`) REFERENCES `schet` (`idschet`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Поставщики';
+
+-- Дамп данных таблицы matvey.postav: ~10 rows (приблизительно)
+DELETE FROM `postav`;
+/*!40000 ALTER TABLE `postav` DISABLE KEYS */;
+INSERT INTO `postav` (`idpostav`, `fio`, `uradr`, `idschet`) VALUES
+	(1, 'ООО СВ-ТрансЛигистик', 'г.Гродно, ул.Суворова,254', 4),
+	(2, 'ИП Тишкевич А.Т.', 'г.Полоцк, ул.Советская 22', 3),
+	(3, 'ООО СимулПлюс', 'г.Витебск, ул.Ф.Скорины, 59', 5),
+	(4, 'ЧТУП Сом-Трак', 'г.Солигорск, ул.Я.Коласа,76', 1),
+	(5, 'ЧТУП АксаЛайт', 'г.Брест,ул.Ленина,43', 2),
+	(6, 'ОДО Белтехстрой', 'г.Пинск,ул.Советских Пограничников,92', 7),
+	(7, 'ООО Горизонт', 'г.Лида,ул.Фолюш,67', 8),
+	(8, 'ООО Алтерм', 'г.Новополоцк,ул.Е.Полоцкой,41', 10),
+	(9, 'ОДО Белросимпорт', 'г.Мозырь,ул.Мостовая,3', 6),
+	(10, 'ЧТУП Комплайт', 'г.Кобрин,ул.Фрунзе,10', 9);
+/*!40000 ALTER TABLE `postav` ENABLE KEYS */;
 
 -- Дамп структуры для таблица matvey.schet
-DROP TABLE IF EXISTS `schet`;
 CREATE TABLE IF NOT EXISTS `schet` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `idschet` int NOT NULL AUTO_INCREMENT,
   `bank` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
   `numchet` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `status` int NOT NULL DEFAULT '0',
   `data` date NOT NULL,
   `creditstat` int NOT NULL DEFAULT '0',
   `creditsum` float NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idt` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`idschet`),
+  UNIQUE KEY `idschet` (`idschet`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы matvey.schet: ~7 rows (приблизительно)
+-- Дамп данных таблицы matvey.schet: ~20 rows (приблизительно)
 DELETE FROM `schet`;
 /*!40000 ALTER TABLE `schet` DISABLE KEYS */;
-INSERT INTO `schet` (`id`, `bank`, `numchet`, `status`, `data`, `creditstat`, `creditsum`) VALUES
-	(1, 'Паритетбанк', '251485758', 1250, '2020-05-19', 1250, 8500),
-	(2, 'Альфа-Банк', '251452854', 0, '2021-05-19', 0, 9520),
-	(3, 'ВТББанк', '956256325', 0, '2021-05-19', 0, 9000),
-	(4, 'Белгазпромбанк', '254152889', 200, '2021-05-19', 200, 8000),
-	(5, 'Белгазпромбанк', '325856984', 0, '2021-05-19', 0, 800),
-	(6, 'Приорбанк', '233625990', 820, '2021-05-19', 820, 1250),
-	(7, 'Белгазпромбанк', '000025215', 0, '2021-05-19', 0, 820);
+INSERT INTO `schet` (`idschet`, `bank`, `numchet`, `status`, `data`, `creditstat`, `creditsum`) VALUES
+	(1, 'Паритетбанк', '251485758', 1250, '2020-03-19', 1250, 8500),
+	(2, 'Альфа-Банк', '251452854', 0, '2019-10-23', 0, 9520),
+	(3, 'ВТББанк', '956256325', 0, '2020-08-12', 0, 9000),
+	(4, 'Белинвестбанк', '254152889', 200, '2018-02-24', 200, 8000),
+	(5, 'Белгазпромбанк', '325856984', 0, '2016-09-28', 0, 800),
+	(6, 'Приорбанк', '233625990', 820, '2017-05-11', 820, 1250),
+	(7, 'МоскваМинск', '000025215', 0, '2019-09-24', 0, 820),
+	(8, 'Беларусбанк', '985578067', 765, '2016-06-06', 0, 4000),
+	(9, 'Беларусбанк', '641923519', 35, '2018-07-20', 1000, 2314),
+	(10, 'Белинвестбанк', '412455125', 78, '2019-08-15', 90, 100),
+	(11, 'ВТББанк', '214758941', 532, '2018-02-17', 678, 1000),
+	(12, 'БПС-Сбербанк', '124789812', 79, '2019-09-26', 678, 700),
+	(13, 'Приорбанк', '709123487', 7, '2018-08-30', 90, 93),
+	(14, 'Белагропромбанк', '908746123', 90, '2015-07-01', 99, 100),
+	(15, 'Альфа-Банк', '679854334', 78, '2016-02-27', 96, 432),
+	(16, 'Банк БелВЭБ', '563354363', 77, '2018-08-29', 80, 90),
+	(17, 'Дабрабыт банк', '439875354', 300, '2019-08-19', 400, 451),
+	(18, 'Банк Решение', '809645352', 456, '2015-07-20', 700, 706),
+	(19, 'БНБ-банк', '894213567', 0, '2017-01-28', 0, 9000),
+	(20, 'БТА банк', '765433653', 0, '2018-08-20', 0, 1000);
 /*!40000 ALTER TABLE `schet` ENABLE KEYS */;
 
 -- Дамп структуры для таблица matvey.sklad
-DROP TABLE IF EXISTS `sklad`;
 CREATE TABLE IF NOT EXISTS `sklad` (
   `Nsklad` int unsigned NOT NULL AUTO_INCREMENT,
   `adress` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `naimen` varchar(500) NOT NULL,
   PRIMARY KEY (`Nsklad`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы matvey.sklad: ~5 rows (приблизительно)
+-- Дамп данных таблицы matvey.sklad: ~10 rows (приблизительно)
 DELETE FROM `sklad`;
 /*!40000 ALTER TABLE `sklad` DISABLE KEYS */;
 INSERT INTO `sklad` (`Nsklad`, `adress`, `naimen`) VALUES
@@ -162,11 +196,15 @@ INSERT INTO `sklad` (`Nsklad`, `adress`, `naimen`) VALUES
 	(2, 'г. Минск, ул. Ленина,5-2', 'Минск'),
 	(3, 'г.Гомель, ул. М.Хмельницкого,125', 'Гомель'),
 	(4, 'г. Бобруйск, ул. Крылова,15-32', 'Бобр Крылова'),
-	(5, 'г. Могилев, пл. Ленина, 14', 'Могилев');
+	(5, 'г. Могилев, пл. Ленина, 14', 'Могилев'),
+	(6, 'г.Мозырь, ул.Фрунзе, 7', 'Мозырь'),
+	(7, 'г.Новоплоцк, ул.Социалистическая 7', 'Новополоцк'),
+	(8, 'г.Витебск, ул.50 лет СССР', 'Витебск'),
+	(9, 'г.Солигорск, ул.Рябиновая 7', 'Солигорск'),
+	(10, 'г.Гродно, ул.Комунальная 16', 'Гродно');
 /*!40000 ALTER TABLE `sklad` ENABLE KEYS */;
 
 -- Дамп структуры для таблица matvey.tovar
-DROP TABLE IF EXISTS `tovar`;
 CREATE TABLE IF NOT EXISTS `tovar` (
   `idtovar` int NOT NULL AUTO_INCREMENT,
   `naimen_tovara` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
@@ -182,9 +220,9 @@ CREATE TABLE IF NOT EXISTS `tovar` (
   KEY `FK_tovar_sklad` (`sklad`),
   CONSTRAINT `FK_tovar_sklad` FOREIGN KEY (`sklad`) REFERENCES `sklad` (`Nsklad`),
   CONSTRAINT `FKpostavt` FOREIGN KEY (`idpostav`) REFERENCES `postav` (`idpostav`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Список товаров нормализованный';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Список товаров нормализованный';
 
--- Дамп данных таблицы matvey.tovar: ~0 rows (приблизительно)
+-- Дамп данных таблицы matvey.tovar: ~10 rows (приблизительно)
 DELETE FROM `tovar`;
 /*!40000 ALTER TABLE `tovar` DISABLE KEYS */;
 INSERT INTO `tovar` (`idtovar`, `naimen_tovara`, `ed_izm`, `cena`, `idpostav`, `sklad`, `Kolvo`, `sort`) VALUES
@@ -193,12 +231,15 @@ INSERT INTO `tovar` (`idtovar`, `naimen_tovara`, `ed_izm`, `cena`, `idpostav`, `
 	(3, 'Мышка', 'шт', 15, 1, 2, 16, 0),
 	(4, 'Фен', 'шт', 59, 2, 2, 4, 0),
 	(5, 'Телвизор', 'шт', 4500, 1, 2, 5, 0),
-	(6, 'Мышка', 'шт', 10, 4, 1, 10, 0);
+	(6, 'Обогреватель', 'шт', 100, 4, 1, 15, 0),
+	(7, 'Чайник', 'шт', 40, 6, 4, 100, 0),
+	(8, 'Монитор', 'шт', 700, 7, 3, 50, 2),
+	(9, 'Телефон', 'шт', 500, 4, 2, 500, 1),
+	(10, 'Миксер', 'шт', 55, 6, 3, 1000, 2);
 /*!40000 ALTER TABLE `tovar` ENABLE KEYS */;
 
--- Дамп структуры для таблица matvey.transp
-DROP TABLE IF EXISTS `transp`;
-CREATE TABLE IF NOT EXISTS `transp` (
+-- Дамп структуры для таблица matvey.transport
+CREATE TABLE IF NOT EXISTS `transport` (
   `idtransport` int NOT NULL AUTO_INCREMENT,
   `nom_auto` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `marka_auto` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -210,20 +251,21 @@ CREATE TABLE IF NOT EXISTS `transp` (
   PRIMARY KEY (`idtransport`) USING BTREE,
   KEY `FK_transport_sklad` (`nsklad`),
   CONSTRAINT `FK_transport_sklad` FOREIGN KEY (`nsklad`) REFERENCES `sklad` (`Nsklad`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы matvey.transp: ~4 rows (приблизительно)
-DELETE FROM `transp`;
-/*!40000 ALTER TABLE `transp` DISABLE KEYS */;
-INSERT INTO `transp` (`idtransport`, `nom_auto`, `marka_auto`, `tonnag`, `god_vipuska`, `vladelec`, `data_perevozki`, `nsklad`) VALUES
-	(2, 'AI 5215-6', 'MAN', 24000, 2011, 'ПАС-Транс', NULL, NULL),
-	(3, 'AM 2532-6', 'DAF', 15000, 2018, 'ПАС-Транс', NULL, NULL),
-	(4, 'AK 1256-6', 'DAF', 24000, 2019, 'ПАС-Транс', NULL, NULL),
-	(5, 'AI 6326-6', 'Volvo', 10000, 2010, 'ПАС-Транс', NULL, NULL);
-/*!40000 ALTER TABLE `transp` ENABLE KEYS */;
+-- Дамп данных таблицы matvey.transport: ~6 rows (приблизительно)
+DELETE FROM `transport`;
+/*!40000 ALTER TABLE `transport` DISABLE KEYS */;
+INSERT INTO `transport` (`idtransport`, `nom_auto`, `marka_auto`, `tonnag`, `god_vipuska`, `vladelec`, `data_perevozki`, `nsklad`) VALUES
+	(2, 'AI 5215-6', 'MAN', 24000, 2011, 'ПАС-Транс', '2020-11-26', 4),
+	(3, 'AM 2532-6', 'DAF', 15000, 2018, 'ПАС-Транс', '2020-12-11', 8),
+	(4, 'AK 1256-6', 'DAF', 24000, 2019, 'ПАС-Транс', '2021-01-29', 1),
+	(5, 'AI 6326-6', 'Volvo', 10000, 2010, 'ПАС-Транс', '2021-03-25', 5),
+	(6, 'AY 6212-3', 'Iveco', 15000, 2012, 'ПАС-Транс', '2021-02-17', 6),
+	(7, 'AR 8967-7', 'Mercedes-benz', 8000, 2017, 'ПАС-Транс', '2021-04-20', 2);
+/*!40000 ALTER TABLE `transport` ENABLE KEYS */;
 
 -- Дамп структуры для таблица matvey.zakaz
-DROP TABLE IF EXISTS `zakaz`;
 CREATE TABLE IF NOT EXISTS `zakaz` (
   `id_zakaz` int NOT NULL AUTO_INCREMENT,
   `data` date DEFAULT NULL,
@@ -238,15 +280,16 @@ CREATE TABLE IF NOT EXISTS `zakaz` (
   KEY `FKclientz` (`id_client`),
   CONSTRAINT `FKclientz` FOREIGN KEY (`id_client`) REFERENCES `klient` (`idklient`),
   CONSTRAINT `FKtovar` FOREIGN KEY (`id_tovar`) REFERENCES `tovar` (`idtovar`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Список заказов п 10';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Список заказов п 10';
 
--- Дамп данных таблицы matvey.zakaz: ~0 rows (приблизительно)
+-- Дамп данных таблицы matvey.zakaz: ~4 rows (приблизительно)
 DELETE FROM `zakaz`;
 /*!40000 ALTER TABLE `zakaz` DISABLE KEYS */;
 INSERT INTO `zakaz` (`id_zakaz`, `data`, `id_client`, `id_tovar`, `kol_vo_zak_tov`, `cena_tovara`, `sum_zakaza`) VALUES
 	(1, '2021-05-19', 2, 2, 3, 2300, 6900),
 	(2, '2021-05-19', 4, 3, 1, 520, 520),
-	(3, '2021-05-22', 5, 3, 1, 5890, 5890);
+	(3, '2021-05-22', 5, 3, 1, 5890, 5890),
+	(4, '2019-03-16', 6, 6, 1, 789, 678);
 /*!40000 ALTER TABLE `zakaz` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
