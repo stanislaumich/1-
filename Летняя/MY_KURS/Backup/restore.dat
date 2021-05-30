@@ -1,0 +1,8 @@
+FILE="backup.DMP"
+LOG="imp_backupz.log"
+FROMUSER=firma
+TOUSER=firma
+GRANTS=Y
+CONSTRAINTS=Y
+IGNORE=Y
+FEEDBACK=10000

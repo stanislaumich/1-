@@ -1,0 +1,7 @@
+FILE="backup.dmp"
+LOG="exp_backup.log"
+OWNER=('FIRMA')
+TRIGGERS=Y
+CONSTRAINTS=Y
+GRANTS=Y
+FEEDBACK=1000
