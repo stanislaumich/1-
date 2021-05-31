@@ -24,17 +24,17 @@ CREATE TABLE IF NOT EXISTS `firma` (
   `firma` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
   `uradr` varchar(500) NOT NULL DEFAULT '',
   `telefon` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
-  `Nschet` int NOT NULL,
+  `schet` int NOT NULL,
   KEY `I1` (`firma`) USING BTREE,
-  KEY `FKschetf` (`Nschet`) USING BTREE,
-  CONSTRAINT `FKschetf` FOREIGN KEY (`Nschet`) REFERENCES `schet` (`n`)
+  KEY `FKschetf` (`schet`) USING BTREE,
+  CONSTRAINT `FKschetf` FOREIGN KEY (`schet`) REFERENCES `schet` (`n`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Описание фирмы';
 
--- Дамп данных таблицы dmaslak.firma: ~0 rows (приблизительно)
+-- Дамп данных таблицы dmaslak.firma: ~1 rows (приблизительно)
 DELETE FROM `firma`;
 /*!40000 ALTER TABLE `firma` DISABLE KEYS */;
-INSERT INTO `firma` (`firma`, `uradr`, `telefon`, `Nschet`) VALUES
-	('Инспектор гаджет', 'г.Мозырь ул.Чапаева 28', '+375336512162', 4);
+INSERT INTO `firma` (`firma`, `uradr`, `telefon`, `schet`) VALUES
+	('com40', 'PODKOCKA 4B, 63-460 NOWE SKALMIERZYCE', '62 76 29 550', 4);
 /*!40000 ALTER TABLE `firma` ENABLE KEYS */;
 
 -- Дамп структуры для таблица dmaslak.kadry
@@ -49,18 +49,20 @@ CREATE TABLE IF NOT EXISTS `kadry` (
   PRIMARY KEY (`N`) USING BTREE,
   UNIQUE KEY `i2` (`fio`),
   UNIQUE KEY `idkadr` (`N`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Сотрудники фирмы';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Сотрудники фирмы';
 
--- Дамп данных таблицы dmaslak.kadry: ~6 rows (приблизительно)
+-- Дамп данных таблицы dmaslak.kadry: ~8 rows (приблизительно)
 DELETE FROM `kadry`;
 /*!40000 ALTER TABLE `kadry` DISABLE KEYS */;
 INSERT INTO `kadry` (`N`, `fio`, `dolg`, `obraz`, `salary`, `data`) VALUES
-	(2, 'Аверкова И.В.', 'Бухгалтер', 'Высшее', 750, '2018-02-20'),
-	(3, 'Долбик К.В.', 'Водитель', 'Среднеспециальное', 550, '2020-02-20'),
-	(4, 'Савицкий А.Н.', 'Менеджер ', 'Среднеспециальное', 600, '2020-02-20'),
-	(5, 'Зарянина Т.Н.', 'Продавец', 'Среднеспециальное', 550, '2020-02-20'),
-	(6, 'Ивашин А.С.', 'техник-Программист', 'Среднеспециальное', 600, '2019-04-12'),
-	(7, 'Лубовский А.В.', 'продавец', 'Среднеспециальное', 550, '2019-05-26');
+	(1, 'Анатолий Николаевич Жерносенко', 'Генеральный директор (приемная)', 'Базовое', 1500, '2014-08-21'),
+	(2, 'Юрий Владимирович Главатский', 'Главный инженер', 'Высшее', 1450, '2014-08-21'),
+	(3, 'Андрей Николаевич Рожков', 'Зам. генерального директора по кадровой, идеологической работе и экономической безопасности', 'Высшее', 1350, '2014-08-22'),
+	(4, 'Сергей Борисович Юзвяк', 'Зам. генерального директора по материально-техническому снабжению и транспорту', 'Высшее', 1355, '2014-08-21'),
+	(5, 'Андрей Владимирович Пескун', 'Зам. генерального директора – начальник управления маркетинга, сбыта и фирменного обслуживания', 'Высшее', 1400, '2014-08-21'),
+	(6, 'Александр Николаевич Таланцев', 'Главный бухгалтер', 'Высшее', 1000, '2014-08-24'),
+	(7, 'Ольга Михайловна Старченко', 'Начальник ОТК', 'Среднеспециальное', 1000, '2014-08-25'),
+	(8, 'Елена Адамовна Рапеева', 'Главный технолог', 'Высшее', 1100, '2014-08-21');
 /*!40000 ALTER TABLE `kadry` ENABLE KEYS */;
 
 -- Дамп структуры для таблица dmaslak.klient
@@ -68,29 +70,29 @@ DROP TABLE IF EXISTS `klient`;
 CREATE TABLE IF NOT EXISTS `klient` (
   `n` int NOT NULL AUTO_INCREMENT,
   `fio` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
-  `adr` varchar(500) DEFAULT NULL,
-  `nschet` int DEFAULT NULL,
+  `adres` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `schet` int DEFAULT NULL,
   PRIMARY KEY (`n`) USING BTREE,
   UNIQUE KEY `i3` (`fio`),
   UNIQUE KEY `idclient` (`n`) USING BTREE,
-  KEY `FKschet` (`nschet`) USING BTREE,
-  CONSTRAINT `FKschet` FOREIGN KEY (`nschet`) REFERENCES `schet` (`n`)
+  KEY `FKschet` (`schet`) USING BTREE,
+  CONSTRAINT `FKschet` FOREIGN KEY (`schet`) REFERENCES `schet` (`n`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Дамп данных таблицы dmaslak.klient: ~10 rows (приблизительно)
 DELETE FROM `klient`;
 /*!40000 ALTER TABLE `klient` DISABLE KEYS */;
-INSERT INTO `klient` (`n`, `fio`, `adr`, `nschet`) VALUES
-	(1, 'Говрицов А.К.', 'г. Бобруйск, ул. Крылова, 152', 14),
-	(2, 'Иванов К.А.', 'г. Минск, ул. Радиальная, 11', 11),
-	(3, 'Максимова А.Г.', 'г. Жодино, ул. Неманская, 15-6', 13),
-	(4, 'Мавриков П.К.', 'г. Бобруйск, ул. Минская, 14-2', 19),
-	(5, 'Парахневич С.А.', 'г. Рогачев, ул. Юбилейная, 23', 12),
-	(6, 'Бобр Ю.Н.', 'г. Мозырь, ул.Б.Юности, 68', 15),
-	(7, 'Кузьменко Е.В.', 'г.Гомель, ул.Б.Хмельницкого 72 ', 17),
-	(8, 'Стаховский В.В.', 'г.Калинковичи, ул.Гастело, 33', 16),
-	(9, 'Фещенко В.П.', 'г.Речица, ул.8 марта, 12', 20),
-	(10, 'Комисаров Т.В.', 'г.Житковичи, ул.Пушкина,69', 18);
+INSERT INTO `klient` (`n`, `fio`, `adres`, `schet`) VALUES
+	(1, 'Жукова Алиса Олеговна', 'г. Забарье, ул. Ольховская 2-я, дом 71', 14),
+	(2, 'Кольцов Максим Иванович', 'г. Шацк, ул. Кучин пер, дом 110', 11),
+	(3, 'Мальцев Даниил Романович', 'г. Родино, ул. Вавиловых, дом 142', 13),
+	(4, 'Мешкова Василиса Владиславовна', 'г. Мантурово, ул. Новоясеневский пр-кт, дом 113', 19),
+	(5, 'Нефедов Максим Тимурович', 'г. Полтавское, ул. Моцарта, дом 193', 12),
+	(6, 'Смирнов Матвей Алексеевич', 'г. Жилино, ул. Бойцова пер, дом 118', 15),
+	(7, 'Софронова Мария Марковна', 'г. Туринск, ул. Новолужнецкий проезд, дом 12', 17),
+	(8, 'Субботина Мария Никитична', 'г. Курагино, ул. Талалихина пер, дом 180', 16),
+	(9, 'Сухов Матвей Алексеевич', ' г. Верхняя Хава, ул. Лукино 2-я, дом 174', 20),
+	(10, 'Яковлева Варвара Николаевна', 'г. Холмогорье, ул. Рассветная, дом 197', 18);
 /*!40000 ALTER TABLE `klient` ENABLE KEYS */;
 
 -- Дамп структуры для таблица dmaslak.nakladnaya
@@ -126,28 +128,28 @@ CREATE TABLE IF NOT EXISTS `postav` (
   `n` int NOT NULL AUTO_INCREMENT,
   `nazv` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
   `uradr` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
-  `nschet` int DEFAULT NULL,
+  `schet` int DEFAULT NULL,
   PRIMARY KEY (`n`) USING BTREE,
   UNIQUE KEY `idpostav` (`n`) USING BTREE,
   UNIQUE KEY `i4` (`nazv`) USING BTREE,
-  KEY `FKschetp` (`nschet`) USING BTREE,
-  CONSTRAINT `FKschetp` FOREIGN KEY (`nschet`) REFERENCES `schet` (`n`)
+  KEY `FKschetp` (`schet`) USING BTREE,
+  CONSTRAINT `FKschetp` FOREIGN KEY (`schet`) REFERENCES `schet` (`n`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Поставщики';
 
 -- Дамп данных таблицы dmaslak.postav: ~10 rows (приблизительно)
 DELETE FROM `postav`;
 /*!40000 ALTER TABLE `postav` DISABLE KEYS */;
-INSERT INTO `postav` (`n`, `nazv`, `uradr`, `nschet`) VALUES
-	(1, 'ООО СВ-ТрансЛигистик', 'г.Гродно, ул.Суворова,254', 4),
-	(2, 'ИП Тишкевич А.Т.', 'г.Полоцк, ул.Советская 22', 3),
-	(3, 'ООО СимулПлюс', 'г.Витебск, ул.Ф.Скорины, 59', 5),
-	(4, 'ЧТУП Сом-Трак', 'г.Солигорск, ул.Я.Коласа,76', 1),
-	(5, 'ЧТУП АксаЛайт', 'г.Брест,ул.Ленина,43', 2),
-	(6, 'ОДО Белтехстрой', 'г.Пинск,ул.Советских Пограничников,92', 7),
-	(7, 'ООО Горизонт', 'г.Лида,ул.Фолюш,67', 8),
-	(8, 'ООО Алтерм', 'г.Новополоцк,ул.Е.Полоцкой,41', 10),
-	(9, 'ОДО Белросимпорт', 'г.Мозырь,ул.Мостовая,3', 6),
-	(10, 'ЧТУП Комплайт', 'г.Кобрин,ул.Фрунзе,10', 9);
+INSERT INTO `postav` (`n`, `nazv`, `uradr`, `schet`) VALUES
+	(1, 'Siedziba firmy Personio', 'Strażacka 41A/64, 84-331 Piaseczno', 4),
+	(2, 'Dom w Konstancinie', 'Wczasowa 07A, 35-983 Pawłowice', 3),
+	(3, 'L\'Oreal House Warsaw', 'Równa 31, 65-189 Płock', 5),
+	(4, 'Microsoft Polska', 'Miła 09/65, 70-122 Koszalin', 1),
+	(5, 'Hotel Provita', 'Zbożowa 33, 06-300 Ełk', 2),
+	(6, 'Hotel Marriott', 'Bielska 40/80, 37-406 Żywiec', 7),
+	(7, 'NH Hotel Bloom', 'Kołobrzeska 64/48, 14-495 Tomaszów Mazowiecki', 8),
+	(8, 'Penthaus', 'Sienkiewicza Henryka 06/92, 40-829', 10),
+	(9, 'Novotel', 'Puławska 38/94, 29-547 Rybnik', 6),
+	(10, 'Sofitel', 'Srebrna 97/23, 50-973 Legnica', 9);
 /*!40000 ALTER TABLE `postav` ENABLE KEYS */;
 
 -- Дамп структуры для таблица dmaslak.schet
@@ -168,26 +170,26 @@ CREATE TABLE IF NOT EXISTS `schet` (
 DELETE FROM `schet`;
 /*!40000 ALTER TABLE `schet` DISABLE KEYS */;
 INSERT INTO `schet` (`n`, `bank`, `numb`, `sost`, `data`, `cr`, `summa`) VALUES
-	(1, 'Паритетбанк', '251485758', 1250, '2020-03-19', '', 8500),
-	(2, 'Альфа-Банк', '251452854', 0, '2019-10-23', '', 9520),
-	(3, 'ВТББанк', '956256325', 0, '2020-08-12', '', 9000),
-	(4, 'Белинвестбанк', '254152889', 200, '2018-02-24', '', 8000),
-	(5, 'Белгазпромбанк', '325856984', 0, '2016-09-28', '', 800),
-	(6, 'Приорбанк', '233625990', 820, '2017-05-11', '', 1250),
-	(7, 'МоскваМинск', '000025215', 0, '2019-09-24', '', 820),
-	(8, 'Беларусбанк', '985578067', 765, '2016-06-06', '', 4000),
-	(9, 'Беларусбанк', '641923519', 35, '2018-07-20', '', 2314),
-	(10, 'Белинвестбанк', '412455125', 78, '2019-08-15', '', 100),
-	(11, 'ВТББанк', '214758941', 532, '2018-02-17', '', 1000),
-	(12, 'БПС-Сбербанк', '124789812', 79, '2019-09-26', '', 700),
-	(13, 'Приорбанк', '709123487', 7, '2018-08-30', '', 93),
-	(14, 'Белагропромбанк', '908746123', 90, '2015-07-01', '', 100),
-	(15, 'Альфа-Банк', '679854334', 78, '2016-02-27', '', 432),
-	(16, 'Банк БелВЭБ', '563354363', 77, '2018-08-29', '', 90),
-	(17, 'Дабрабыт банк', '439875354', 300, '2019-08-19', '', 451),
-	(18, 'Банк Решение', '809645352', 456, '2015-07-20', '', 706),
-	(19, 'БНБ-банк', '894213567', 0, '2017-01-28', '', 9000),
-	(20, 'БТА банк', '765433653', 0, '2018-08-20', '', 1000);
+	(1, 'PKO Bank Polski', '251485758', 820, '2015-01-08', '', 35419),
+	(2, 'Bank Pekao SA', '251452854', 366, '2015-06-12', '', 42386),
+	(3, 'Santander Bank Polska', '956256325', 540, '2015-06-17', '', 42170),
+	(4, 'MBank', '254152889', 5673, '2016-08-18', '', 30382),
+	(5, 'ING Bank Śląski', '325856984', 7655, '2017-07-26', '', 92809),
+	(6, 'Bank Millennium', '233625990', 359, '2014-06-12', '', 64122),
+	(7, 'Bank BNP Paribas', '000025215', 5513, '2015-11-18', '', 67116),
+	(8, 'Alior Bank', '985578067', 244, '2016-06-06', '', 60970),
+	(9, 'Getin Noble Bank', '641923519', 574, '2019-01-04', '', 94065),
+	(10, 'Raiffeisen Bank International', '412455125', 783, '2017-05-01', '', 94812),
+	(11, 'Citi Handlowy', '214758941', 532, '2020-06-30', '', 88921),
+	(12, 'Idea Bank', '124789812', 89, '2016-11-07', '', 50243),
+	(13, 'Bank BPS', '709123487', 264, '2017-08-03', '', 1143),
+	(14, 'Credit Agricole', '908746123', 90, '2017-08-18', '', 10787),
+	(15, 'BOŚ Bank', '679854334', 783, '2018-03-16', '', 4184),
+	(16, 'SGB Bank', '563354363', 717, '2018-08-22', '', 32623),
+	(17, 'Santander Consumer Bank', '439875354', 300, '2018-10-01', '', 13272),
+	(18, 'Bank Pocztowy', '809645352', 456, '2019-12-24', '', 10787),
+	(19, 'Nest Bank', '894213567', 1290, '2020-07-30', '', 9149),
+	(20, 'Volkswagen Bank Polska', '765433653', 200, '2021-01-15', '', 777777);
 /*!40000 ALTER TABLE `schet` ENABLE KEYS */;
 
 -- Дамп структуры для таблица dmaslak.sklad
@@ -202,16 +204,16 @@ CREATE TABLE IF NOT EXISTS `sklad` (
 DELETE FROM `sklad`;
 /*!40000 ALTER TABLE `sklad` DISABLE KEYS */;
 INSERT INTO `sklad` (`N`, `adres`) VALUES
-	(1, 'г.Бобруйск,ул. Гоголя,172'),
-	(2, 'г. Минск, ул. Ленина,5-2'),
-	(3, 'г.Гомель, ул. М.Хмельницкого,125'),
-	(4, 'г. Бобруйск, ул. Крылова,15-32'),
-	(5, 'г. Могилев, пл. Ленина, 14'),
-	(6, 'г.Мозырь, ул.Фрунзе, 7'),
-	(7, 'г.Новоплоцк, ул.Социалистическая 7'),
-	(8, 'г.Витебск, ул.50 лет СССР'),
-	(9, 'г.Солигорск, ул.Рябиновая 7'),
-	(10, 'г.Гродно, ул.Комунальная 16');
+	(1, 'Częstochowska 39A, 88-986 Skierniewice'),
+	(2, 'Wolności Pl. 78, 65-200 Elbląg'),
+	(3, 'Spółdzielcza 06A/35, 41-304 Bolesławiec'),
+	(4, 'Górnośląska 07, 83-899 Tomaszów Mazowiecki'),
+	(5, 'Wojska Polskiego 98/17, 67-976 Wągrowiec'),
+	(6, 'Żołnierska 13A, 63-426 Oświęcim'),
+	(7, 'Pawia 53A/53, 95-501 Oświęcim'),
+	(8, 'Hallera Józefa 35A/64, 95-390 Kozienice'),
+	(9, 'Młynarska 92, 46-445 Radom'),
+	(10, 'Wspólna 33, 84-324 Konstancin-Jeziorna');
 /*!40000 ALTER TABLE `sklad` ENABLE KEYS */;
 
 -- Дамп структуры для таблица dmaslak.tovar
@@ -221,33 +223,33 @@ CREATE TABLE IF NOT EXISTS `tovar` (
   `name` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
   `ed` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Не указано',
   `cena` int unsigned NOT NULL,
-  `npostav` int NOT NULL,
-  `nsklad` int unsigned NOT NULL,
+  `postav` int NOT NULL,
+  `sklad` int unsigned NOT NULL,
   `Kolvo` int unsigned NOT NULL,
   `sort` int unsigned NOT NULL,
   PRIMARY KEY (`n`) USING BTREE,
   UNIQUE KEY `idtovar` (`n`) USING BTREE,
-  KEY `FKpostavt` (`npostav`) USING BTREE,
-  KEY `FK_tovar_sklad` (`nsklad`) USING BTREE,
   KEY `i5` (`name`) USING BTREE,
-  CONSTRAINT `FK_tovar_sklad` FOREIGN KEY (`nsklad`) REFERENCES `sklad` (`N`),
-  CONSTRAINT `FKpostavt` FOREIGN KEY (`npostav`) REFERENCES `postav` (`n`)
+  KEY `FKpostavt` (`postav`) USING BTREE,
+  KEY `FK_tovar_sklad` (`sklad`) USING BTREE,
+  CONSTRAINT `FK_tovar_sklad` FOREIGN KEY (`sklad`) REFERENCES `sklad` (`N`),
+  CONSTRAINT `FKpostavt` FOREIGN KEY (`postav`) REFERENCES `postav` (`n`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Список товаров нормализованный';
 
 -- Дамп данных таблицы dmaslak.tovar: ~10 rows (приблизительно)
 DELETE FROM `tovar`;
 /*!40000 ALTER TABLE `tovar` DISABLE KEYS */;
-INSERT INTO `tovar` (`n`, `name`, `ed`, `cena`, `npostav`, `nsklad`, `Kolvo`, `sort`) VALUES
-	(1, 'Ноутбук', 'шт', 1499, 1, 1, 28, 0),
-	(2, 'Игровая приставка', 'шт', 2455, 2, 1, 21, 0),
-	(3, 'Мышка', 'шт', 15, 1, 2, 16, 2),
-	(4, 'Фен', 'шт', 59, 2, 2, 4, 1),
-	(5, 'Телвизор', 'шт', 4500, 1, 2, 5, 3),
-	(6, 'Обогреватель', 'шт', 100, 4, 1, 15, 2),
-	(7, 'Чайник', 'шт', 40, 6, 4, 100, 3),
-	(8, 'Монитор', 'шт', 700, 7, 3, 50, 2),
-	(9, 'Телефон', 'шт', 500, 4, 2, 500, 1),
-	(10, 'Миксер', 'шт', 55, 6, 3, 1000, 2);
+INSERT INTO `tovar` (`n`, `name`, `ed`, `cena`, `postav`, `sklad`, `Kolvo`, `sort`) VALUES
+	(1, 'Диваны', 'шт', 1500, 1, 9, 989, 1),
+	(2, 'Диваны раскладные', 'шт', 3000, 2, 7, 356, 0),
+	(3, 'Пуфы', 'шт', 250, 1, 10, 916, 2),
+	(4, 'Кресла', 'шт', 500, 2, 8, 800, 1),
+	(5, 'Подножки', 'шт', 100, 1, 4, 80, 3),
+	(6, 'Стулья', 'шт', 50, 4, 3, 713, 2),
+	(7, 'Книжный шкаф', 'шт', 350, 6, 4, 659, 7),
+	(8, 'Лампы', 'шт', 20, 7, 9, 322, 2),
+	(9, 'Кровать', 'шт', 2350, 4, 7, 740, 1),
+	(10, 'Столы', 'шт', 450, 6, 3, 999, 3);
 /*!40000 ALTER TABLE `tovar` ENABLE KEYS */;
 
 -- Дамп структуры для таблица dmaslak.transport
@@ -260,23 +262,23 @@ CREATE TABLE IF NOT EXISTS `transport` (
   `god` int NOT NULL,
   `fio` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `data` date NOT NULL,
-  `nsklad` int unsigned NOT NULL,
+  `sklad` int unsigned NOT NULL,
   PRIMARY KEY (`n`) USING BTREE,
   UNIQUE KEY `i5` (`nomer`),
-  KEY `FK_transport_sklad` (`nsklad`),
-  CONSTRAINT `FK_transport_sklad` FOREIGN KEY (`nsklad`) REFERENCES `sklad` (`N`)
+  KEY `FK_transport_sklad` (`sklad`) USING BTREE,
+  CONSTRAINT `FK_transport_sklad` FOREIGN KEY (`sklad`) REFERENCES `sklad` (`N`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Дамп данных таблицы dmaslak.transport: ~6 rows (приблизительно)
 DELETE FROM `transport`;
 /*!40000 ALTER TABLE `transport` DISABLE KEYS */;
-INSERT INTO `transport` (`n`, `nomer`, `marka`, `gruz`, `god`, `fio`, `data`, `nsklad`) VALUES
-	(2, 'AI 5215-6', 'MAN', 24000, 2011, 'ПАС-Транс', '2020-11-26', 4),
-	(3, 'AM 2532-6', 'DAF', 15000, 2018, 'ПАС-Транс', '2020-12-11', 8),
-	(4, 'AK 1256-6', 'DAF', 24000, 2019, 'Ивашин А.С.', '2021-01-29', 1),
-	(5, 'AI 6326-6', 'Volvo', 10000, 2010, 'ПАС-Транс', '2021-03-25', 5),
-	(6, 'AY 6212-3', 'Iveco', 15000, 2012, 'ПАС-Транс', '2021-02-17', 6),
-	(7, 'AR 8967-7', 'Mercedes-benz', 8000, 2017, 'ПАС-Транс', '2021-04-20', 2);
+INSERT INTO `transport` (`n`, `nomer`, `marka`, `gruz`, `god`, `fio`, `data`, `sklad`) VALUES
+	(2, 'Х 410 Х А', 'MD-11', 340000, 2010, 'Com-Avia', '2014-09-24', 3),
+	(3, 'В 189 У К', 'SCANIA', 70000, 2011, 'Com-Avto', '2014-10-10', 4),
+	(4, 'С 159 Н У', 'MAЗ', 24000, 2014, 'Com-Avto', '2014-11-27', 1),
+	(5, 'Р 115 С О', 'RENAULT', 3400, 2012, 'Com-Avto', '2014-08-28', 3),
+	(6, 'В 674 К Т', 'FOTON', 50000, 2012, 'Com-Avto', '2014-09-24', 5),
+	(7, 'Х 360 О Е', 'Ан-225', 520000, 2013, 'Com-Avia', '2015-01-07', 10);
 /*!40000 ALTER TABLE `transport` ENABLE KEYS */;
 
 -- Дамп структуры для таблица dmaslak.zakaz
@@ -284,28 +286,28 @@ DROP TABLE IF EXISTS `zakaz`;
 CREATE TABLE IF NOT EXISTS `zakaz` (
   `n` int NOT NULL AUTO_INCREMENT,
   `data` date NOT NULL,
-  `nclient` int NOT NULL,
-  `ntovar` int NOT NULL,
+  `client` int NOT NULL,
+  `tovar` int NOT NULL,
   `kolvo` int NOT NULL DEFAULT '0',
   `cena` float(12,0) NOT NULL,
   `summa` float(12,0) NOT NULL,
   `opl` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`n`) USING BTREE,
   UNIQUE KEY `id_zakaz` (`n`) USING BTREE,
-  KEY `FKtovar` (`ntovar`) USING BTREE,
-  KEY `FKclientz` (`nclient`) USING BTREE,
-  CONSTRAINT `FKclientz` FOREIGN KEY (`nclient`) REFERENCES `klient` (`n`),
-  CONSTRAINT `FKtovar` FOREIGN KEY (`ntovar`) REFERENCES `tovar` (`n`)
+  KEY `FKtovar` (`tovar`) USING BTREE,
+  KEY `FKclientz` (`client`) USING BTREE,
+  CONSTRAINT `FKclientz` FOREIGN KEY (`client`) REFERENCES `klient` (`n`),
+  CONSTRAINT `FKtovar` FOREIGN KEY (`tovar`) REFERENCES `tovar` (`n`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Список заказов п 10';
 
 -- Дамп данных таблицы dmaslak.zakaz: ~4 rows (приблизительно)
 DELETE FROM `zakaz`;
 /*!40000 ALTER TABLE `zakaz` DISABLE KEYS */;
-INSERT INTO `zakaz` (`n`, `data`, `nclient`, `ntovar`, `kolvo`, `cena`, `summa`, `opl`) VALUES
-	(1, '2021-05-19', 2, 2, 3, 2300, 6900, ''),
-	(2, '2021-05-19', 4, 3, 1, 520, 520, ''),
-	(3, '2021-05-22', 5, 3, 1, 5890, 5890, ''),
-	(4, '2019-03-16', 6, 6, 1, 789, 678, '');
+INSERT INTO `zakaz` (`n`, `data`, `client`, `tovar`, `kolvo`, `cena`, `summa`, `opl`) VALUES
+	(1, '2021-03-24', 6, 8, 3, 80, 140, ''),
+	(2, '2021-05-05', 9, 10, 1, 450, 650, ''),
+	(3, '2021-02-28', 1, 10, 3, 1350, 2000, ''),
+	(4, '2021-01-13', 4, 4, 1, 500, 999, '');
 /*!40000 ALTER TABLE `zakaz` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
