@@ -1,4 +1,5 @@
 rem @echo off
+del backup_prev.dmp
 ren backup.dmp backup_prev.dmp
 del backup.dmp
 sqlplus firma/firma @backup.sql
