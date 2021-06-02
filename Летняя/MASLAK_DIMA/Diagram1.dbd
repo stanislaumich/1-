@@ -54,12 +54,12 @@
               <Parent>0</Parent>
             </CustomProperties>
             <Location>
-              <X>230 px</X>
-              <Y>760 px</Y>
+              <X>360 px</X>
+              <Y>130 px</Y>
             </Location>
             <Size>
               <Width>152 px</Width>
-              <Height>140 px</Height>
+              <Height>161 px</Height>
             </Size>
             <DbOid>
               <Path>dmaslak.firma</Path>
@@ -77,12 +77,12 @@
               <Parent>0</Parent>
             </CustomProperties>
             <Location>
-              <X>450 px</X>
-              <Y>500 px</Y>
+              <X>950 px</X>
+              <Y>620 px</Y>
             </Location>
             <Size>
               <Width>144 px</Width>
-              <Height>107 px</Height>
+              <Height>124 px</Height>
             </Size>
             <DbOid>
               <Path>dmaslak.izgot</Path>
@@ -100,12 +100,12 @@
               <Parent>0</Parent>
             </CustomProperties>
             <Location>
-              <X>30 px</X>
-              <Y>20 px</Y>
+              <X>152 px</X>
+              <Y>72 px</Y>
             </Location>
             <Size>
               <Width>146 px</Width>
-              <Height>178 px</Height>
+              <Height>195 px</Height>
             </Size>
             <DbOid>
               <Path>dmaslak.kadry</Path>
@@ -117,14 +117,83 @@
               <TriggersCollapsed>True</TriggersCollapsed>
             </Compartments>
           </Model>
-          <Model xsi:type="TableModel">
+          <Model xsi:type="RelationLinkModel">
             <CustomProperties>
               <OID>4</OID>
+              <Comment>5</Comment>
+              <OutModel>3</OutModel>
+              <InModel>1</InModel>
+              <OutPort>6</OutPort>
+              <InPort>7</InPort>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <PortAnchors>
+              <Port>
+                <Location>
+                  <X>147 px</X>
+                  <Y>138 px</Y>
+                </Location>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Right</Align>
+                <CustomProperties>
+                  <OID>6</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
+              <Port>
+                <Location>
+                  <X>-1 px</X>
+                  <Y>80 px</Y>
+                </Location>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Left</Align>
+                <CustomProperties>
+                  <OID>7</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
+            </PortAnchors>
+            <IsManuallyRouted>false</IsManuallyRouted>
+            <DbOid>
+              <Path>dmaslak.kadry.FK_kadry_firma</Path>
+              <TypeName>ForeignKey</TypeName>
+            </DbOid>
+          </Model>
+          <Model xsi:type="RelationCommentModel">
+            <CustomProperties>
+              <OID>5</OID>
+              <HolderModel>4</HolderModel>
+              <Port>8</Port>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <PortAnchors>
+              <Port xsi:type="LinkPort">
+                <Location>
+                  <X>-31 px</X>
+                  <Y>0 px</Y>
+                </Location>
+                <Anchors>None</Anchors>
+                <Align>Right</Align>
+                <CustomProperties>
+                  <OID>8</OID>
+                  <PortType>FixedAnchor</PortType>
+                </CustomProperties>
+                <LinkPortAnchor>OutPoint</LinkPortAnchor>
+              </Port>
+            </PortAnchors>
+            <CommentOffset>
+              <X>-48 px</X>
+              <Y>70 px</Y>
+            </CommentOffset>
+          </Model>
+          <Model xsi:type="TableModel">
+            <CustomProperties>
+              <OID>9</OID>
               <Parent>0</Parent>
             </CustomProperties>
             <Location>
-              <X>10 px</X>
-              <Y>520 px</Y>
+              <X>638 px</X>
+              <Y>-90 px</Y>
             </Location>
             <Size>
               <Width>144 px</Width>
@@ -142,12 +211,12 @@
           </Model>
           <Model xsi:type="TableModel">
             <CustomProperties>
-              <OID>5</OID>
+              <OID>10</OID>
               <Parent>0</Parent>
             </CustomProperties>
             <Location>
-              <X>30 px</X>
-              <Y>880 px</Y>
+              <X>26 px</X>
+              <Y>328 px</Y>
             </Location>
             <Size>
               <Width>135 px</Width>
@@ -165,40 +234,46 @@
           </Model>
           <Model xsi:type="RelationLinkModel">
             <CustomProperties>
-              <OID>6</OID>
-              <Comment>7</Comment>
-              <OutModel>5</OutModel>
-              <InModel>4</InModel>
-              <OutPort>8</OutPort>
-              <InPort>9</InPort>
+              <OID>11</OID>
+              <Comment>12</Comment>
+              <OutModel>10</OutModel>
+              <InModel>9</InModel>
+              <OutPort>13</OutPort>
+              <InPort>14</InPort>
               <Parent>0</Parent>
             </CustomProperties>
             <PortAnchors>
               <Port>
                 <Location>
-                  <X>93 px</X>
-                  <Y>0 px</Y>
+                  <X>66 px</X>
+                  <Y>-1 px</Y>
                 </Location>
                 <Anchors>Left Right</Anchors>
                 <Align>Top</Align>
                 <CustomProperties>
-                  <OID>8</OID>
+                  <OID>13</OID>
                   <PortType>FloatAnchor</PortType>
                 </CustomProperties>
               </Port>
               <Port>
                 <Location>
-                  <X>113 px</X>
-                  <Y>0 px</Y>
+                  <X>0 px</X>
+                  <Y>72 px</Y>
                 </Location>
-                <Anchors>Left Right</Anchors>
-                <Align>Bottom</Align>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Left</Align>
                 <CustomProperties>
-                  <OID>9</OID>
+                  <OID>14</OID>
                   <PortType>FloatAnchor</PortType>
                 </CustomProperties>
               </Port>
             </PortAnchors>
+            <BendPoints>
+              <PointD>
+                <X>92 px</X>
+                <Y>-18 px</Y>
+              </PointD>
+            </BendPoints>
             <IsManuallyRouted>false</IsManuallyRouted>
             <DbOid>
               <Path>dmaslak.nakladnaya.FK_nakladnaya_klient</Path>
@@ -207,39 +282,39 @@
           </Model>
           <Model xsi:type="RelationCommentModel">
             <CustomProperties>
-              <OID>7</OID>
-              <HolderModel>6</HolderModel>
-              <Port>10</Port>
+              <OID>12</OID>
+              <HolderModel>11</HolderModel>
+              <Port>15</Port>
               <Parent>0</Parent>
             </CustomProperties>
             <PortAnchors>
               <Port xsi:type="LinkPort">
                 <Location>
-                  <X>0 px</X>
-                  <Y>108 px</Y>
+                  <X>-273 px</X>
+                  <Y>346 px</Y>
                 </Location>
                 <Anchors>None</Anchors>
                 <Align>Top</Align>
                 <CustomProperties>
-                  <OID>10</OID>
+                  <OID>15</OID>
                   <PortType>FixedAnchor</PortType>
                 </CustomProperties>
                 <LinkPortAnchor>OutPoint</LinkPortAnchor>
               </Port>
             </PortAnchors>
             <CommentOffset>
-              <X>102.239585876465 px</X>
-              <Y>-63 px</Y>
+              <X>22 px</X>
+              <Y>2 px</Y>
             </CommentOffset>
           </Model>
           <Model xsi:type="TableModel">
             <CustomProperties>
-              <OID>11</OID>
+              <OID>16</OID>
               <Parent>0</Parent>
             </CustomProperties>
             <Location>
-              <X>443 px</X>
-              <Y>614 px</Y>
+              <X>848 px</X>
+              <Y>138 px</Y>
             </Location>
             <Size>
               <Width>143 px</Width>
@@ -257,12 +332,12 @@
           </Model>
           <Model xsi:type="TableModel">
             <CustomProperties>
-              <OID>12</OID>
+              <OID>17</OID>
               <Parent>0</Parent>
             </CustomProperties>
             <Location>
-              <X>230 px</X>
-              <Y>500 px</Y>
+              <X>632 px</X>
+              <Y>112 px</Y>
             </Location>
             <Size>
               <Width>155 px</Width>
@@ -280,89 +355,10 @@
           </Model>
           <Model xsi:type="RelationLinkModel">
             <CustomProperties>
-              <OID>13</OID>
-              <Comment>14</Comment>
-              <OutModel>1</OutModel>
-              <InModel>12</InModel>
-              <OutPort>15</OutPort>
-              <InPort>16</InPort>
-              <Parent>0</Parent>
-            </CustomProperties>
-            <PortAnchors>
-              <Port>
-                <Location>
-                  <X>76.875 px</X>
-                  <Y>0.850000000000136 px</Y>
-                </Location>
-                <Anchors>Left Right</Anchors>
-                <Align>Top</Align>
-                <CustomProperties>
-                  <OID>15</OID>
-                  <PortType>FloatAnchor</PortType>
-                </CustomProperties>
-              </Port>
-              <Port>
-                <Location>
-                  <X>77.875 px</X>
-                  <Y>195 px</Y>
-                </Location>
-                <Anchors>Left Right</Anchors>
-                <Align>Bottom</Align>
-                <CustomProperties>
-                  <OID>16</OID>
-                  <PortType>FloatAnchor</PortType>
-                </CustomProperties>
-              </Port>
-            </PortAnchors>
-            <BendPoints>
-              <PointD>
-                <X>306.875 px</X>
-                <Y>700 px</Y>
-              </PointD>
-              <PointD>
-                <X>307.875 px</X>
-                <Y>700 px</Y>
-              </PointD>
-            </BendPoints>
-            <IsManuallyRouted>false</IsManuallyRouted>
-            <DbOid>
-              <Path>dmaslak.firma.FKschetf</Path>
-              <TypeName>ForeignKey</TypeName>
-            </DbOid>
-          </Model>
-          <Model xsi:type="RelationCommentModel">
-            <CustomProperties>
-              <OID>14</OID>
-              <HolderModel>13</HolderModel>
-              <Port>17</Port>
-              <Parent>0</Parent>
-            </CustomProperties>
-            <PortAnchors>
-              <Port xsi:type="LinkPort">
-                <Location>
-                  <X>0 px</X>
-                  <Y>30 px</Y>
-                </Location>
-                <Anchors>None</Anchors>
-                <Align>Top</Align>
-                <CustomProperties>
-                  <OID>17</OID>
-                  <PortType>FixedAnchor</PortType>
-                </CustomProperties>
-                <LinkPortAnchor>OutPoint</LinkPortAnchor>
-              </Port>
-            </PortAnchors>
-            <CommentOffset>
-              <X>22 px</X>
-              <Y>2 px</Y>
-            </CommentOffset>
-          </Model>
-          <Model xsi:type="RelationLinkModel">
-            <CustomProperties>
               <OID>18</OID>
               <Comment>19</Comment>
-              <OutModel>4</OutModel>
-              <InModel>12</InModel>
+              <OutModel>1</OutModel>
+              <InModel>17</InModel>
               <OutPort>20</OutPort>
               <InPort>21</InPort>
               <Parent>0</Parent>
@@ -370,8 +366,8 @@
             <PortAnchors>
               <Port>
                 <Location>
-                  <X>144.45 px</X>
-                  <Y>37.7000000000002 px</Y>
+                  <X>152 px</X>
+                  <Y>80 px</Y>
                 </Location>
                 <Anchors>Top Bottom</Anchors>
                 <Align>Right</Align>
@@ -382,8 +378,8 @@
               </Port>
               <Port>
                 <Location>
-                  <X>0.300000000000011 px</X>
-                  <Y>98.7000000000002 px</Y>
+                  <X>0 px</X>
+                  <Y>98 px</Y>
                 </Location>
                 <Anchors>Top Bottom</Anchors>
                 <Align>Left</Align>
@@ -393,19 +389,9 @@
                 </CustomProperties>
               </Port>
             </PortAnchors>
-            <BendPoints>
-              <PointD>
-                <X>190 px</X>
-                <Y>557.7 px</Y>
-              </PointD>
-              <PointD>
-                <X>190 px</X>
-                <Y>598.7 px</Y>
-              </PointD>
-            </BendPoints>
             <IsManuallyRouted>false</IsManuallyRouted>
             <DbOid>
-              <Path>dmaslak.klient.FKschet</Path>
+              <Path>dmaslak.firma.FKschetf</Path>
               <TypeName>ForeignKey</TypeName>
             </DbOid>
           </Model>
@@ -419,8 +405,8 @@
             <PortAnchors>
               <Port xsi:type="LinkPort">
                 <Location>
-                  <X>-36 px</X>
-                  <Y>-20.5000122070311 px</Y>
+                  <X>-60 px</X>
+                  <Y>0 px</Y>
                 </Location>
                 <Anchors>None</Anchors>
                 <Align>Right</Align>
@@ -440,8 +426,8 @@
             <CustomProperties>
               <OID>23</OID>
               <Comment>24</Comment>
-              <OutModel>11</OutModel>
-              <InModel>12</InModel>
+              <OutModel>9</OutModel>
+              <InModel>17</InModel>
               <OutPort>25</OutPort>
               <InPort>26</InPort>
               <Parent>0</Parent>
@@ -449,11 +435,11 @@
             <PortAnchors>
               <Port>
                 <Location>
-                  <X>0.299999999999955 px</X>
-                  <Y>71.7000000000002 px</Y>
+                  <X>72 px</X>
+                  <Y>144 px</Y>
                 </Location>
-                <Anchors>Top Bottom</Anchors>
-                <Align>Left</Align>
+                <Anchors>Left Right</Anchors>
+                <Align>Bottom</Align>
                 <CustomProperties>
                   <OID>25</OID>
                   <PortType>FloatAnchor</PortType>
@@ -461,30 +447,20 @@
               </Port>
               <Port>
                 <Location>
-                  <X>155.45 px</X>
-                  <Y>98.7000000000002 px</Y>
+                  <X>78 px</X>
+                  <Y>2 px</Y>
                 </Location>
-                <Anchors>Top Bottom</Anchors>
-                <Align>Right</Align>
+                <Anchors>Left Right</Anchors>
+                <Align>Top</Align>
                 <CustomProperties>
                   <OID>26</OID>
                   <PortType>FloatAnchor</PortType>
                 </CustomProperties>
               </Port>
             </PortAnchors>
-            <BendPoints>
-              <PointD>
-                <X>423 px</X>
-                <Y>685.700012207031 px</Y>
-              </PointD>
-              <PointD>
-                <X>423 px</X>
-                <Y>598.700012207031 px</Y>
-              </PointD>
-            </BendPoints>
             <IsManuallyRouted>false</IsManuallyRouted>
             <DbOid>
-              <Path>dmaslak.postav.FKschetp</Path>
+              <Path>dmaslak.klient.FKschet</Path>
               <TypeName>ForeignKey</TypeName>
             </DbOid>
           </Model>
@@ -498,11 +474,11 @@
             <PortAnchors>
               <Port xsi:type="LinkPort">
                 <Location>
-                  <X>20 px</X>
-                  <Y>43.4999877929689 px</Y>
+                  <X>0 px</X>
+                  <Y>-29 px</Y>
                 </Location>
                 <Anchors>None</Anchors>
-                <Align>Left</Align>
+                <Align>Bottom</Align>
                 <CustomProperties>
                   <OID>27</OID>
                   <PortType>FixedAnchor</PortType>
@@ -515,14 +491,83 @@
               <Y>2 px</Y>
             </CommentOffset>
           </Model>
-          <Model xsi:type="TableModel">
+          <Model xsi:type="RelationLinkModel">
             <CustomProperties>
               <OID>28</OID>
+              <Comment>29</Comment>
+              <OutModel>16</OutModel>
+              <InModel>17</InModel>
+              <OutPort>30</OutPort>
+              <InPort>31</InPort>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <PortAnchors>
+              <Port>
+                <Location>
+                  <X>0 px</X>
+                  <Y>72 px</Y>
+                </Location>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Left</Align>
+                <CustomProperties>
+                  <OID>30</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
+              <Port>
+                <Location>
+                  <X>156 px</X>
+                  <Y>98 px</Y>
+                </Location>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Right</Align>
+                <CustomProperties>
+                  <OID>31</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
+            </PortAnchors>
+            <IsManuallyRouted>false</IsManuallyRouted>
+            <DbOid>
+              <Path>dmaslak.postav.FKschetp</Path>
+              <TypeName>ForeignKey</TypeName>
+            </DbOid>
+          </Model>
+          <Model xsi:type="RelationCommentModel">
+            <CustomProperties>
+              <OID>29</OID>
+              <HolderModel>28</HolderModel>
+              <Port>32</Port>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <PortAnchors>
+              <Port xsi:type="LinkPort">
+                <Location>
+                  <X>30.5 px</X>
+                  <Y>0 px</Y>
+                </Location>
+                <Anchors>None</Anchors>
+                <Align>Left</Align>
+                <CustomProperties>
+                  <OID>32</OID>
+                  <PortType>FixedAnchor</PortType>
+                </CustomProperties>
+                <LinkPortAnchor>OutPoint</LinkPortAnchor>
+              </Port>
+            </PortAnchors>
+            <CommentOffset>
+              <X>-1.21006011962891 px</X>
+              <Y>30 px</Y>
+            </CommentOffset>
+          </Model>
+          <Model xsi:type="TableModel">
+            <CustomProperties>
+              <OID>33</OID>
               <Parent>0</Parent>
             </CustomProperties>
             <Location>
-              <X>706 px</X>
-              <Y>303 px</Y>
+              <X>1080 px</X>
+              <Y>280 px</Y>
             </Location>
             <Size>
               <Width>144 px</Width>
@@ -540,12 +585,12 @@
           </Model>
           <Model xsi:type="TableModel">
             <CustomProperties>
-              <OID>29</OID>
+              <OID>34</OID>
               <Parent>0</Parent>
             </CustomProperties>
             <Location>
-              <X>703 px</X>
-              <Y>470 px</Y>
+              <X>510 px</X>
+              <Y>430 px</Y>
             </Location>
             <Size>
               <Width>150 px</Width>
@@ -563,79 +608,10 @@
           </Model>
           <Model xsi:type="RelationLinkModel">
             <CustomProperties>
-              <OID>30</OID>
-              <Comment>31</Comment>
-              <OutModel>29</OutModel>
-              <InModel>2</InModel>
-              <OutPort>32</OutPort>
-              <InPort>33</InPort>
-              <Parent>0</Parent>
-            </CustomProperties>
-            <PortAnchors>
-              <Port>
-                <Location>
-                  <X>0 px</X>
-                  <Y>83.5 px</Y>
-                </Location>
-                <Anchors>Top Bottom</Anchors>
-                <Align>Left</Align>
-                <CustomProperties>
-                  <OID>32</OID>
-                  <PortType>FloatAnchor</PortType>
-                </CustomProperties>
-              </Port>
-              <Port>
-                <Location>
-                  <X>0 px</X>
-                  <Y>53.5 px</Y>
-                </Location>
-                <Anchors>Top Bottom</Anchors>
-                <Align>Right</Align>
-                <CustomProperties>
-                  <OID>33</OID>
-                  <PortType>FloatAnchor</PortType>
-                </CustomProperties>
-              </Port>
-            </PortAnchors>
-            <IsManuallyRouted>false</IsManuallyRouted>
-            <DbOid>
-              <Path>dmaslak.tovar.FK_tovar_izgot</Path>
-              <TypeName>ForeignKey</TypeName>
-            </DbOid>
-          </Model>
-          <Model xsi:type="RelationCommentModel">
-            <CustomProperties>
-              <OID>31</OID>
-              <HolderModel>30</HolderModel>
-              <Port>34</Port>
-              <Parent>0</Parent>
-            </CustomProperties>
-            <PortAnchors>
-              <Port xsi:type="LinkPort">
-                <Location>
-                  <X>54.5 px</X>
-                  <Y>0 px</Y>
-                </Location>
-                <Anchors>None</Anchors>
-                <Align>Left</Align>
-                <CustomProperties>
-                  <OID>34</OID>
-                  <PortType>FixedAnchor</PortType>
-                </CustomProperties>
-                <LinkPortAnchor>OutPoint</LinkPortAnchor>
-              </Port>
-            </PortAnchors>
-            <CommentOffset>
-              <X>22 px</X>
-              <Y>2 px</Y>
-            </CommentOffset>
-          </Model>
-          <Model xsi:type="RelationLinkModel">
-            <CustomProperties>
               <OID>35</OID>
               <Comment>36</Comment>
-              <OutModel>29</OutModel>
-              <InModel>28</InModel>
+              <OutModel>34</OutModel>
+              <InModel>2</InModel>
               <OutPort>37</OutPort>
               <InPort>38</InPort>
               <Parent>0</Parent>
@@ -643,11 +619,11 @@
             <PortAnchors>
               <Port>
                 <Location>
-                  <X>74.6750000000001 px</X>
-                  <Y>-0.974999999999795 px</Y>
+                  <X>0 px</X>
+                  <Y>204.5 px</Y>
                 </Location>
-                <Anchors>Left Right</Anchors>
-                <Align>Top</Align>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Right</Align>
                 <CustomProperties>
                   <OID>37</OID>
                   <PortType>FloatAnchor</PortType>
@@ -655,20 +631,30 @@
               </Port>
               <Port>
                 <Location>
-                  <X>71.6750000000001 px</X>
-                  <Y>107.175 px</Y>
+                  <X>0 px</X>
+                  <Y>24.5 px</Y>
                 </Location>
-                <Anchors>Left Right</Anchors>
-                <Align>Bottom</Align>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Left</Align>
                 <CustomProperties>
                   <OID>38</OID>
                   <PortType>FloatAnchor</PortType>
                 </CustomProperties>
               </Port>
             </PortAnchors>
+            <BendPoints>
+              <PointD>
+                <X>680 px</X>
+                <Y>634.5 px</Y>
+              </PointD>
+              <PointD>
+                <X>680 px</X>
+                <Y>644.5 px</Y>
+              </PointD>
+            </BendPoints>
             <IsManuallyRouted>false</IsManuallyRouted>
             <DbOid>
-              <Path>dmaslak.tovar.FK_tovar_sklad</Path>
+              <Path>dmaslak.tovar.FK_tovar_izgot</Path>
               <TypeName>ForeignKey</TypeName>
             </DbOid>
           </Model>
@@ -682,11 +668,11 @@
             <PortAnchors>
               <Port xsi:type="LinkPort">
                 <Location>
-                  <X>1.22070313182121E-05 px</X>
-                  <Y>30 px</Y>
+                  <X>-155 px</X>
+                  <Y>-10 px</Y>
                 </Location>
                 <Anchors>None</Anchors>
-                <Align>Top</Align>
+                <Align>Right</Align>
                 <CustomProperties>
                   <OID>39</OID>
                   <PortType>FixedAnchor</PortType>
@@ -695,16 +681,16 @@
               </Port>
             </PortAnchors>
             <CommentOffset>
-              <X>22 px</X>
-              <Y>2 px</Y>
+              <X>80 px</X>
+              <Y>15.5 px</Y>
             </CommentOffset>
           </Model>
           <Model xsi:type="RelationLinkModel">
             <CustomProperties>
               <OID>40</OID>
               <Comment>41</Comment>
-              <OutModel>29</OutModel>
-              <InModel>11</InModel>
+              <OutModel>34</OutModel>
+              <InModel>33</InModel>
               <OutPort>42</OutPort>
               <InPort>43</InPort>
               <Parent>0</Parent>
@@ -712,11 +698,11 @@
             <PortAnchors>
               <Port>
                 <Location>
-                  <X>-0.224999999999909 px</X>
-                  <Y>215.7 px</Y>
+                  <X>0 px</X>
+                  <Y>171.75 px</Y>
                 </Location>
                 <Anchors>Top Bottom</Anchors>
-                <Align>Left</Align>
+                <Align>Right</Align>
                 <CustomProperties>
                   <OID>42</OID>
                   <PortType>FloatAnchor</PortType>
@@ -724,20 +710,34 @@
               </Port>
               <Port>
                 <Location>
-                  <X>142.075 px</X>
-                  <Y>71.7000000000002 px</Y>
+                  <X>72 px</X>
+                  <Y>0 px</Y>
                 </Location>
-                <Anchors>Top Bottom</Anchors>
-                <Align>Right</Align>
+                <Anchors>Left Right</Anchors>
+                <Align>Bottom</Align>
                 <CustomProperties>
                   <OID>43</OID>
                   <PortType>FloatAnchor</PortType>
                 </CustomProperties>
               </Port>
             </PortAnchors>
-            <IsManuallyRouted>false</IsManuallyRouted>
+            <BendPoints>
+              <PointD>
+                <X>1000 px</X>
+                <Y>601.75 px</Y>
+              </PointD>
+              <PointD>
+                <X>1000 px</X>
+                <Y>440.6875 px</Y>
+              </PointD>
+              <PointD>
+                <X>1152 px</X>
+                <Y>440.6875 px</Y>
+              </PointD>
+            </BendPoints>
+            <IsManuallyRouted>true</IsManuallyRouted>
             <DbOid>
-              <Path>dmaslak.tovar.FKpostavt</Path>
+              <Path>dmaslak.tovar.FK_tovar_sklad</Path>
               <TypeName>ForeignKey</TypeName>
             </DbOid>
           </Model>
@@ -751,11 +751,11 @@
             <PortAnchors>
               <Port xsi:type="LinkPort">
                 <Location>
-                  <X>58.5 px</X>
-                  <Y>-1.22070310908384E-05 px</Y>
+                  <X>-340 px</X>
+                  <Y>80.53125 px</Y>
                 </Location>
                 <Anchors>None</Anchors>
-                <Align>Left</Align>
+                <Align>Right</Align>
                 <CustomProperties>
                   <OID>44</OID>
                   <PortType>FixedAnchor</PortType>
@@ -772,8 +772,8 @@
             <CustomProperties>
               <OID>45</OID>
               <Comment>46</Comment>
-              <OutModel>5</OutModel>
-              <InModel>29</InModel>
+              <OutModel>34</OutModel>
+              <InModel>16</InModel>
               <OutPort>47</OutPort>
               <InPort>48</InPort>
               <Parent>0</Parent>
@@ -781,8 +781,8 @@
             <PortAnchors>
               <Port>
                 <Location>
-                  <X>134.1 px</X>
-                  <Y>80.8000000000002 px</Y>
+                  <X>0 px</X>
+                  <Y>57.25 px</Y>
                 </Location>
                 <Anchors>Top Bottom</Anchors>
                 <Align>Right</Align>
@@ -793,8 +793,8 @@
               </Port>
               <Port>
                 <Location>
-                  <X>74.6750000000001 px</X>
-                  <Y>229.075 px</Y>
+                  <X>71.5 px</X>
+                  <Y>0 px</Y>
                 </Location>
                 <Anchors>Left Right</Anchors>
                 <Align>Bottom</Align>
@@ -806,13 +806,13 @@
             </PortAnchors>
             <BendPoints>
               <PointD>
-                <X>777.675 px</X>
-                <Y>960.8 px</Y>
+                <X>919.5 px</X>
+                <Y>487.25 px</Y>
               </PointD>
             </BendPoints>
             <IsManuallyRouted>false</IsManuallyRouted>
             <DbOid>
-              <Path>dmaslak.nakladnaya.FKtovarn</Path>
+              <Path>dmaslak.tovar.FKpostavt</Path>
               <TypeName>ForeignKey</TypeName>
             </DbOid>
           </Model>
@@ -826,8 +826,8 @@
             <PortAnchors>
               <Port xsi:type="LinkPort">
                 <Location>
-                  <X>-306.337493896484 px</X>
-                  <Y>1.22070314318989E-05 px</Y>
+                  <X>-129.75 px</X>
+                  <Y>0 px</Y>
                 </Location>
                 <Anchors>None</Anchors>
                 <Align>Right</Align>
@@ -843,14 +843,93 @@
               <Y>2 px</Y>
             </CommentOffset>
           </Model>
-          <Model xsi:type="TableModel">
+          <Model xsi:type="RelationLinkModel">
             <CustomProperties>
               <OID>50</OID>
+              <Comment>51</Comment>
+              <OutModel>10</OutModel>
+              <InModel>34</InModel>
+              <OutPort>52</OutPort>
+              <InPort>53</InPort>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <PortAnchors>
+              <Port>
+                <Location>
+                  <X>135 px</X>
+                  <Y>80 px</Y>
+                </Location>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Right</Align>
+                <CustomProperties>
+                  <OID>52</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
+              <Port>
+                <Location>
+                  <X>0 px</X>
+                  <Y>214 px</Y>
+                </Location>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Left</Align>
+                <CustomProperties>
+                  <OID>53</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
+            </PortAnchors>
+            <BendPoints>
+              <PointD>
+                <X>181 px</X>
+                <Y>408 px</Y>
+              </PointD>
+              <PointD>
+                <X>181 px</X>
+                <Y>644 px</Y>
+              </PointD>
+            </BendPoints>
+            <IsManuallyRouted>false</IsManuallyRouted>
+            <DbOid>
+              <Path>dmaslak.nakladnaya.FKtovarn</Path>
+              <TypeName>ForeignKey</TypeName>
+            </DbOid>
+          </Model>
+          <Model xsi:type="RelationCommentModel">
+            <CustomProperties>
+              <OID>51</OID>
+              <HolderModel>50</HolderModel>
+              <Port>54</Port>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <PortAnchors>
+              <Port xsi:type="LinkPort">
+                <Location>
+                  <X>-184.5 px</X>
+                  <Y>-236 px</Y>
+                </Location>
+                <Anchors>None</Anchors>
+                <Align>Right</Align>
+                <CustomProperties>
+                  <OID>54</OID>
+                  <PortType>FixedAnchor</PortType>
+                </CustomProperties>
+                <LinkPortAnchor>OutPoint</LinkPortAnchor>
+              </Port>
+            </PortAnchors>
+            <CommentOffset>
+              <X>22 px</X>
+              <Y>2 px</Y>
+            </CommentOffset>
+          </Model>
+          <Model xsi:type="TableModel">
+            <CustomProperties>
+              <OID>55</OID>
               <Parent>0</Parent>
             </CustomProperties>
             <Location>
-              <X>703 px</X>
-              <Y>33 px</Y>
+              <X>1140 px</X>
+              <Y>500 px</Y>
             </Location>
             <Size>
               <Width>149 px</Width>
@@ -868,40 +947,46 @@
           </Model>
           <Model xsi:type="RelationLinkModel">
             <CustomProperties>
-              <OID>51</OID>
-              <Comment>52</Comment>
-              <OutModel>50</OutModel>
-              <InModel>28</InModel>
-              <OutPort>53</OutPort>
-              <InPort>54</InPort>
+              <OID>56</OID>
+              <Comment>57</Comment>
+              <OutModel>55</OutModel>
+              <InModel>33</InModel>
+              <OutPort>58</OutPort>
+              <InPort>59</InPort>
               <Parent>0</Parent>
             </CustomProperties>
             <PortAnchors>
               <Port>
                 <Location>
-                  <X>74.6750000000001 px</X>
-                  <Y>211.325 px</Y>
+                  <X>74.5 px</X>
+                  <Y>0 px</Y>
                 </Location>
                 <Anchors>Left Right</Anchors>
-                <Align>Bottom</Align>
+                <Align>Top</Align>
                 <CustomProperties>
-                  <OID>53</OID>
+                  <OID>58</OID>
                   <PortType>FloatAnchor</PortType>
                 </CustomProperties>
               </Port>
               <Port>
                 <Location>
-                  <X>71.6750000000001 px</X>
-                  <Y>0.175000000000182 px</Y>
+                  <X>0 px</X>
+                  <Y>80.25 px</Y>
                 </Location>
-                <Anchors>Left Right</Anchors>
-                <Align>Top</Align>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Right</Align>
                 <CustomProperties>
-                  <OID>54</OID>
+                  <OID>59</OID>
                   <PortType>FloatAnchor</PortType>
                 </CustomProperties>
               </Port>
             </PortAnchors>
+            <BendPoints>
+              <PointD>
+                <X>1214.5 px</X>
+                <Y>360.25 px</Y>
+              </PointD>
+            </BendPoints>
             <IsManuallyRouted>false</IsManuallyRouted>
             <DbOid>
               <Path>dmaslak.transport.FK_transport_sklad</Path>
@@ -910,43 +995,43 @@
           </Model>
           <Model xsi:type="RelationCommentModel">
             <CustomProperties>
-              <OID>52</OID>
-              <HolderModel>51</HolderModel>
-              <Port>55</Port>
+              <OID>57</OID>
+              <HolderModel>56</HolderModel>
+              <Port>60</Port>
               <Parent>0</Parent>
             </CustomProperties>
             <PortAnchors>
               <Port xsi:type="LinkPort">
                 <Location>
-                  <X>1.22070313182121E-05 px</X>
-                  <Y>-29 px</Y>
+                  <X>0 px</X>
+                  <Y>69.875 px</Y>
                 </Location>
                 <Anchors>None</Anchors>
-                <Align>Bottom</Align>
+                <Align>Top</Align>
                 <CustomProperties>
-                  <OID>55</OID>
+                  <OID>60</OID>
                   <PortType>FixedAnchor</PortType>
                 </CustomProperties>
                 <LinkPortAnchor>OutPoint</LinkPortAnchor>
               </Port>
             </PortAnchors>
             <CommentOffset>
-              <X>22 px</X>
-              <Y>2 px</Y>
+              <X>12.2395858764648 px</X>
+              <Y>-134.5 px</Y>
             </CommentOffset>
           </Model>
           <Model xsi:type="TableModel">
             <CustomProperties>
-              <OID>56</OID>
+              <OID>61</OID>
               <Parent>0</Parent>
             </CustomProperties>
             <Location>
-              <X>40 px</X>
-              <Y>220 px</Y>
+              <X>1127 px</X>
+              <Y>-108 px</Y>
             </Location>
             <Size>
-              <Width>135 px</Width>
-              <Height>212 px</Height>
+              <Width>120 px</Width>
+              <Height>178 px</Height>
             </Size>
             <DbOid>
               <Path>dmaslak.zakaz</Path>
@@ -960,89 +1045,10 @@
           </Model>
           <Model xsi:type="RelationLinkModel">
             <CustomProperties>
-              <OID>57</OID>
-              <Comment>58</Comment>
-              <OutModel>56</OutModel>
-              <InModel>4</InModel>
-              <OutPort>59</OutPort>
-              <InPort>60</InPort>
-              <Parent>0</Parent>
-            </CustomProperties>
-            <PortAnchors>
-              <Port>
-                <Location>
-                  <X>67.225 px</X>
-                  <Y>211.4 px</Y>
-                </Location>
-                <Anchors>Left Right</Anchors>
-                <Align>Bottom</Align>
-                <CustomProperties>
-                  <OID>59</OID>
-                  <PortType>FloatAnchor</PortType>
-                </CustomProperties>
-              </Port>
-              <Port>
-                <Location>
-                  <X>72.225 px</X>
-                  <Y>0.250000000000227 px</Y>
-                </Location>
-                <Anchors>Left Right</Anchors>
-                <Align>Top</Align>
-                <CustomProperties>
-                  <OID>60</OID>
-                  <PortType>FloatAnchor</PortType>
-                </CustomProperties>
-              </Port>
-            </PortAnchors>
-            <BendPoints>
-              <PointD>
-                <X>107.225 px</X>
-                <Y>452 px</Y>
-              </PointD>
-              <PointD>
-                <X>82.225 px</X>
-                <Y>452 px</Y>
-              </PointD>
-            </BendPoints>
-            <IsManuallyRouted>false</IsManuallyRouted>
-            <DbOid>
-              <Path>dmaslak.zakaz.FKclientz</Path>
-              <TypeName>ForeignKey</TypeName>
-            </DbOid>
-          </Model>
-          <Model xsi:type="RelationCommentModel">
-            <CustomProperties>
-              <OID>58</OID>
-              <HolderModel>57</HolderModel>
-              <Port>61</Port>
-              <Parent>0</Parent>
-            </CustomProperties>
-            <PortAnchors>
-              <Port xsi:type="LinkPort">
-                <Location>
-                  <X>25.0000015258789 px</X>
-                  <Y>-54 px</Y>
-                </Location>
-                <Anchors>None</Anchors>
-                <Align>Bottom</Align>
-                <CustomProperties>
-                  <OID>61</OID>
-                  <PortType>FixedAnchor</PortType>
-                </CustomProperties>
-                <LinkPortAnchor>OutPoint</LinkPortAnchor>
-              </Port>
-            </PortAnchors>
-            <CommentOffset>
-              <X>22 px</X>
-              <Y>2 px</Y>
-            </CommentOffset>
-          </Model>
-          <Model xsi:type="RelationLinkModel">
-            <CustomProperties>
               <OID>62</OID>
               <Comment>63</Comment>
-              <OutModel>56</OutModel>
-              <InModel>29</InModel>
+              <OutModel>61</OutModel>
+              <InModel>9</InModel>
               <OutPort>64</OutPort>
               <InPort>65</InPort>
               <Parent>0</Parent>
@@ -1050,11 +1056,11 @@
             <PortAnchors>
               <Port>
                 <Location>
-                  <X>134.1 px</X>
-                  <Y>107.075 px</Y>
+                  <X>0 px</X>
+                  <Y>90 px</Y>
                 </Location>
                 <Anchors>Top Bottom</Anchors>
-                <Align>Right</Align>
+                <Align>Left</Align>
                 <CustomProperties>
                   <OID>64</OID>
                   <PortType>FloatAnchor</PortType>
@@ -1062,30 +1068,20 @@
               </Port>
               <Port>
                 <Location>
-                  <X>-0.224999999999909 px</X>
-                  <Y>15.0750000000002 px</Y>
+                  <X>144 px</X>
+                  <Y>72 px</Y>
                 </Location>
                 <Anchors>Top Bottom</Anchors>
-                <Align>Left</Align>
+                <Align>Right</Align>
                 <CustomProperties>
                   <OID>65</OID>
                   <PortType>FloatAnchor</PortType>
                 </CustomProperties>
               </Port>
             </PortAnchors>
-            <BendPoints>
-              <PointD>
-                <X>195 px</X>
-                <Y>327.075012207031 px</Y>
-              </PointD>
-              <PointD>
-                <X>195 px</X>
-                <Y>485.075012207031 px</Y>
-              </PointD>
-            </BendPoints>
             <IsManuallyRouted>false</IsManuallyRouted>
             <DbOid>
-              <Path>dmaslak.zakaz.FKtovar</Path>
+              <Path>dmaslak.zakaz.FKclientz</Path>
               <TypeName>ForeignKey</TypeName>
             </DbOid>
           </Model>
@@ -1099,11 +1095,11 @@
             <PortAnchors>
               <Port xsi:type="LinkPort">
                 <Location>
-                  <X>-274 px</X>
-                  <Y>-158.000012207031 px</Y>
+                  <X>172.5 px</X>
+                  <Y>0 px</Y>
                 </Location>
                 <Anchors>None</Anchors>
-                <Align>Right</Align>
+                <Align>Left</Align>
                 <CustomProperties>
                   <OID>66</OID>
                   <PortType>FixedAnchor</PortType>
@@ -1112,17 +1108,104 @@
               </Port>
             </PortAnchors>
             <CommentOffset>
-              <X>22 px</X>
-              <Y>2 px</Y>
+              <X>29.1310844421387 px</X>
+              <Y>18 px</Y>
+            </CommentOffset>
+          </Model>
+          <Model xsi:type="RelationLinkModel">
+            <CustomProperties>
+              <OID>67</OID>
+              <Comment>68</Comment>
+              <OutModel>61</OutModel>
+              <InModel>34</InModel>
+              <OutPort>69</OutPort>
+              <InPort>70</InPort>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <PortAnchors>
+              <Port>
+                <Location>
+                  <X>60 px</X>
+                  <Y>177 px</Y>
+                </Location>
+                <Anchors>Left Right</Anchors>
+                <Align>Bottom</Align>
+                <CustomProperties>
+                  <OID>69</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
+              <Port>
+                <Location>
+                  <X>75 px</X>
+                  <Y>1 px</Y>
+                </Location>
+                <Anchors>Left Right</Anchors>
+                <Align>Top</Align>
+                <CustomProperties>
+                  <OID>70</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
+            </PortAnchors>
+            <BendPoints>
+              <PointD>
+                <X>1187 px</X>
+                <Y>140 px</Y>
+              </PointD>
+              <PointD>
+                <X>1040 px</X>
+                <Y>140 px</Y>
+              </PointD>
+              <PointD>
+                <X>1040 px</X>
+                <Y>350 px</Y>
+              </PointD>
+              <PointD>
+                <X>585 px</X>
+                <Y>350 px</Y>
+              </PointD>
+            </BendPoints>
+            <IsManuallyRouted>true</IsManuallyRouted>
+            <DbOid>
+              <Path>dmaslak.zakaz.FKtovar</Path>
+              <TypeName>ForeignKey</TypeName>
+            </DbOid>
+          </Model>
+          <Model xsi:type="RelationCommentModel">
+            <CustomProperties>
+              <OID>68</OID>
+              <HolderModel>67</HolderModel>
+              <Port>71</Port>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <PortAnchors>
+              <Port xsi:type="LinkPort">
+                <Location>
+                  <X>374.5 px</X>
+                  <Y>-280 px</Y>
+                </Location>
+                <Anchors>None</Anchors>
+                <Align>Bottom</Align>
+                <CustomProperties>
+                  <OID>71</OID>
+                  <PortType>FixedAnchor</PortType>
+                </CustomProperties>
+                <LinkPortAnchor>OutPoint</LinkPortAnchor>
+              </Port>
+            </PortAnchors>
+            <CommentOffset>
+              <X>20 px</X>
+              <Y>-67 px</Y>
             </CommentOffset>
           </Model>
         </Children>
         <ViewPort>
           <ScaleMode>Free</ScaleMode>
-          <Scale>0.449642539</Scale>
+          <Scale>0.619440436</Scale>
           <Location>
-            <X>-549.325249643745 px</X>
-            <Y>17.7919079271288 px</Y>
+            <X>19.3723226569658 px</X>
+            <Y>-184.037065501466 px</Y>
           </Location>
         </ViewPort>
       </Model>
